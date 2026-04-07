@@ -17,7 +17,8 @@
 | **Database** | File-based JSON (zero external DB dependency) |
 | **Deployment** | Node.js server, no build step required |
 | **External APIs** | 4 free, open-source APIs (no API keys needed) |
-| **Lines of Code** | ~3,800+ (frontend) + ~800+ (backend) |
+| **Lines of Code** | ~5,000+ (frontend) + ~800+ (backend) |
+| **Languages** | English, Hindi (हिन्दी), Punjabi (ਪੰਜਾਬੀ) |
 
 ---
 
@@ -180,6 +181,30 @@
 - Dual JWT tokens (access + refresh) — detailed in Security section below
 - Auto-refresh interceptor in frontend
 
+### Feature 13: Full UI Language Switcher (i18n)
+
+- **Globe dropdown** in navbar (desktop + mobile) with 3 languages:
+  - 🇬🇧 **English** (EN) — Default
+  - 🇮🇳 **Hindi** (हिन्दी) — Full translation
+  - 🇮🇳 **Punjabi** (ਪੰਜਾਬੀ) — Full translation
+- **100+ UI elements** tagged with `data-i18n` attributes and translated:
+  - Navbar links, buttons, logout
+  - Hero section (title, subtitle, badges, CTAs)
+  - Stats bar labels
+  - Problem section (title + 3 cards)
+  - All 7 feature cards (titles, descriptions, bullet points)
+  - How It Works (3 steps)
+  - Demo/chatbot section (labels, buttons)
+  - Map controls (search, my location)
+  - Location settings panel
+  - Impact section (title + 4 cards)
+  - Footer (all columns, copyright, medical disclaimer)
+- **Input placeholders** translated (chat input, map search, location text)
+- **Persists** user's language choice in `localStorage` — stays across sessions
+- **Updates `<html lang>` attribute** for accessibility and SEO
+- **Glassmorphism dropdown** matches existing design system
+- Zero external dependency — pure vanilla JS i18n engine
+
 ---
 
 ## 5. Security Architecture (Unique Selling Point)
@@ -228,6 +253,7 @@
 | **Pragma** | `no-cache` header |
 | **Expires** | Set to `0` |
 | **Surrogate-Control** | `no-store` |
+| **noCache middleware** | Custom Express middleware applied to `/`, `/app`, `/login`, `/signup`, `/logout` |
 | **Result** | Browser back/forward button CANNOT show cached protected pages after logout |
 
 ### 5.6 Frontend Auth Guards (Triple Layer)
@@ -434,6 +460,8 @@ Each includes: description, when to see a doctor, and precautions.
 | **Leaflet map integration** | Custom markers, radius circles, route polylines, autocomplete |
 | **JWT auto-refresh** | Global `fetch` wrapper with refresh queue for concurrent requests |
 | **Auth guards** | Triple-layer: page load + pageshow + visibilitychange |
+| **i18n engine** | Custom translation system with `data-i18n` attributes, 3 languages, localStorage persistence |
+| **Language switcher** | Globe dropdown with glassmorphism styling, desktop + mobile variants |
 
 ---
 
@@ -544,6 +572,8 @@ Nominatim API       Overpass API
 | 8 | **In-memory caching with TTL** — Hospital results and geocode lookups cached to minimize API calls |
 | 9 | **Retry with exponential backoff** — API resilience for unreliable rural network connections |
 | 10 | **Provider factory pattern** — Map provider is swappable (OSM today, Google tomorrow) without code changes |
+| 11 | **Custom i18n engine** — Full UI translation system with 100+ tagged elements, zero external i18n library |
+| 12 | **Language persistence** — User's language choice saved in localStorage, applied instantly on reload |
 
 ### 11.2 Healthcare Differentiators
 
@@ -571,6 +601,8 @@ Nominatim API       Overpass API
 | 5 | **Indian number formatting** — Stats display in lakhs (1,50,000+) matching local convention |
 | 6 | **Responsive down to mobile** — Grid collapse at 3 breakpoints, hamburger menu, stacked layouts |
 | 7 | **Dark theme** — Reduces eye strain and battery consumption on OLED screens |
+| 8 | **Full UI language switch** — One-click switch between English, Hindi, Punjabi for entire interface |
+| 9 | **Navbar language globe** — Compact dropdown with native script labels (EN / हिं / ਪੰ), works on mobile too |
 
 ---
 
@@ -606,7 +638,7 @@ medicheck-auth-app/
 │           └── osmProvider.js     # Nominatim + Overpass API client
 │
 └── public/
-    ├── app.html                 # Main SPA (~3,800 lines)
+    ├── app.html                 # Main SPA (~5,000 lines, i18n-enabled)
     ├── login.html               # Login page (glassmorphism UI)
     └── signup.html              # Signup page (glassmorphism UI)
 ```
@@ -682,8 +714,9 @@ MediCheck is a **production-grade, full-stack healthcare web application** that 
 - **AI-powered symptom triage** with a trilingual medical knowledge base
 - **Real-time hospital discovery** using free OpenStreetMap APIs with driving directions
 - **Enterprise-grade JWT security** with refresh token rotation and reuse detection
+- **Full UI internationalization** — one-click language switch (English / Hindi / Punjabi) for 100+ elements
 - **Professional UI/UX** with 15 animations, glassmorphism design, and full mobile responsiveness
-- **Zero-cost architecture** — no paid APIs, no external database, no frontend framework
+- **Zero-cost architecture** — no paid APIs, no external database, no frontend framework, no i18n library
 
 Built specifically for **rural India's healthcare gap**, it's designed to work on low-end devices, slow networks, and in regional languages — making quality healthcare guidance accessible to the 65% of Indian villages that have no doctor within 10 km.
 
