@@ -1632,105 +1632,6 @@
       .map-hospital-list { grid-template-columns: 1fr; }
     }
 
-    /* ─── SECTION 8: ASHA SPOTLIGHT ─── */
-    .asha-spot {
-      padding: 100px 0;
-      background: #0A1628;
-      border-top: 4px solid transparent;
-      border-image: linear-gradient(90deg, #00E5FF, #7B61FF) 1;
-    }
-
-    .asha-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      align-items: start;
-    }
-
-    .quote-wrap {
-      position: relative;
-      padding-top: 20px;
-    }
-
-    .quote-mark {
-      position: absolute;
-      top: -20px;
-      left: -5px;
-      font-size: 120px;
-      color: var(--accent-cyan);
-      opacity: 0.2;
-      line-height: 1;
-    }
-
-    .quote-text {
-      font-size: 24px;
-      font-style: italic;
-      line-height: 1.5;
-      margin-bottom: 18px;
-      max-width: 580px;
-    }
-
-    .avatar-id {
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-weight: 700;
-      background: linear-gradient(135deg, #00E5FF, #7B61FF);
-      color: #041021;
-      margin-bottom: 10px;
-    }
-
-    .asha-stats {
-      margin-top: 20px;
-      color: #b7cbe2;
-      display: grid;
-      gap: 6px;
-    }
-
-    .dash-panel {
-      padding: 16px;
-      border-radius: 18px;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      background: rgba(6, 11, 24, 0.85);
-    }
-
-    .dash-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      margin-bottom: 10px;
-    }
-
-    .offline-dot { color: var(--red); }
-
-    .dash-list {
-      max-height: 220px;
-      overflow: auto;
-      display: grid;
-      gap: 8px;
-    }
-
-    .dash-row {
-      border: 1px solid rgba(26, 47, 74, 0.9);
-      border-radius: 10px;
-      padding: 8px 10px;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr 0.7fr;
-      gap: 10px;
-      font-size: 12px;
-      color: #c7d8ec;
-      background: rgba(13, 21, 38, 0.7);
-    }
-
-    .dash-buttons {
-      display: flex;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
     /* ─── SECTION 9: IMPACT ─── */
     .impact {
       padding: 100px 0;
@@ -1773,64 +1674,6 @@
     .glow-purple:hover { box-shadow: 0 0 32px rgba(123, 97, 255, 0.25); }
     .glow-green:hover { box-shadow: 0 0 32px rgba(0, 230, 118, 0.25); }
     .glow-yellow:hover { box-shadow: 0 0 32px rgba(255, 214, 0, 0.25); }
-
-    /* ─── SECTION 10: TECH STACK ─── */
-    .tech {
-      padding: 80px 0;
-      background: #080F1E;
-      text-align: center;
-    }
-
-    .marquee-wrap {
-      margin-top: 26px;
-      overflow: hidden;
-      mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-    }
-
-    .marquee-track {
-      display: flex;
-      width: max-content;
-      animation: marquee 18s linear infinite;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .tech-pill {
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      background: #0D1526;
-      color: #bfd1e5;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      white-space: nowrap;
-    }
-
-    .pillars {
-      margin-top: 24px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      text-align: left;
-    }
-
-    .pillar {
-      padding: 18px;
-      border-radius: 14px;
-      border: 1px solid rgba(123, 97, 255, 0.25);
-      background: rgba(13, 21, 38, 0.75);
-    }
-
-    .pillar h4 {
-      margin-bottom: 8px;
-      font-size: 19px;
-      font-family: 'Cabinet Grotesk', Georgia, serif;
-    }
-
-    .pillar p {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
 
     /* ─── SECTION 11: FOOTER ─── */
     footer {
@@ -1962,7 +1805,6 @@
         <a class="nav-link" href="#how-it-works">How It Works</a>
         <a class="nav-link" href="#hospital-map">📍 Hospitals Map</a>
         <a class="nav-link" href="#impact">Impact</a>
-        <a class="nav-link" href="#asha-mode">ASHA Mode</a>
         <a class="nav-link" href="#demo">Demo</a>
       </nav>
       <div class="nav-actions">
@@ -1981,7 +1823,6 @@
     <a href="#how-it-works">How It Works</a>
     <a href="#hospital-map">📍 Hospitals Map</a>
     <a href="#impact">Impact</a>
-    <a href="#asha-mode">ASHA Mode</a>
     <a href="#demo">Demo</a>
     <a href="#" class="btn btn-primary">Get the App</a>
     <a href="/logout" class="btn btn-ghost-cyan">Logout</a>
@@ -2446,38 +2287,6 @@
     </div>
   </section>
 
-  <!-- ─── SECTION 8: ASHA WORKER SPOTLIGHT ─── -->
-  <section class="asha-spot" id="asha-mode">
-    <div class="container asha-grid">
-      <div class="quote-wrap fade-in-up">
-        <div class="quote-mark">"</div>
-        <p class="quote-text">Before MediCheck, I had to guess which family needed urgent referral today. Now I have data, and my PHC doctor trusts my assessments.</p>
-        <div class="avatar-id">SD</div>
-        <p><strong>- Sunita Devi, ASHA Worker</strong><br/><span class="muted">Fatehgarh Sahib District, Punjab</span></p>
-        <div class="asha-stats">
-          <p>1.1M ASHA workers in India</p>
-          <p>Each manages ~250 households</p>
-          <p>Zero digital decision support tools existed before</p>
-        </div>
-      </div>
-
-      <div class="dash-panel fade-in-up">
-        <div class="dash-head"><strong>Sunita's Dashboard · 12 Households Today</strong><span class="offline-dot">🔴 Offline · Will sync when connected</span></div>
-        <div class="dash-list">
-          <div class="dash-row"><span>Sharma (4 members)</span><span>2 days ago</span><span>🟢 Healthy</span></div>
-          <div class="dash-row"><span>Singh (6 members)</span><span>Today</span><span>🔴 Urgent</span></div>
-          <div class="dash-row"><span>Kaur (3 members)</span><span>Yesterday</span><span>🟡 Monitor</span></div>
-          <div class="dash-row"><span>Verma (5 members)</span><span>3 days ago</span><span>🟢 Healthy</span></div>
-          <div class="dash-row"><span>Mehta (2 members)</span><span>Today</span><span>🟡 Follow up</span></div>
-        </div>
-        <div class="dash-buttons">
-          <button class="btn btn-ghost-cyan" type="button">Generate Weekly Report</button>
-          <button class="btn" type="button" style="background:var(--red);color:white">Escalate to PHC Doctor</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ─── SECTION 9: IMPACT NUMBERS ─── -->
   <section class="impact" id="impact">
     <div class="container">
@@ -2506,30 +2315,6 @@
     </div>
   </section>
 
-  <!-- ─── SECTION 10: TECH STACK ─── -->
-  <section class="tech" id="tech-stack">
-    <div class="container">
-      <h2 class="section-title fade-in-up">Powered by World-Class AI,<br/>Grounded in India's Health Data</h2>
-
-      <div class="marquee-wrap fade-in-up">
-        <div class="marquee-track">
-          <span class="tech-pill">Claude AI</span><span class="tech-pill">Whisper</span><span class="tech-pill">AI4Bharat</span><span class="tech-pill">Firebase</span><span class="tech-pill">React Native</span><span class="tech-pill">IndicTrans2</span><span class="tech-pill">OpenWeatherMap</span>
-          <span class="tech-pill">Claude AI</span><span class="tech-pill">Whisper</span><span class="tech-pill">AI4Bharat</span><span class="tech-pill">Firebase</span><span class="tech-pill">React Native</span><span class="tech-pill">IndicTrans2</span><span class="tech-pill">OpenWeatherMap</span>
-        </div>
-        <div class="marquee-track" style="animation-duration:22s">
-          <span class="tech-pill">IDSP API</span><span class="tech-pill">NHA Registry</span><span class="tech-pill">CPCB AQI</span><span class="tech-pill">SQLite</span><span class="tech-pill">Node.js</span><span class="tech-pill">Expo</span><span class="tech-pill">Vision AI</span>
-          <span class="tech-pill">IDSP API</span><span class="tech-pill">NHA Registry</span><span class="tech-pill">CPCB AQI</span><span class="tech-pill">SQLite</span><span class="tech-pill">Node.js</span><span class="tech-pill">Expo</span><span class="tech-pill">Vision AI</span>
-        </div>
-      </div>
-
-      <div class="pillars">
-        <article class="pillar fade-in-up"><h4>🧠 Intelligence Layer</h4><p>Claude API · Vision AI · Whisper · IndicTrans2</p></article>
-        <article class="pillar fade-in-up"><h4>🗺️ India Data Layer</h4><p>IDSP outbreaks · NHA facilities · AQI · Weather</p></article>
-        <article class="pillar fade-in-up"><h4>📱 Delivery Layer</h4><p>Offline-first · React Native · Low-end device optimised</p></article>
-      </div>
-    </div>
-  </section>
-
   <!-- ─── SECTION 11: FOOTER ─── -->
   <footer>
     <div class="container">
@@ -2549,7 +2334,6 @@
             <li><a href="#features">Features</a></li>
             <li><a href="#how-it-works">How It Works</a></li>
             <li><a href="#demo">Live Demo</a></li>
-            <li><a href="#asha-mode">ASHA Mode</a></li>
             <li><a href="#">Download App</a></li>
           </ul>
         </div>
@@ -2580,6 +2364,44 @@
   </footer>
 
   <script>
+    /* ─── JWT AUTH HELPERS ─── */
+    let isRefreshing = false;
+    let refreshQueue = [];
+
+    async function tryRefreshToken() {
+      if (isRefreshing) {
+        return new Promise((resolve) => refreshQueue.push(resolve));
+      }
+      isRefreshing = true;
+      try {
+        const res = await fetch('/auth/refresh', { method: 'POST', credentials: 'same-origin' });
+        const ok = res.ok;
+        refreshQueue.forEach((cb) => cb(ok));
+        refreshQueue = [];
+        return ok;
+      } catch (_) {
+        refreshQueue.forEach((cb) => cb(false));
+        refreshQueue = [];
+        return false;
+      } finally {
+        isRefreshing = false;
+      }
+    }
+
+    /* Wrapper around fetch that auto-refreshes on 401 */
+    const _origFetch = window.fetch;
+    window.fetch = async function authFetch(url, opts = {}) {
+      opts.credentials = opts.credentials || 'same-origin';
+      let res = await _origFetch(url, opts);
+      if (res.status === 401 && !url.includes('/auth/refresh') && !url.includes('/auth/login') && !url.includes('/auth/signup')) {
+        const refreshed = await tryRefreshToken();
+        if (refreshed) {
+          res = await _origFetch(url, opts);
+        }
+      }
+      return res;
+    };
+
     /* ─── FRONTEND ROUTE GUARD ─── */
     async function ensureAuthenticated() {
       try {

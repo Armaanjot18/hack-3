@@ -109,6 +109,51 @@
       "location_lat": null,
       "location_lon": null,
       "location_updated_at": null
+    },
+    {
+      "id": "8686bbba-12a3-4665-8d7a-4b30b7ca89e2",
+      "name": "JWT Test",
+      "email": "jwttest687714271@test.com",
+      "password_hash": "$2a$12$8RshnNosjSTOE0OvGdLa3O58H9XFg.JgDPGXJQ3mkCuPaCeBvM/LS",
+      "created_at": "2026-04-07T07:13:11.051Z",
+      "location_text": null,
+      "location_lat": null,
+      "location_lon": null,
+      "location_updated_at": null
+    },
+    {
+      "id": "067f9ecc-698f-4217-b0e3-8ebfb8158c71",
+      "name": "JWT Test",
+      "email": "jwttest280635028@test.com",
+      "password_hash": "$2a$12$hwfNUszaznrr/k0ki9EtGu.YvIWd6ePPLCj3PjJbpCTp2/HKG6m4C",
+      "created_at": "2026-04-07T07:14:09.549Z",
+      "location_text": null,
+      "location_lat": null,
+      "location_lon": null,
+      "location_updated_at": null
+    }
+  ],
+  "refresh_tokens": [
+    {
+      "token_hash": "3cf501ac4586c3305dd59e726eb2aa4ad212f689af9f078c956286dc6e30d842",
+      "user_id": "067f9ecc-698f-4217-b0e3-8ebfb8158c71",
+      "family": "cf052ee2-ddfe-4a43-af5f-58203bf91f4f",
+      "created_at": "2026-04-07T07:14:15.092Z",
+      "expires_at": "2026-04-14T07:14:15.091Z"
+    },
+    {
+      "token_hash": "c96eac9caef401b72a1a32a8bddc1f824a9e700b36e2cb1093ec2b745ac2d501",
+      "user_id": "d0dbaefb-94c5-4cef-aa20-6e8396302f31",
+      "family": "971c08d7-6551-4b9f-b542-d13348dd2699",
+      "created_at": "2026-04-07T07:15:26.848Z",
+      "expires_at": "2026-04-14T07:15:26.848Z"
+    },
+    {
+      "token_hash": "225e1641bc13482179c9879e0523acc79b450e96da6e85176969d1912add4b21",
+      "user_id": "d0dbaefb-94c5-4cef-aa20-6e8396302f31",
+      "family": "ceb86d84-f060-4efc-8c19-8f9ecb862cc5",
+      "created_at": "2026-04-07T07:15:40.801Z",
+      "expires_at": "2026-04-14T07:15:40.800Z"
     }
   ]
 }

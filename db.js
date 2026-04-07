@@ -26,7 +26,7 @@ function ensureDbFile() {
     if (!fs.existsSync(dbPath)) {
       fs.writeFileSync(
         dbPath,
-        JSON.stringify({ users: [] }, null, 2),
+        JSON.stringify({ users: [], refresh_tokens: [] }, null, 2),
         'utf8'
       );
     }
@@ -35,6 +35,10 @@ function ensureDbFile() {
     const parsed = JSON.parse(raw || '{}');
     if (!parsed.users || !Array.isArray(parsed.users)) {
       throw new Error('Invalid DB structure. Expected { users: [] }.');
+    }
+
+    if (!parsed.refresh_tokens || !Array.isArray(parsed.refresh_tokens)) {
+      parsed.refresh_tokens = [];
     }
 
     let migrated = false;
@@ -71,6 +75,9 @@ function readDb() {
     const parsed = JSON.parse(raw || '{}');
     if (!parsed.users || !Array.isArray(parsed.users)) {
       throw new Error('Invalid DB structure.');
+    }
+    if (!parsed.refresh_tokens || !Array.isArray(parsed.refresh_tokens)) {
+      parsed.refresh_tokens = [];
     }
     return parsed;
   } catch (err) {
@@ -165,10 +172,63 @@ function getUserLocation(id) {
   };
 }
 
+/* ── Refresh Token Storage ── */
+
+function saveRefreshToken({ tokenHash, userId, expiresAt, family }) {
+  const db = readDb();
+  db.refresh_tokens.push({
+    token_hash: tokenHash,
+    user_id: userId,
+    family: family || crypto.randomUUID(),
+    created_at: new Date().toISOString(),
+    expires_at: expiresAt
+  });
+  writeDb(db);
+}
+
+function findRefreshToken(tokenHash) {
+  const db = readDb();
+  return db.refresh_tokens.find((t) => t.token_hash === tokenHash) || null;
+}
+
+function deleteRefreshToken(tokenHash) {
+  const db = readDb();
+  db.refresh_tokens = db.refresh_tokens.filter((t) => t.token_hash !== tokenHash);
+  writeDb(db);
+}
+
+function deleteRefreshTokensByUser(userId) {
+  const db = readDb();
+  db.refresh_tokens = db.refresh_tokens.filter((t) => t.user_id !== userId);
+  writeDb(db);
+}
+
+function deleteRefreshTokensByFamily(family) {
+  const db = readDb();
+  db.refresh_tokens = db.refresh_tokens.filter((t) => t.family !== family);
+  writeDb(db);
+}
+
+function cleanExpiredRefreshTokens() {
+  const db = readDb();
+  const now = new Date().toISOString();
+  const before = db.refresh_tokens.length;
+  db.refresh_tokens = db.refresh_tokens.filter((t) => t.expires_at > now);
+  if (db.refresh_tokens.length < before) {
+    writeDb(db);
+  }
+}
+
 module.exports = {
   createUser,
   findUserByEmail,
   findUserById,
   updateUserLocation,
-  getUserLocation
+  getUserLocation,
+  saveRefreshToken,
+  findRefreshToken,
+  deleteRefreshToken,
+  deleteRefreshTokensByUser,
+  deleteRefreshTokensByFamily,
+  cleanExpiredRefreshTokens
 };

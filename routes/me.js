@@ -9,12 +9,12 @@ const {
 const router = express.Router();
 
 router.get('/location', (req, res) => {
-  const user = findUserById(req.session.userId);
+  const user = findUserById(req.userId);
   if (!user) {
     return res.status(401).json({ error: 'Unauthenticated' });
   }
 
-  const location = getUserLocation(req.session.userId);
+  const location = getUserLocation(req.userId);
   return res.status(200).json({
     location
   });
@@ -24,7 +24,7 @@ router.put('/location', async (req, res) => {
   try {
     const resolved = await resolveLocationUpdateInput(req.body || {});
 
-    const updated = updateUserLocation(req.session.userId, {
+    const updated = updateUserLocation(req.userId, {
       location_text: resolved.location_text,
       location_lat: resolved.location_lat,
       location_lon: resolved.location_lon
@@ -77,7 +77,7 @@ router.put('/location', async (req, res) => {
 
 router.get('/nearby-hospitals', async (req, res) => {
   try {
-    const location = getUserLocation(req.session.userId);
+    const location = getUserLocation(req.userId);
 
     if (!location || location.location_lat === null || location.location_lon === null) {
       return res.status(400).json({
