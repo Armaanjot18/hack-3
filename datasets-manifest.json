@@ -1,0 +1,67 @@
+{
+  "source": "https://github.com/openmedlab/Awesome-Medical-Dataset",
+  "version": "1.0",
+  "updated_at": "2026-04-07",
+  "datasets": [
+    {
+      "id": "medmnist-v2",
+      "name": "MedMNIST v2",
+      "category": "imaging",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "source_url": "https://medmnist.com/",
+      "download_url": "https://zenodo.org/records/6496656/files/medmnist.npz?download=1",
+      "approved": false,
+      "requires_manual_access": true,
+      "notes": "Direct Zenodo URL returned HTTP 403 in this environment; keep as manual download until a stable direct link is verified."
+    },
+    {
+      "id": "isic-archive",
+      "name": "ISIC Archive",
+      "category": "skin",
+      "license": "Varies by collection",
+      "license_url": "https://www.isic-archive.com/",
+      "source_url": "https://www.isic-archive.com/",
+      "download_url": "",
+      "approved": false,
+      "requires_manual_access": true,
+      "notes": "Review collection-level terms before download."
+    },
+    {
+      "id": "nih-chestxray14",
+      "name": "NIH ChestXray14",
+      "category": "chest",
+      "license": "Research use",
+      "license_url": "https://nihcc.app.box.com/v/ChestXray-NIHCC",
+      "source_url": "https://nihcc.app.box.com/v/ChestXray-NIHCC",
+      "download_url": "",
+      "approved": false,
+      "requires_manual_access": true,
+      "notes": "Large dataset. Requires explicit compliance checks."
+    },
+    {
+      "id": "ham10000",
+      "name": "HAM10000",
+      "category": "skin",
+      "license": "CC BY-NC 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+      "source_url": "https://www.kaggle.com/datasets/kmader/skin-cancer-mnist-ham10000",
+      "download_url": "",
+      "approved": false,
+      "requires_manual_access": true,
+      "notes": "Kaggle auth required; verify non-commercial usage constraints."
+    },
+    {
+      "id": "busi-ultrasound",
+      "name": "BUSI Ultrasound",
+      "category": "breast",
+      "license": "Dataset-specific",
+      "license_url": "https://scholar.cu.edu.eg/?q=afahmy/pages/dataset",
+      "source_url": "https://scholar.cu.edu.eg/?q=afahmy/pages/dataset",
+      "download_url": "",
+      "approved": false,
+      "requires_manual_access": true,
+      "notes": "Manually download after terms review."
+    }
+  ]
+}

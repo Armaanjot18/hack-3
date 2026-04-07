@@ -2,6 +2,11 @@
   "name": "medicheck",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "datasets:list": "node scripts/manage-datasets.js list",
+    "datasets:validate": "node scripts/manage-datasets.js validate",
+    "datasets:download": "node scripts/manage-datasets.js download"
+  },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "bcryptjs": "^2.4.3",
