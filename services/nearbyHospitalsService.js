@@ -86,6 +86,98 @@ function validateAndNormalizeInput(input = {}) {
   };
 }
 
+function validateSearchOptions(input = {}) {
+  const radiusKm = clamp(asNumber(input.radius_km) || 5, 1, 25);
+  const limit = Math.floor(clamp(asNumber(input.limit) || 5, 1, 20));
+  return { radiusKm, limit };
+}
+
+function validateCoordinates(lat, lon) {
+  const parsedLat = asNumber(lat);
+  const parsedLon = asNumber(lon);
+
+  if (parsedLat === undefined || parsedLon === undefined) {
+    const err = new Error('Both lat and lon are required when using coordinates.');
+    err.code = 'VALIDATION';
+    throw err;
+  }
+
+  if (parsedLat < -90 || parsedLat > 90) {
+    const err = new Error('lat must be between -90 and 90.');
+    err.code = 'VALIDATION';
+    throw err;
+  }
+
+  if (parsedLon < -180 || parsedLon > 180) {
+    const err = new Error('lon must be between -180 and 180.');
+    err.code = 'VALIDATION';
+    throw err;
+  }
+
+  return {
+    lat: parsedLat,
+    lon: parsedLon
+  };
+}
+
+async function findNearbyHospitalsByCoordinates(input = {}) {
+  const provider = createMapProvider();
+  const { lat, lon } = validateCoordinates(input.lat, input.lon);
+  const { radiusKm, limit } = validateSearchOptions(input);
+
+  const cacheKey = getCacheKey({
+    lat,
+    lon,
+    radiusKm,
+    limit
+  });
+
+  const cached = getFromCache(cacheKey);
+  if (cached) {
+    return {
+      query: {
+        location: input.location || null,
+        geocoded_location: null,
+        lat,
+        lon,
+        radius_km: radiusKm,
+        limit,
+        cached: true
+      },
+      hospitals: cached
+    };
+  }
+
+  try {
+    const hospitals = await provider.findNearbyHospitals({
+      lat,
+      lon,
+      radiusKm,
+      limit
+    });
+
+    setCache(cacheKey, hospitals);
+
+    return {
+      query: {
+        location: input.location || null,
+        geocoded_location: null,
+        lat,
+        lon,
+        radius_km: radiusKm,
+        limit,
+        cached: false
+      },
+      hospitals
+    };
+  } catch (error) {
+    const err = new Error('I could not reach the map service right now. Try again in a minute.');
+    err.code = 'MAP_SERVICE_UNAVAILABLE';
+    err.cause = error;
+    throw err;
+  }
+}
+
 async function findNearbyHospitals(input = {}) {
   const provider = createMapProvider();
   const normalized = validateAndNormalizeInput(input);
@@ -168,5 +260,8 @@ async function findNearbyHospitals(input = {}) {
 
 module.exports = {
   findNearbyHospitals,
-  validateAndNormalizeInput
+  findNearbyHospitalsByCoordinates,
+  validateAndNormalizeInput,
+  validateSearchOptions,
+  validateCoordinates
 };

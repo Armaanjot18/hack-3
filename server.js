@@ -5,6 +5,7 @@ const session = require('express-session');
 const helmet = require('helmet');
 const authRoutes = require('./routes/auth');
 const nearbyHospitalsRoutes = require('./routes/nearbyHospitals');
+const meRoutes = require('./routes/me');
 const { requireAuthPage, requireAuthApi } = require('./middleware/auth');
 
 const app = express();
@@ -41,6 +42,7 @@ app.use(
 
 app.use('/auth', authRoutes);
 app.use('/api/nearby', requireAuthApi, nearbyHospitalsRoutes);
+app.use('/api/me', requireAuthApi, meRoutes);
 
 app.get('/login', (req, res) => {
   if (req.session && req.session.userId) {

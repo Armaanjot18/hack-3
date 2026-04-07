@@ -10,6 +10,9 @@ This project now includes secure authentication with signup/login, protected rou
 - `POST /auth/logout`
 - `GET /auth/me`
 - `POST /api/nearby/hospitals` (authenticated)
+- `GET /api/me/location` (authenticated)
+- `PUT /api/me/location` (authenticated)
+- `GET /api/me/nearby-hospitals` (authenticated)
 - Secure session cookies (`httpOnly`, `sameSite`, `secure` in production)
 - Route guards for pages and API routes
 - Protected app page (`public/app.html`) requiring login
@@ -32,6 +35,7 @@ Copy `.env.example` to `.env` and fill values:
 - `MAPS_TIMEOUT_MS`
 - `OVERPASS_MAX_RETRIES`
 - `HOSPITALS_CACHE_TTL_MS`
+- `GEOCODE_CACHE_TTL_MS`
 
 ## Install and run
 
@@ -56,6 +60,51 @@ The app auto-creates a database file with a `users` collection:
 - `password_hash`
 - `created_at`
 - `name` (optional)
+- `location_text` (nullable)
+- `location_lat` (nullable)
+- `location_lon` (nullable)
+- `location_updated_at` (nullable)
+
+## Saved location APIs
+
+Set or update current user location:
+
+- `PUT /api/me/location`
+
+Body supports either geocoding from text:
+
+```json
+{
+	"location_text": "San Jose, CA"
+}
+```
+
+Or direct coordinates:
+
+```json
+{
+	"location_text": "San Jose, CA",
+	"lat": 37.33,
+	"lon": -121.89
+}
+```
+
+Get saved location:
+
+- `GET /api/me/location`
+
+Find hospitals using saved location:
+
+- `GET /api/me/nearby-hospitals?radius_km=5&limit=10`
+
+If location is missing, API returns:
+
+```json
+{
+	"error": "Set your location first.",
+	"code": "MISSING_SAVED_LOCATION"
+}
+```
 
 ## Nearby hospitals API
 
@@ -80,6 +129,8 @@ Rules:
 - Provide either `location` OR both `lat` and `lon`
 - `radius_km` is clamped to `1..25` (default `5`)
 - `limit` is clamped to `1..20` (default `5`)
+- Nearby hospital results are cached for a short period (default 10 minutes)
+- Geocoding results are cached (default 24 hours)
 
 Response shape:
 

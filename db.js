@@ -36,6 +36,30 @@ function ensureDbFile() {
     if (!parsed.users || !Array.isArray(parsed.users)) {
       throw new Error('Invalid DB structure. Expected { users: [] }.');
     }
+
+    let migrated = false;
+    parsed.users.forEach((user) => {
+      if (!Object.prototype.hasOwnProperty.call(user, 'location_text')) {
+        user.location_text = null;
+        migrated = true;
+      }
+      if (!Object.prototype.hasOwnProperty.call(user, 'location_lat')) {
+        user.location_lat = null;
+        migrated = true;
+      }
+      if (!Object.prototype.hasOwnProperty.call(user, 'location_lon')) {
+        user.location_lon = null;
+        migrated = true;
+      }
+      if (!Object.prototype.hasOwnProperty.call(user, 'location_updated_at')) {
+        user.location_updated_at = null;
+        migrated = true;
+      }
+    });
+
+    if (migrated) {
+      fs.writeFileSync(dbPath, JSON.stringify(parsed, null, 2), 'utf8');
+    }
   } catch (err) {
     failFast('Failed to initialize database file:', err);
   }
@@ -72,7 +96,11 @@ function createUser({ name, email, passwordHash }) {
     name: name || null,
     email,
     password_hash: passwordHash,
-    created_at: now
+    created_at: now,
+    location_text: null,
+    location_lat: null,
+    location_lon: null,
+    location_updated_at: null
   };
   db.users.push(user);
   writeDb(db);
@@ -92,12 +120,55 @@ function findUserById(id) {
     id: user.id,
     name: user.name,
     email: user.email,
-    created_at: user.created_at
+    created_at: user.created_at,
+    location_text: user.location_text || null,
+    location_lat: Number.isFinite(user.location_lat) ? user.location_lat : null,
+    location_lon: Number.isFinite(user.location_lon) ? user.location_lon : null,
+    location_updated_at: user.location_updated_at || null
+  };
+}
+
+function updateUserLocation(id, location) {
+  const db = readDb();
+  const user = db.users.find((u) => u.id === id);
+  if (!user) {
+    return null;
+  }
+
+  user.location_text = location.location_text || null;
+  user.location_lat = Number(location.location_lat);
+  user.location_lon = Number(location.location_lon);
+  user.location_updated_at = new Date().toISOString();
+
+  writeDb(db);
+
+  return {
+    location_text: user.location_text,
+    location_lat: user.location_lat,
+    location_lon: user.location_lon,
+    location_updated_at: user.location_updated_at
+  };
+}
+
+function getUserLocation(id) {
+  const db = readDb();
+  const user = db.users.find((u) => u.id === id);
+  if (!user) {
+    return null;
+  }
+
+  return {
+    location_text: user.location_text || null,
+    location_lat: Number.isFinite(user.location_lat) ? user.location_lat : null,
+    location_lon: Number.isFinite(user.location_lon) ? user.location_lon : null,
+    location_updated_at: user.location_updated_at || null
   };
 }
 
 module.exports = {
   createUser,
   findUserByEmail,
-  findUserById
+  findUserById,
+  updateUserLocation,
+  getUserLocation
 };

@@ -5,28 +5,88 @@
       "name": "PRABHU",
       "email": "prabhu@rajj.com",
       "password_hash": "$2a$12$Alf1mi4c6GgHzkEbB02exuFYd.Y6ATbMkDv9Cfr.8tIdTHPzFdmlu",
-      "created_at": "2026-04-07T04:46:22.893Z"
+      "created_at": "2026-04-07T04:46:22.893Z",
+      "location_text": null,
+      "location_lat": null,
+      "location_lon": null,
+      "location_updated_at": null
     },
     {
       "id": "66affd5c-229b-4699-ae30-fa34e9733771",
       "name": "IPHONE",
       "email": "iphone@17pro.com",
       "password_hash": "$2a$12$AV2kfBz24mOPhPu/cDrETu7dfmQG6fbnxXW8OapF2hIoFK.G4y1CW",
-      "created_at": "2026-04-07T04:53:05.479Z"
+      "created_at": "2026-04-07T04:53:05.479Z",
+      "location_text": null,
+      "location_lat": null,
+      "location_lon": null,
+      "location_updated_at": null
     },
     {
       "id": "d51a78f0-5675-4f99-bfdb-810393f068ce",
       "name": "Hosp Tester",
       "email": "hosp1941627692@test.com",
       "password_hash": "$2a$12$05XnbVpLPReq6Vc.oPWaqewr7dlMP33MltI4PjZt3YHO2xDwbKTHO",
-      "created_at": "2026-04-07T05:17:15.092Z"
+      "created_at": "2026-04-07T05:17:15.092Z",
+      "location_text": null,
+      "location_lat": null,
+      "location_lon": null,
+      "location_updated_at": null
     },
     {
       "id": "acb90ee9-38c3-44e2-83d8-977e3da540a2",
       "name": "Test User",
       "email": "testuser1384479313@example.com",
       "password_hash": "$2a$12$UD9ThuYLh8rcgc/Uh8IFL.uQocfdHrBNZkD8qqBCxCEBIZaWxM7Na",
-      "created_at": "2026-04-07T06:00:12.807Z"
+      "created_at": "2026-04-07T06:00:12.807Z",
+      "location_text": null,
+      "location_lat": null,
+      "location_lon": null,
+      "location_updated_at": null
+    },
+    {
+      "id": "69ecaabb-30d0-4605-b5be-850364beb59d",
+      "name": "Loc User",
+      "email": "loc2029349591@test.com",
+      "password_hash": "$2a$12$WHxSxaDw2.i/xV/LpwskGewXOpXNhqJohcyD6./8m8BNGbUfyWg8u",
+      "created_at": "2026-04-07T06:09:23.239Z",
+      "location_text": "Boston, MA",
+      "location_lat": 42.3588336,
+      "location_lon": -71.0578303,
+      "location_updated_at": "2026-04-07T06:09:23.520Z"
+    },
+    {
+      "id": "fce1a71c-a085-4b98-b0a9-4b5833a7bdda",
+      "name": "Coord User",
+      "email": "coord361698098@test.com",
+      "password_hash": "$2a$12$s2yqKoSU/V89C/EgLa3kDeaE5GB87p8QKoaS80f43EvsbKEj3b18.",
+      "created_at": "2026-04-07T06:11:11.165Z",
+      "location_text": "Manual coords",
+      "location_lat": 37.33,
+      "location_lon": -121.89,
+      "location_updated_at": "2026-04-07T06:11:11.177Z"
+    },
+    {
+      "id": "48bb5734-fe7a-444d-9af0-4fb9d94089b6",
+      "name": "Map User",
+      "email": "map104196925@test.com",
+      "password_hash": "$2a$12$1ew8Q0z4LWO0Mqs0gchtLOG1XKiU1xZbmQskLUs26te/UYxZ2dFoW",
+      "created_at": "2026-04-07T06:20:46.704Z",
+      "location_text": null,
+      "location_lat": null,
+      "location_lon": null,
+      "location_updated_at": null
+    },
+    {
+      "id": "3e6dd502-a50e-466c-9a21-40f5271a31d0",
+      "name": "Debug",
+      "email": "debug1416628417@test.com",
+      "password_hash": "$2a$12$TQ6R4JEy5A/I/HsSbeZYo.dXmuvoFGoWz5aw.oXhqAAp3EOPoo.tK",
+      "created_at": "2026-04-07T06:23:00.743Z",
+      "location_text": null,
+      "location_lat": null,
+      "location_lon": null,
+      "location_updated_at": null
     }
   ]
 }

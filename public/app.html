@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MediCheck | Rural Health AI</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap');
 
@@ -1169,7 +1170,7 @@
     .chat-controls {
       margin-top: 12px;
       display: grid;
-      grid-template-columns: 1fr auto auto auto;
+      grid-template-columns: 1fr auto auto auto auto;
       gap: 8px;
     }
 
@@ -1274,6 +1275,58 @@
       margin-top: 10px;
     }
 
+    .location-settings {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 229, 255, 0.22);
+      background: rgba(6, 11, 24, 0.85);
+      font-size: 13px;
+    }
+
+    .location-settings h4 {
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #d3e7ff;
+    }
+
+    .location-settings input,
+    .location-settings select {
+      width: 100%;
+      margin-top: 6px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-primary);
+      padding: 9px 10px;
+      outline: none;
+    }
+
+    .location-coords {
+      display: none;
+      margin-top: 8px;
+      gap: 8px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .location-coords.active {
+      display: grid;
+    }
+
+    .location-row {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .saved-location {
+      margin-top: 8px;
+      color: #bcd2e8;
+      min-height: 18px;
+    }
+
     .mini-btn {
       border: 1px solid rgba(0, 229, 255, 0.35);
       color: var(--accent-cyan);
@@ -1282,6 +1335,164 @@
       padding: 6px 10px;
       font-size: 12px;
       cursor: pointer;
+    }
+
+    /* ─── MAP SECTION ─── */
+    .map-section {
+      padding: 80px 0;
+      background: #070E1C;
+    }
+
+    .map-wrap {
+      margin-top: 28px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.12);
+      position: relative;
+    }
+
+    #hospitalMap {
+      width: 100%;
+      height: 520px;
+      background: #0D1526;
+      z-index: 1;
+    }
+
+    .map-controls {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      right: 14px;
+      z-index: 1000;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .map-search-input {
+      flex: 1;
+      min-width: 200px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      background: rgba(6, 11, 24, 0.92);
+      color: var(--text-primary);
+      font-size: 14px;
+      outline: none;
+      backdrop-filter: blur(8px);
+    }
+
+    .map-search-input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.15);
+    }
+
+    .map-search-input::placeholder { color: var(--text-muted); }
+
+    .map-ctrl-btn {
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      background: rgba(6, 11, 24, 0.92);
+      color: var(--accent-cyan);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .map-ctrl-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 16px rgba(0, 229, 255, 0.3);
+    }
+
+    .map-ctrl-btn.primary {
+      background: var(--accent-cyan);
+      color: #051021;
+      border-color: var(--accent-cyan);
+    }
+
+    .map-ctrl-select {
+      padding: 10px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      background: rgba(6, 11, 24, 0.92);
+      color: var(--text-primary);
+      font-size: 13px;
+      outline: none;
+      backdrop-filter: blur(8px);
+    }
+
+    .map-status {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      right: 14px;
+      z-index: 1000;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(6, 11, 24, 0.92);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      color: #bcd2e8;
+      font-size: 13px;
+      backdrop-filter: blur(8px);
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .map-status.hidden { opacity: 0; }
+
+    .map-hospital-list {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+
+    .map-hospital-card {
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(0, 229, 255, 0.15);
+      background: rgba(13, 21, 38, 0.7);
+      font-size: 13px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+
+    .map-hospital-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.18);
+    }
+
+    .map-hospital-card h4 {
+      font-size: 15px;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+
+    .map-hospital-card .dist {
+      color: var(--accent-cyan);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+    }
+
+    .map-hospital-card .addr {
+      color: var(--text-muted);
+      margin: 4px 0 8px;
+    }
+
+    .map-hospital-card a {
+      color: var(--accent-cyan);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 767px) {
+      #hospitalMap { height: 380px; }
+      .map-controls { flex-direction: column; }
+      .map-hospital-list { grid-template-columns: 1fr; }
     }
 
     /* ─── SECTION 8: ASHA SPOTLIGHT ─── */
@@ -1612,6 +1823,7 @@
       <nav class="nav-links" aria-label="Primary">
         <a class="nav-link" href="#features">Features</a>
         <a class="nav-link" href="#how-it-works">How It Works</a>
+        <a class="nav-link" href="#hospital-map">📍 Hospitals Map</a>
         <a class="nav-link" href="#impact">Impact</a>
         <a class="nav-link" href="#asha-mode">ASHA Mode</a>
         <a class="nav-link" href="#demo">Demo</a>
@@ -1630,6 +1842,7 @@
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile Menu">
     <a href="#features">Features</a>
     <a href="#how-it-works">How It Works</a>
+    <a href="#hospital-map">📍 Hospitals Map</a>
     <a href="#impact">Impact</a>
     <a href="#asha-mode">ASHA Mode</a>
     <a href="#demo">Demo</a>
@@ -2000,6 +2213,18 @@
               <option>Hindi</option>
               <option>Punjabi</option>
             </select>
+            <select id="radiusSelect" class="lang-select" aria-label="Nearby radius">
+              <option value="1">1 km</option>
+              <option value="2">2 km</option>
+              <option value="5" selected>5 km</option>
+              <option value="10">10 km</option>
+              <option value="25">25 km</option>
+            </select>
+            <select id="limitSelect" class="lang-select" aria-label="Nearby result limit">
+              <option value="5" selected>Top 5</option>
+              <option value="10">Top 10</option>
+              <option value="20">Top 20</option>
+            </select>
             <button id="nearbyHospitalsBtn" class="mini-btn" type="button" aria-label="Find nearby hospitals">Nearby hospitals</button>
             <button id="sendBtn" class="send-btn" aria-label="Send">➜</button>
           </div>
@@ -2021,8 +2246,59 @@
               <button class="mini-btn" type="button">🗺️ Directions</button>
             </div>
           </div>
+
+          <div class="location-settings" aria-live="polite">
+            <h4>My Location</h4>
+            <label for="locationTextInput">Enter your city/address</label>
+            <input id="locationTextInput" type="text" placeholder="e.g. Boston, MA" maxlength="200" />
+            <div class="location-row">
+              <label for="coordToggle">Enter coordinates instead</label>
+              <input id="coordToggle" type="checkbox" style="width:auto;margin:0" />
+            </div>
+            <div id="coordFields" class="location-coords">
+              <input id="latInput" type="number" step="any" placeholder="Latitude" />
+              <input id="lonInput" type="number" step="any" placeholder="Longitude" />
+            </div>
+            <div class="location-row">
+              <button id="saveLocationBtn" class="mini-btn" type="button">Save location</button>
+            </div>
+            <div id="savedLocationInfo" class="saved-location">Loading your saved location...</div>
+          </div>
         </aside>
       </div>
+    </div>
+  </section>
+
+  <!-- ─── MAP: NEARBY HOSPITALS ─── -->
+  <section class="map-section" id="hospital-map">
+    <div class="container">
+      <div class="center-copy fade-in-up">
+        <div class="section-label">FIND HOSPITALS</div>
+        <h2 class="section-title">Nearby Hospitals on <span class="gradient-text">OpenStreetMap</span></h2>
+        <p class="muted">Search any location manually, use your GPS, or click on the map to find hospitals near that spot.</p>
+      </div>
+      <div class="map-wrap fade-in-up">
+        <div class="map-controls">
+          <input id="mapSearchInput" class="map-search-input" type="text" placeholder="Search city, address, or landmark..." maxlength="200" />
+          <select id="mapRadiusSelect" class="map-ctrl-select" aria-label="Search radius">
+            <option value="1">1 km</option>
+            <option value="2">2 km</option>
+            <option value="5" selected>5 km</option>
+            <option value="10">10 km</option>
+            <option value="25">25 km</option>
+          </select>
+          <select id="mapLimitSelect" class="map-ctrl-select" aria-label="Max results">
+            <option value="5" selected>Top 5</option>
+            <option value="10">Top 10</option>
+            <option value="20">Top 20</option>
+          </select>
+          <button id="mapSearchBtn" class="map-ctrl-btn primary" type="button">🔍 Search</button>
+          <button id="mapLocateBtn" class="map-ctrl-btn" type="button">📍 My Location</button>
+        </div>
+        <div id="hospitalMap"></div>
+        <div id="mapStatus" class="map-status hidden"></div>
+      </div>
+      <div id="mapHospitalList" class="map-hospital-list"></div>
     </div>
   </section>
 
@@ -2414,10 +2690,23 @@
     const chatWindow = document.getElementById('chatWindow');
     const chatInput = document.getElementById('chatInput');
     const nearbyHospitalsBtn = document.getElementById('nearbyHospitalsBtn');
+    const radiusSelect = document.getElementById('radiusSelect');
+    const limitSelect = document.getElementById('limitSelect');
     const sendBtn = document.getElementById('sendBtn');
     const confidenceBar = document.getElementById('confidenceBar');
     const confidenceText = document.getElementById('confidenceText');
     const conditionsBox = document.getElementById('conditionsBox');
+    const locationTextInput = document.getElementById('locationTextInput');
+    const coordToggle = document.getElementById('coordToggle');
+    const coordFields = document.getElementById('coordFields');
+    const latInput = document.getElementById('latInput');
+    const lonInput = document.getElementById('lonInput');
+    const saveLocationBtn = document.getElementById('saveLocationBtn');
+    const savedLocationInfo = document.getElementById('savedLocationInfo');
+
+    let savedLocation = null;
+    let pendingLocationSave = null;
+    let waitingForLocation = false;
 
     const chatbotSystemInstructions =
       'When a user asks for nearby hospitals, the bot must call the find_nearby_hospitals tool and then show a numbered list.';
@@ -2466,6 +2755,13 @@
       return /(nearby hospitals?|find hospital|hospital near me|emergency near|near hospital|nearest hospital)/i.test(text);
     }
 
+    function getSelectedNearbyOptions() {
+      return {
+        radius_km: Number(radiusSelect.value || 5),
+        limit: Number(limitSelect.value || 5)
+      };
+    }
+
     function extractCoordinates(text) {
       const named = text.match(/lat\s*[:=]\s*(-?\d+(?:\.\d+)?)\s*[, ]\s*lon\s*[:=]\s*(-?\d+(?:\.\d+)?)/i);
       if (named) {
@@ -2487,9 +2783,10 @@
     }
 
     function parseHospitalSearchRequest(text) {
+      const selected = getSelectedNearbyOptions();
       const parsed = {
-        radius_km: 5,
-        limit: 5
+        radius_km: selected.radius_km,
+        limit: selected.limit
       };
 
       const radiusMatch = text.match(/(\d+(?:\.\d+)?)\s*km/i);
@@ -2543,6 +2840,76 @@
       return data;
     }
 
+    async function fetchSavedLocation() {
+      const response = await fetch('/api/me/location', {
+        method: 'GET',
+        credentials: 'same-origin'
+      });
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(data.error || 'Unable to fetch saved location.');
+      }
+
+      savedLocation = data.location || null;
+      return savedLocation;
+    }
+
+    function renderSavedLocationInfo(location) {
+      if (!location || location.location_lat === null || location.location_lon === null) {
+        savedLocationInfo.textContent = 'No location saved yet.';
+        return;
+      }
+
+      const updatedText = location.location_updated_at
+        ? new Date(location.location_updated_at).toLocaleString()
+        : 'Unknown';
+      const label = location.location_text || `${location.location_lat.toFixed(4)}, ${location.location_lon.toFixed(4)}`;
+      savedLocationInfo.textContent = `Saved: ${label} (${location.location_lat.toFixed(4)}, ${location.location_lon.toFixed(4)}) · Updated ${updatedText}`;
+    }
+
+    async function saveLocation(payload) {
+      const response = await fetch('/api/me/location', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        const error = new Error(data.error || 'Unable to save location.');
+        error.code = data.code || 'UNKNOWN';
+        error.suggestions = data.suggestions || [];
+        throw error;
+      }
+
+      savedLocation = data.location;
+      renderSavedLocationInfo(savedLocation);
+      return data.location;
+    }
+
+    async function callSavedNearbyHospitals(payload) {
+      const params = new URLSearchParams({
+        radius_km: String(payload.radius_km),
+        limit: String(payload.limit)
+      });
+
+      const response = await fetch(`/api/me/nearby-hospitals?${params.toString()}`, {
+        method: 'GET',
+        credentials: 'same-origin'
+      });
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        const error = new Error(data.error || 'Unable to fetch nearby hospitals.');
+        error.code = data.code || 'UNKNOWN';
+        throw error;
+      }
+
+      return data;
+    }
+
     function formatHospitalsAsHtml(hospitals) {
       if (!Array.isArray(hospitals) || hospitals.length === 0) {
         return 'No hospitals found in that area. Try increasing radius to 10-15 km.';
@@ -2561,24 +2928,28 @@
 
     async function runNearbyHospitalsFlow(rawText, explicitInput) {
       const toolInput = explicitInput || parseHospitalSearchRequest(rawText);
-
-      if (!toolInput.location && (toolInput.lat === undefined || toolInput.lon === undefined)) {
-        addMessage('Share your city/address or allow location access (lat/lon).', 'ai');
-        return true;
-      }
+      const hasExplicitLocation = Boolean(toolInput.location) || (toolInput.lat !== undefined && toolInput.lon !== undefined);
 
       const typing = typingIndicator();
 
       try {
         const payload = {
-          location: toolInput.location,
-          lat: toolInput.lat,
-          lon: toolInput.lon,
           radius_km: toolInput.radius_km,
           limit: toolInput.limit
         };
 
-        const toolResult = await callFindNearbyHospitalsTool(payload);
+        let toolResult;
+        if (hasExplicitLocation) {
+          toolResult = await callFindNearbyHospitalsTool({
+            ...payload,
+            location: toolInput.location,
+            lat: toolInput.lat,
+            lon: toolInput.lon
+          });
+        } else {
+          toolResult = await callSavedNearbyHospitals(payload);
+        }
+
         typing.remove();
 
         const lead = toolResult.query.cached
@@ -2587,9 +2958,28 @@
 
         addMessage(lead, 'ai');
         addHtmlMessage(formatHospitalsAsHtml(toolResult.hospitals), 'ai');
+
+        if (hasExplicitLocation) {
+          pendingLocationSave = {
+            location_text: toolInput.location || null,
+            lat: toolResult.query.lat,
+            lon: toolResult.query.lon
+          };
+          addMessage('Do you want to save this as your default location? Reply yes to save.', 'ai');
+        }
+
         addMessage('Do you want directions to one of these, or should I expand the radius?', 'ai');
       } catch (error) {
         typing.remove();
+
+        if (error.code === 'MISSING_SAVED_LOCATION') {
+          waitingForLocation = true;
+          addMessage('No saved location found. Type your city or address below (e.g. "Boston, MA") and I will find hospitals near you.', 'ai');
+          chatInput.placeholder = 'Type your city or address...';
+          chatInput.focus();
+          locationTextInput.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          return true;
+        }
 
         if (error.code === 'AMBIGUOUS_LOCATION' && error.suggestions.length) {
           const suggestions = error.suggestions.map((value, idx) => `${idx + 1}. ${value}`).join(' | ');
@@ -2734,6 +3124,36 @@
       addMessage(value, 'user');
       chatInput.value = '';
 
+      if (pendingLocationSave && /^(yes|y|save|ok|okay|sure)$/i.test(value)) {
+        const typing = typingIndicator();
+        try {
+          await saveLocation({
+            location_text: pendingLocationSave.location_text,
+            lat: pendingLocationSave.lat,
+            lon: pendingLocationSave.lon
+          });
+          typing.remove();
+          pendingLocationSave = null;
+          addMessage('Saved. I will use this location for future nearby hospital searches.', 'ai');
+        } catch (error) {
+          typing.remove();
+          addMessage(error.message || 'I could not save your location right now.', 'ai');
+        }
+        return;
+      }
+
+      if (waitingForLocation) {
+        waitingForLocation = false;
+        chatInput.placeholder = 'Type your symptom...';
+        const selected = getSelectedNearbyOptions();
+        const coords = extractCoordinates(value);
+        const toolInput = coords
+          ? { lat: coords.lat, lon: coords.lon, radius_km: selected.radius_km, limit: selected.limit }
+          : { location: value, radius_km: selected.radius_km, limit: selected.limit };
+        await runNearbyHospitalsFlow('', toolInput);
+        return;
+      }
+
       if (isHospitalIntent(value)) {
         await runNearbyHospitalsFlow(value);
         return;
@@ -2752,9 +3172,21 @@
 
     nearbyHospitalsBtn.addEventListener('click', async () => {
       addMessage('Find nearby hospitals', 'user');
+      const selected = getSelectedNearbyOptions();
+
+      if (savedLocation && savedLocation.location_lat !== null && savedLocation.location_lon !== null) {
+        await runNearbyHospitalsFlow('', {
+          radius_km: selected.radius_km,
+          limit: selected.limit
+        });
+        return;
+      }
 
       if (!navigator.geolocation) {
-        addMessage('Share your city/address or allow location access (lat/lon).', 'ai');
+        waitingForLocation = true;
+        addMessage('No saved location found. Type your city or address below (e.g. "Boston, MA") and I will find hospitals near you.', 'ai');
+        chatInput.placeholder = 'Type your city or address...';
+        chatInput.focus();
         return;
       }
 
@@ -2768,13 +3200,16 @@
           await runNearbyHospitalsFlow('', {
             lat,
             lon,
-            radius_km: 5,
-            limit: 5
+            radius_km: selected.radius_km,
+            limit: selected.limit
           });
         },
         () => {
           typing.remove();
-          addMessage('Location permission denied. Share your city/address or allow location access (lat/lon).', 'ai');
+          waitingForLocation = true;
+          addMessage('Location permission denied. Type your city or address below (e.g. "Boston, MA") and I will find hospitals near you.', 'ai');
+          chatInput.placeholder = 'Type your city or address...';
+          chatInput.focus();
         },
         {
           enableHighAccuracy: false,
@@ -2789,6 +3224,48 @@
       if (e.key === 'Enter') handleSend();
     });
 
+    coordToggle.addEventListener('change', () => {
+      coordFields.classList.toggle('active', coordToggle.checked);
+    });
+
+    saveLocationBtn.addEventListener('click', async () => {
+      const locationText = locationTextInput.value.trim();
+      const payload = coordToggle.checked
+        ? {
+            location_text: locationText || null,
+            lat: latInput.value,
+            lon: lonInput.value
+          }
+        : {
+            location_text: locationText
+          };
+
+      try {
+        saveLocationBtn.disabled = true;
+        const location = await saveLocation(payload);
+        addMessage(`Location saved: ${location.location_text || `${location.location_lat.toFixed(4)}, ${location.location_lon.toFixed(4)}`}`, 'ai');
+      } catch (error) {
+        if (error.code === 'AMBIGUOUS_LOCATION' && error.suggestions && error.suggestions.length) {
+          addMessage(`Please clarify your location: ${error.suggestions.join(' | ')}`, 'ai');
+        } else {
+          addMessage(error.message || 'Could not save location.', 'ai');
+        }
+      } finally {
+        saveLocationBtn.disabled = false;
+      }
+    });
+
+    fetchSavedLocation()
+      .then((location) => {
+        renderSavedLocationInfo(location);
+        if (location && location.location_text) {
+          locationTextInput.value = location.location_text;
+        }
+      })
+      .catch(() => {
+        savedLocationInfo.textContent = 'Unable to load saved location right now.';
+      });
+
     // Seed panel with initial state.
     applyAnalysis({
       confidence: 63,
@@ -2799,6 +3276,253 @@
         { name: 'Malaria', value: 17 }
       ]
     });
+  </script>
+
+  <!-- Leaflet JS (open-source, no API key) -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <script>
+    /* ─── HOSPITAL MAP ─── */
+    (function () {
+      const mapEl = document.getElementById('hospitalMap');
+      const mapSearchInput = document.getElementById('mapSearchInput');
+      const mapSearchBtn = document.getElementById('mapSearchBtn');
+      const mapLocateBtn = document.getElementById('mapLocateBtn');
+      const mapRadiusSelect = document.getElementById('mapRadiusSelect');
+      const mapLimitSelect = document.getElementById('mapLimitSelect');
+      const mapStatus = document.getElementById('mapStatus');
+      const mapHospitalList = document.getElementById('mapHospitalList');
+
+      const defaultCenter = [20.5937, 78.9629]; // India center
+      const defaultZoom = 5;
+
+      const map = L.map(mapEl, {
+        center: defaultCenter,
+        zoom: defaultZoom,
+        zoomControl: true,
+        scrollWheelZoom: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19
+      }).addTo(map);
+
+      const userIcon = L.divIcon({
+        className: '',
+        html: '<div style="width:18px;height:18px;border-radius:50%;background:#00E5FF;border:3px solid #fff;box-shadow:0 0 12px rgba(0,229,255,0.7)"></div>',
+        iconSize: [18, 18],
+        iconAnchor: [9, 9]
+      });
+
+      const hospitalIcon = L.divIcon({
+        className: '',
+        html: '<div style="width:14px;height:14px;border-radius:50%;background:#FF4C4C;border:2px solid #fff;box-shadow:0 0 8px rgba(255,76,76,0.6)"></div>',
+        iconSize: [14, 14],
+        iconAnchor: [7, 7]
+      });
+
+      let userMarker = null;
+      let hospitalMarkers = [];
+      let radiusCircle = null;
+      let searching = false;
+
+      function showStatus(text) {
+        mapStatus.textContent = text;
+        mapStatus.classList.remove('hidden');
+      }
+
+      function hideStatus() {
+        mapStatus.classList.add('hidden');
+      }
+
+      function clearHospitalMarkers() {
+        hospitalMarkers.forEach((m) => m.remove());
+        hospitalMarkers = [];
+        if (radiusCircle) {
+          radiusCircle.remove();
+          radiusCircle = null;
+        }
+      }
+
+      function escHtml(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+
+      function renderHospitalCards(hospitals) {
+        mapHospitalList.innerHTML = '';
+        if (!hospitals.length) {
+          mapHospitalList.innerHTML = '<p style="color:var(--text-muted);font-size:14px;padding:8px;">No hospitals found. Try a larger radius.</p>';
+          return;
+        }
+
+        hospitals.forEach((h, idx) => {
+          const card = document.createElement('div');
+          card.className = 'map-hospital-card';
+          card.innerHTML = `
+            <h4>${idx + 1}. ${escHtml(h.name)}</h4>
+            <span class="dist">${h.distance_km} km</span>
+            <p class="addr">${escHtml(h.address)}</p>
+            <a href="${escHtml(h.maps_url)}" target="_blank" rel="noopener noreferrer">Open in Google Maps \u2197</a>
+            &nbsp;|&nbsp;
+            <a href="https://www.openstreetmap.org/?mlat=${h.lat}&mlon=${h.lon}#map=17/${h.lat}/${h.lon}" target="_blank" rel="noopener noreferrer">OpenStreetMap \u2197</a>
+          `;
+          card.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') return;
+            map.flyTo([h.lat, h.lon], 16, { duration: 0.8 });
+            hospitalMarkers[idx]?.openPopup();
+          });
+          mapHospitalList.appendChild(card);
+        });
+      }
+
+      function placeHospitalsOnMap(lat, lon, hospitals, radiusKm) {
+        clearHospitalMarkers();
+
+        radiusCircle = L.circle([lat, lon], {
+          radius: radiusKm * 1000,
+          color: 'rgba(0,229,255,0.4)',
+          fillColor: 'rgba(0,229,255,0.06)',
+          fillOpacity: 1,
+          weight: 1.5
+        }).addTo(map);
+
+        hospitals.forEach((h) => {
+          const marker = L.marker([h.lat, h.lon], { icon: hospitalIcon })
+            .addTo(map)
+            .bindPopup(
+              `<strong>${escHtml(h.name)}</strong><br/>${escHtml(h.address)}<br/>${h.distance_km} km<br/><a href="${escHtml(h.maps_url)}" target="_blank">Google Maps</a>`,
+              { maxWidth: 260 }
+            );
+          hospitalMarkers.push(marker);
+        });
+
+        const bounds = L.latLngBounds([[lat, lon]]);
+        hospitals.forEach((h) => bounds.extend([h.lat, h.lon]));
+        map.fitBounds(bounds.pad(0.15), { maxZoom: 14 });
+      }
+
+      function setUserPosition(lat, lon) {
+        if (userMarker) {
+          userMarker.setLatLng([lat, lon]);
+        } else {
+          userMarker = L.marker([lat, lon], { icon: userIcon })
+            .addTo(map)
+            .bindPopup('Your location');
+        }
+      }
+
+      async function searchHospitals(lat, lon, locationLabel) {
+        if (searching) return;
+        searching = true;
+        const radiusKm = Number(mapRadiusSelect.value || 5);
+        const limit = Number(mapLimitSelect.value || 5);
+
+        showStatus(`Searching hospitals within ${radiusKm} km of ${locationLabel || lat.toFixed(4) + ', ' + lon.toFixed(4)}...`);
+        setUserPosition(lat, lon);
+        map.flyTo([lat, lon], 13, { duration: 0.6 });
+
+        try {
+          const res = await fetch('/api/nearby/hospitals', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({ lat, lon, radius_km: radiusKm, limit })
+          });
+
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) {
+            showStatus(data.error || 'Could not fetch hospitals.');
+            setTimeout(hideStatus, 5000);
+            searching = false;
+            return;
+          }
+
+          placeHospitalsOnMap(lat, lon, data.hospitals || [], radiusKm);
+          renderHospitalCards(data.hospitals || []);
+
+          const count = (data.hospitals || []).length;
+          showStatus(`Found ${count} hospital${count !== 1 ? 's' : ''} within ${radiusKm} km.`);
+          setTimeout(hideStatus, 4000);
+        } catch (err) {
+          showStatus('Could not reach the map service. Try again in a minute.');
+          setTimeout(hideStatus, 5000);
+        } finally {
+          searching = false;
+        }
+      }
+
+      async function geocodeAndSearch(query) {
+        if (!query) return;
+        showStatus(`Geocoding "${query}"...`);
+
+        try {
+          const params = new URLSearchParams({ q: query, format: 'jsonv2', limit: '1' });
+          const res = await fetch('https://nominatim.openstreetmap.org/search?' + params.toString(), {
+            headers: { 'User-Agent': 'MediCheck/1.0' }
+          });
+          const data = await res.json();
+
+          if (!Array.isArray(data) || data.length === 0) {
+            showStatus('Location not found. Try a different name or address.');
+            setTimeout(hideStatus, 4000);
+            return;
+          }
+
+          const best = data[0];
+          await searchHospitals(Number(best.lat), Number(best.lon), best.display_name || query);
+        } catch (err) {
+          showStatus('Geocoding failed. Try again.');
+          setTimeout(hideStatus, 4000);
+        }
+      }
+
+      // Search button
+      mapSearchBtn.addEventListener('click', () => {
+        geocodeAndSearch(mapSearchInput.value.trim());
+      });
+
+      // Enter key in search input
+      mapSearchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') geocodeAndSearch(mapSearchInput.value.trim());
+      });
+
+      // My Location button (GPS)
+      mapLocateBtn.addEventListener('click', () => {
+        if (!navigator.geolocation) {
+          showStatus('Geolocation not supported by your browser.');
+          setTimeout(hideStatus, 3000);
+          return;
+        }
+
+        showStatus('Getting your location...');
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            searchHospitals(pos.coords.latitude, pos.coords.longitude, 'Your location');
+          },
+          () => {
+            showStatus('Location permission denied. Use the search bar to enter a location manually.');
+            setTimeout(hideStatus, 5000);
+          },
+          { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
+        );
+      });
+
+      // Click on map to search that location
+      map.on('click', (e) => {
+        if (searching) return;
+        searchHospitals(e.latlng.lat, e.latlng.lng, null);
+      });
+
+      // If user already has a saved location, center the map on it
+      if (typeof savedLocation !== 'undefined' && savedLocation && savedLocation.location_lat !== null) {
+        map.setView([savedLocation.location_lat, savedLocation.location_lon], 12);
+        setUserPosition(savedLocation.location_lat, savedLocation.location_lon);
+        if (savedLocation.location_text) {
+          mapSearchInput.value = savedLocation.location_text;
+        }
+      }
+    })();
   </script>
 </body>
 </html>
