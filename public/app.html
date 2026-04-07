@@ -3435,81 +3435,20 @@
     }
 
     function getResponse(input) {
-      const text = input.toLowerCase();
-      if (/(fever|bukhar)/i.test(text)) {
-        return {
-          reply: 'How many days? Any joint pain or rash?',
-          triage: '🟡 CAUTION',
-          action: 'Visit PHC today, hydrate, monitor platelets if fever persists.',
-          tone: 'yellow',
-          color: '#FFD600',
-          confidence: 78,
-          conditions: [
-            { name: 'Viral fever', value: 67 },
-            { name: 'Dengue', value: 23 },
-            { name: 'Malaria', value: 10 }
-          ]
-        };
-      }
-      if (/(chest pain|seene mein dard)/i.test(text)) {
-        return {
-          reply: '🔴 EMERGENCY - Call 108 now.',
-          triage: '🔴 EMERGENCY',
-          action: 'Call 108 immediately and avoid travel alone.',
-          tone: 'red',
-          color: '#FF4C4C',
-          confidence: 94,
-          conditions: [
-            { name: 'Cardiac event risk', value: 64 },
-            { name: 'Severe acidity', value: 21 },
-            { name: 'Musculoskeletal pain', value: 15 }
-          ]
-        };
-      }
-      if (/(headache|sar dard)/i.test(text)) {
-        return {
-          reply: 'Severity 1-10? Any vomiting?',
-          triage: '🟡 MONITOR',
-          action: 'Home rest, fluids, and PHC visit if severe or persistent.',
-          tone: 'yellow',
-          color: '#FFD600',
-          confidence: 72,
-          conditions: [
-            { name: 'Tension headache', value: 58 },
-            { name: 'Migraine', value: 29 },
-            { name: 'Viral symptom', value: 13 }
-          ]
-        };
-      }
-      if (/(cough|khansi)/i.test(text)) {
-        return {
-          reply: 'Duration? Any breathing difficulty?',
-          triage: '🟢 HOME REST',
-          action: 'Home rest advised. If persists 5+ days, visit PHC.',
-          tone: 'green',
-          color: '#00E676',
-          confidence: 75,
-          conditions: [
-            { name: 'Seasonal cough', value: 61 },
-            { name: 'Upper respiratory infection', value: 27 },
-            { name: 'Allergic reaction', value: 12 }
-          ]
-        };
-      }
-      return {
-        reply: 'Let me analyse that. Can you rate severity 1-10?',
-        triage: '🟡 CONSULT PHC',
-        action: 'Consult your nearest PHC within 24 hours.',
-        tone: 'yellow',
-        color: '#FFD600',
-        confidence: 66,
-        conditions: [
-          { name: 'General infection', value: 44 },
-          { name: 'Inflammatory condition', value: 31 },
-          { name: 'Nutritional factor', value: 25 }
-        ]
-      };
+      // AI chatbot - calls the /chat API endpoint
+      return fetch('/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({ userId: chatUserId, message: input })
+      })
+        .then(r => r.json())
+        .then(data => data.message || 'Sorry, I could not process that.')
+        .catch(() => '⚠️ Connection error. Please try again.');
     }
+
+    // Generate a unique chat user ID for this session
+    const chatUserId = 'user_' + Math.random().toString(36).substring(2, 10) + Date.now().toString(36);
 
     async function handleSend() {
       const value = chatInput.value.trim();
@@ -3553,14 +3492,14 @@
       }
 
       const typing = typingIndicator();
-      const response = getResponse(value);
-
-      setTimeout(() => {
+      try {
+        const aiReply = await getResponse(value);
         typing.remove();
-        addMessage(response.reply, 'ai');
-        addResultCard(response);
-        applyAnalysis(response);
-      }, 1500);
+        addMessage(aiReply, 'ai');
+      } catch (err) {
+        typing.remove();
+        addMessage('⚠️ Sorry, I encountered an error. Please try again.', 'ai');
+      }
     }
 
     nearbyHospitalsBtn.addEventListener('click', async () => {
