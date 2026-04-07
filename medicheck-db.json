@@ -87,6 +87,28 @@
       "location_lat": null,
       "location_lon": null,
       "location_updated_at": null
+    },
+    {
+      "id": "2e60c150-eea7-49c1-a87f-6c9d3fdd215e",
+      "name": "Test",
+      "email": "apitest847223101@test.com",
+      "password_hash": "$2a$12$QfCKKzkPQHPHDedtsC9Uxu9WDxXmXfkvS3w/cxT9vTbxGHkwLncK2",
+      "created_at": "2026-04-07T06:34:50.480Z",
+      "location_text": null,
+      "location_lat": null,
+      "location_lon": null,
+      "location_updated_at": null
+    },
+    {
+      "id": "36c66887-c655-4208-9993-2250be10faed",
+      "name": "Test",
+      "email": "apitest591117654@test.com",
+      "password_hash": "$2a$12$jMzRQECEoCJlDUiV9iEhQOV3siQwl2XO1iExa7TH8rKc6I7TI8/wi",
+      "created_at": "2026-04-07T06:40:13.733Z",
+      "location_text": null,
+      "location_lat": null,
+      "location_lon": null,
+      "location_updated_at": null
     }
   ]
 }

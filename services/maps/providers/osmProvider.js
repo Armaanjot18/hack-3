@@ -185,7 +185,14 @@ class OsmMapProvider {
           lon: longitude,
           distance_km: Number(distanceKm.toFixed(2)),
           osm_id: `${element.type}/${element.id}`,
-          maps_url: `https://www.google.com/maps?q=${latitude},${longitude}`
+          maps_url: `https://www.google.com/maps?q=${latitude},${longitude}`,
+          phone: tags.phone || tags['contact:phone'] || null,
+          website: tags.website || tags['contact:website'] || null,
+          opening_hours: tags.opening_hours || null,
+          emergency: tags.emergency === 'yes' ? true : (tags.emergency === 'no' ? false : null),
+          operator: tags.operator || null,
+          beds: tags.beds ? Number(tags.beds) : null,
+          healthcare_type: tags.healthcare || tags.amenity || 'hospital'
         };
       })
       .filter(Boolean)
