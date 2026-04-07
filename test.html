@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediCheck AI - Health Symptom Checker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="chat-container">
+
+    <div class="chat-header">
+      <div class="header-icon">🏥</div>
+      <div class="header-text">
+        <h2>MediCheck AI</h2>
+        <p>Your personal health symptom checker</p>
+      </div>
+    </div>
+
+    <div id="chatMessages" class="chat-messages"></div>
+
+    <div id="quickActions" class="quick-actions">
+      <button class="quick-btn" onclick="quickSend('I have fever')">🤒 Fever</button>
+      <button class="quick-btn" onclick="quickSend('I have cough')">😷 Cough</button>
+      <button class="quick-btn" onclick="quickSend('I have headache')">🤕 Headache</button>
+      <button class="quick-btn" onclick="quickSend('stomach pain')">🤢 Stomach</button>
+      <button class="quick-btn" onclick="quickSend('body pain and weakness')">😩 Body Pain</button>
+      <button class="quick-btn" onclick="quickSend('reset')">🔄 Reset</button>
+    </div>
+
+    <div class="chat-input">
+      <input id="userInput" placeholder="Describe your symptoms..." autocomplete="off">
+      <button onclick="sendMessage()" title="Send">➤</button>
+    </div>
+
+  </div>
+
+  <script>
+
+    const userId = "user_" + Math.random().toString(36).substr(2, 9);
+
+    // Greet on load
+    window.onload = function () {
+      addMessage("Hello 👋 I am MediCheck AI — your personal health symptom checker.\n\nTell me your symptoms and I will help you understand possible conditions, home remedies, and when to see a doctor.\n\nYou can type in English, Hindi, or Punjabi.", "bot-message");
+    };
+
+    // Enter key
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("userInput").addEventListener("keydown", function (e) {
+        if (e.key === "Enter") sendMessage();
+      });
+    });
+
+    // Quick button
+    function quickSend(text) {
+      document.getElementById("userInput").value = text;
+      sendMessage();
+    }
+
+    // Send message
+    async function sendMessage() {
+      const input = document.getElementById("userInput");
+      const message = input.value.trim();
+
+      if (!message) return;
+
+      addMessage(message, "user-message");
+      input.value = "";
+      input.focus();
+
+      // Show typing indicator
+      showTyping();
+
+      try {
+        const res = await fetch("http://localhost:3000/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userId: userId, message: message })
+        });
+
+        const data = await res.json();
+        removeTyping();
+
+        if (data.message) {
+          addMessage(data.message, "bot-message");
+        }
+
+        // Show yes/no quick buttons if bot asks a question
+        updateQuickButtons(data.message);
+
+      } catch (err) {
+        removeTyping();
+        addMessage("⚠️ Could not connect to the server. Please make sure the server is running on port 3000.", "bot-message");
+      }
+    }
+
+    // Add message bubble
+    function addMessage(text, className) {
+      const container = document.getElementById("chatMessages");
+      const div = document.createElement("div");
+      div.className = "message " + className;
+      div.textContent = text;
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // Typing indicator
+    function showTyping() {
+      const container = document.getElementById("chatMessages");
+      const typing = document.createElement("div");
+      typing.className = "typing";
+      typing.id = "typingIndicator";
+      typing.innerHTML = "<span></span><span></span><span></span>";
+      container.appendChild(typing);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function removeTyping() {
+      const typing = document.getElementById("typingIndicator");
+      if (typing) typing.remove();
+    }
+
+    // Update quick buttons based on context
+    function updateQuickButtons(botMessage) {
+      const actions = document.getElementById("quickActions");
+      const msg = (botMessage || "").toLowerCase();
+
+      if (msg.includes("yes or no") || msg.includes("?")) {
+        if (msg.includes("do you") || msg.includes("are you") || msg.includes("have you")) {
+          actions.innerHTML = `
+            <button class="quick-btn" onclick="quickSend('yes')">✅ Yes</button>
+            <button class="quick-btn" onclick="quickSend('no')">❌ No</button>
+            <button class="quick-btn" onclick="quickSend('reset')">🔄 Reset</button>
+          `;
+          return;
+        }
+      }
+
+      if (msg.includes("reset") || msg.includes("consultation is complete")) {
+        actions.innerHTML = `
+          <button class="quick-btn" onclick="quickSend('reset')">🔄 New Consultation</button>
+          <button class="quick-btn" onclick="quickSend('thanks')">👋 Goodbye</button>
+        `;
+        return;
+      }
+
+      // Default buttons
+      actions.innerHTML = `
+        <button class="quick-btn" onclick="quickSend('I have fever')">🤒 Fever</button>
+        <button class="quick-btn" onclick="quickSend('I have cough')">😷 Cough</button>
+        <button class="quick-btn" onclick="quickSend('I have headache')">🤕 Headache</button>
+        <button class="quick-btn" onclick="quickSend('stomach pain')">🤢 Stomach</button>
+        <button class="quick-btn" onclick="quickSend('body pain and weakness')">😩 Body Pain</button>
+        <button class="quick-btn" onclick="quickSend('reset')">🔄 Reset</button>
+      `;
+    }
+
+  </script>
+
+</body>
+</html>

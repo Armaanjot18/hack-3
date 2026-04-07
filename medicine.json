@@ -1,0 +1,316 @@
+{
+  "symptoms": [
+    {
+      "id": "S001",
+      "english": "Fever",
+      "hindi": "बुखार",
+      "punjabi": "ਬੁਖਾਰ",
+      "synonyms": ["high temperature","body hot","temperature","feverish","pyrexia","hot body","burning up","feeling hot","garmi","bukhar","tapman","high fever","low grade fever","mild fever","102 fever","101 fever","100 fever","body temperature high"],
+      "possible_diseases": ["Influenza","COVID-19","Malaria","Dengue","Typhoid","Pneumonia","Urinary Tract Infection","Meningitis"],
+      "home_remedy": "Take paracetamol (500mg) every 6 hours. Apply cold compress on forehead. Drink plenty of water, ORS, coconut water and clear soups. Wear light clothing and rest. Sponge body with lukewarm water if fever is high.",
+      "severity": "moderate",
+      "warning_signs": "Seek emergency care if fever exceeds 103°F (39.4°C), lasts more than 3 days, or is accompanied by rash, stiff neck, confusion, or seizures."
+    },
+    {
+      "id": "S002",
+      "english": "Cough",
+      "hindi": "खांसी",
+      "punjabi": "ਖੰਘ",
+      "synonyms": ["dry cough","coughing","khansi","persistent cough","wet cough","barking cough","hacking","chest cough","productive cough","phlegm","mucus cough","khasi","morning cough","night cough","whooping cough"],
+      "possible_diseases": ["Common Cold","Influenza","COVID-19","Bronchitis","Tuberculosis","Pneumonia","Asthma","Allergic Rhinitis","GERD"],
+      "home_remedy": "Drink warm water with honey and ginger 3 times a day. Gargle with warm salt water. Steam inhalation with eucalyptus oil. Drink tulsi (basil) tea. Avoid cold drinks, ice cream, and fried food. Sleep with head elevated.",
+      "severity": "mild",
+      "warning_signs": "See a doctor if cough lasts more than 2 weeks, produces blood or green/yellow mucus, or is accompanied by high fever and weight loss."
+    },
+    {
+      "id": "S003",
+      "english": "Headache",
+      "hindi": "सिरदर्द",
+      "punjabi": "ਸਿਰ ਦਰਦ",
+      "synonyms": ["head pain","migraine","pressure in head","sir dard","sar dard","head ache","throbbing head","dizzy","dizziness","lightheaded","spinning","pounding head","tension headache","cluster headache","head heavy","sir bhari"],
+      "possible_diseases": ["Migraine","Dengue","Influenza","COVID-19","Hypertension","Sinusitis","Tension Headache","Meningitis","Brain Tumor"],
+      "home_remedy": "Rest in a dark, quiet room. Apply cold pack on forehead and warm pack on neck. Stay hydrated. Take paracetamol or ibuprofen. Massage temples gently. Practice deep breathing. Avoid bright screens.",
+      "severity": "mild",
+      "warning_signs": "Seek immediate help if headache is sudden and extremely severe, accompanied by stiff neck, fever, confusion, seizures, vision changes, or weakness on one side of body."
+    },
+    {
+      "id": "S004",
+      "english": "Sore Throat",
+      "hindi": "गले में दर्द",
+      "punjabi": "ਗਲੇ ਵਿੱਚ ਦਰਦ",
+      "synonyms": ["throat pain","scratchy throat","throat irritation","gala dard","itchy throat","throat ache","throat burning","swollen throat","gale mein dard","gala kharab","difficulty swallowing","painful swallowing","hoarse voice","gala sukhna"],
+      "possible_diseases": ["Common Cold","Influenza","COVID-19","Strep Throat","Tonsillitis","Pharyngitis","Allergic Rhinitis"],
+      "home_remedy": "Gargle with warm salt water 4-5 times daily. Drink warm turmeric milk at night. Sip warm lemon-honey water. Suck on throat lozenges. Avoid spicy, acidic, and cold foods. Keep throat moist by drinking warm fluids frequently.",
+      "severity": "mild",
+      "warning_signs": "See a doctor if sore throat lasts more than a week, causes difficulty breathing or swallowing, or is accompanied by high fever, rash, or swollen lymph nodes."
+    },
+    {
+      "id": "S005",
+      "english": "Shortness of Breath",
+      "hindi": "सांस लेने में तकलीफ",
+      "punjabi": "ਸਾਹ ਲੈਣ ਵਿੱਚ ਦਿੱਕਤ",
+      "synonyms": ["difficulty breathing","breathing problem","breathlessness","cant breathe","can't breathe","breathless","hard to breathe","saans","saans ki takleef","breathing issue","wheezing","gasping","panting","shortness of breath","saans phoolna","dam ghutna","breathing difficulty"],
+      "possible_diseases": ["Asthma","Pneumonia","Heart Disease","COPD","Anxiety","Pulmonary Embolism","Anemia"],
+      "home_remedy": "Sit upright and try pursed-lip breathing (breathe in through nose, out through pursed lips slowly). Use prescribed inhaler. Stay in a well-ventilated area. Practice diaphragmatic breathing. Avoid smoke and pollution.",
+      "severity": "high",
+      "warning_signs": "CALL EMERGENCY (112) if breathing gets rapidly worse, lips or fingertips turn blue, you feel chest tightness or pain, or you cannot speak in full sentences."
+    },
+    {
+      "id": "S006",
+      "english": "Fatigue",
+      "hindi": "थकान",
+      "punjabi": "ਥਕਾਵਟ",
+      "synonyms": ["tired","weakness","low energy","exhaustion","body ache","muscle pain","body pain","joint pain","weak","lethargic","no energy","thakan","kamzori","feeling weak","sluggish","drowsy","run down","fatigued","malaise","body heavy","muscles aching","joints hurting"],
+      "possible_diseases": ["Influenza","COVID-19","Anemia","Diabetes","Thyroid Disorder","Depression","Chronic Fatigue Syndrome","Vitamin D Deficiency"],
+      "home_remedy": "Sleep 7-8 hours daily. Eat iron-rich foods (spinach, lentils, jaggery, dates). Stay hydrated. Do light exercise like walking. Eat balanced meals with protein. Get Vitamin D from morning sunlight (15 min). Reduce caffeine and sugar intake.",
+      "severity": "mild",
+      "warning_signs": "See a doctor if fatigue persists for more than 2 weeks, causes difficulty in daily activities, or is accompanied by unexplained weight loss, fever, or swollen lymph nodes."
+    },
+    {
+      "id": "S007",
+      "english": "Vomiting",
+      "hindi": "उल्टी",
+      "punjabi": "ਉਲਟੀ",
+      "synonyms": ["throwing up","nausea","vomit","ulti","nausea and vomiting","feel sick","queasy","puking","retching","uneasy stomach","nauseated","feeling nauseous","ji machlana","ji ghabrana","morning sickness"],
+      "possible_diseases": ["Food Poisoning","Dengue","Malaria","Gastroenteritis","Migraine","Pregnancy","Appendicitis","Gastritis"],
+      "home_remedy": "Sip ORS or clear fluids slowly in small amounts. Eat bland foods (plain rice, toast, crackers). Avoid dairy, oily, and spicy food. Try ginger tea or ginger candy for nausea. Rest in a propped-up position. Eat small frequent meals instead of large ones.",
+      "severity": "moderate",
+      "warning_signs": "Seek medical help if vomiting lasts more than 24 hours, contains blood (red or coffee-ground appearance), is accompanied by severe abdominal pain, or causes signs of dehydration (dry mouth, no urination, dizziness)."
+    },
+    {
+      "id": "S008",
+      "english": "Diarrhea",
+      "hindi": "दस्त",
+      "punjabi": "ਦਸਤ",
+      "synonyms": ["loose motion","loose stool","frequent stool","dast","watery stool","stomach upset","stomach cramp","stomach ache","stomach pain","belly pain","abdominal pain","poop problem","pet dard","pet kharab","pet mein dard","tummy ache","runny tummy","pet phoolna"],
+      "possible_diseases": ["Food Poisoning","Cholera","Gastroenteritis","IBS","Typhoid","Celiac Disease","Lactose Intolerance"],
+      "home_remedy": "Drink ORS after every loose stool. Follow BRAT diet (bananas, rice, applesauce, toast). Eat curd/yogurt for probiotics. Drink buttermilk (chaas). Avoid milk, oily food, raw vegetables, and street food. Boil drinking water. Wash hands frequently.",
+      "severity": "moderate",
+      "warning_signs": "See a doctor if diarrhea lasts more than 3 days, stools contain blood or are black, you have severe dehydration signs, or fever above 102°F."
+    },
+    {
+      "id": "S009",
+      "english": "Chest Pain",
+      "hindi": "सीने में दर्द",
+      "punjabi": "ਛਾਤੀ ਵਿੱਚ ਦਰਦ",
+      "synonyms": ["chest pressure","tight chest","chest tightness","heart pain","seene mein dard","chhati dard","chest discomfort","chest heaviness","left chest pain","heart racing","palpitations","chest squeezing","angina"],
+      "possible_diseases": ["Heart Attack","Angina","Pneumonia","Acid Reflux","Anxiety","Costochondritis","Pulmonary Embolism","Pericarditis"],
+      "home_remedy": "EMERGENCY: Call 112 immediately. Chew one aspirin (325mg) if not allergic. Sit upright and stay calm. Loosen tight clothing. Do NOT lie flat. Do NOT ignore chest pain. If caused by acidity: take antacid, sip cold milk, avoid spicy food.",
+      "severity": "critical",
+      "warning_signs": "CALL 112 NOW if chest pain radiates to jaw/arm/back, you feel crushing pressure, have difficulty breathing, break into cold sweat, or feel nauseous with the pain."
+    },
+    {
+      "id": "S010",
+      "english": "Runny Nose",
+      "hindi": "नाक बहना",
+      "punjabi": "ਨੱਕ ਵਗਣਾ",
+      "synonyms": ["nasal discharge","runny nose","cold","stuffy nose","blocked nose","congestion","nasal congestion","sneezing","allergy","rhinitis","naak behna","nazla","sardi","nose running","nose blocked","naak band"],
+      "possible_diseases": ["Common Cold","Influenza","Allergic Rhinitis","Sinusitis","COVID-19"],
+      "home_remedy": "Steam inhalation 2-3 times daily (add eucalyptus oil if available). Drink warm fluids (ginger tea, soups). Use saline nasal drops/spray. Keep head elevated while sleeping. Stay in warm environment. Blow nose gently.",
+      "severity": "mild",
+      "warning_signs": "See a doctor if symptoms last more than 10 days, nasal discharge is green/yellow and thick, you have facial pain, or discharge has blood."
+    },
+    {
+      "id": "S011",
+      "english": "Back Pain",
+      "hindi": "कमर दर्द",
+      "punjabi": "ਪਿੱਠ ਦਰਦ",
+      "synonyms": ["backache","lower back pain","upper back pain","kamar dard","peeth dard","spine pain","back ache","slipped disc","back stiffness","back spasm","sciatica"],
+      "possible_diseases": ["Muscle Strain","Slipped Disc","Sciatica","Kidney Stones","Arthritis","Osteoporosis","Urinary Tract Infection"],
+      "home_remedy": "Apply hot or cold pack for 15-20 minutes. Maintain good posture. Do gentle stretching exercises. Avoid heavy lifting. Sleep on a firm mattress. Use pain relief spray/gel. Take ibuprofen if needed. Walk gently — don't stay in bed all day.",
+      "severity": "mild",
+      "warning_signs": "See a doctor if pain radiates down legs, you have numbness/tingling, difficulty urinating, fever with back pain, or pain after an injury."
+    },
+    {
+      "id": "S012",
+      "english": "Skin Rash",
+      "hindi": "त्वचा पर दाने",
+      "punjabi": "ਚਮੜੀ ਤੇ ਧੱਫੜ",
+      "synonyms": ["rash","skin rash","itching","itchy skin","hives","red spots","bumps on skin","skin allergy","khujli","daad","daane","skin irritation","eczema","urticaria","red patches","skin bumps"],
+      "possible_diseases": ["Allergic Reaction","Eczema","Dengue","Chickenpox","Measles","Fungal Infection","Psoriasis","Scabies"],
+      "home_remedy": "Apply calamine lotion for itching. Take antihistamine (cetirizine). Keep skin clean and dry. Avoid scratching. Wear loose cotton clothes. Apply aloe vera gel. Avoid harsh soaps. If allergy-related, identify and avoid the trigger.",
+      "severity": "mild",
+      "warning_signs": "Seek emergency care if rash spreads rapidly, you have difficulty breathing with rash, face/lips swell, or rash is accompanied by high fever and joint pain."
+    },
+    {
+      "id": "S013",
+      "english": "Abdominal Pain",
+      "hindi": "पेट में दर्द",
+      "punjabi": "ਪੇਟ ਵਿੱਚ ਦਰਦ",
+      "synonyms": ["stomach pain","tummy pain","belly ache","pet mein dard","cramps","abdominal cramps","stomach cramps","bloating","gas","acidity","acid reflux","heartburn","pet phoolna","gas problem","pet mein jalan","gastric"],
+      "possible_diseases": ["Gastritis","Appendicitis","Gastroenteritis","Acid Reflux","IBS","Ulcer","Gallstones","Kidney Stones","Pancreatitis"],
+      "home_remedy": "For acidity: drink cold milk, take antacid, avoid spicy food. For gas: drink ajwain water or jeera water. For cramps: apply warm compress. Eat light meals. Avoid oily, spicy, and fried food. Drink mint/fennel tea. Walk after meals.",
+      "severity": "moderate",
+      "warning_signs": "Seek emergency care if pain is severe and sudden, abdomen is rigid/tender, you have bloody stools, persistent vomiting, or the pain is in lower right abdomen (possible appendicitis)."
+    },
+    {
+      "id": "S014",
+      "english": "Eye Problem",
+      "hindi": "आंखों में दर्द",
+      "punjabi": "ਅੱਖਾਂ ਵਿੱਚ ਦਰਦ",
+      "synonyms": ["eye pain","red eye","eye irritation","watery eyes","blurry vision","aankh dard","aankh lal","itchy eyes","eye burning","eye swelling","conjunctivitis","pink eye","aankh se paani","dry eyes","eye strain"],
+      "possible_diseases": ["Conjunctivitis","Allergic Reaction","Glaucoma","Migraine","Sinusitis","Eye Strain","Dengue"],
+      "home_remedy": "Wash eyes with clean cool water. Apply cold compress. Avoid touching/rubbing eyes. Wear sunglasses outdoors. Use lubricating eye drops. Take screen breaks (20-20-20 rule: every 20 min, look 20 feet away for 20 seconds). Avoid sharing towels.",
+      "severity": "mild",
+      "warning_signs": "See a doctor immediately if you have sudden vision loss, severe eye pain with nausea, see flashing lights or floaters, or have eye injury."
+    },
+    {
+      "id": "S015",
+      "english": "Ear Pain",
+      "hindi": "कान में दर्द",
+      "punjabi": "ਕੰਨ ਵਿੱਚ ਦਰਦ",
+      "synonyms": ["earache","ear ache","ear pain","kaan dard","ear infection","ear blocked","hearing problem","ear ringing","tinnitus","ear discharge","kaan behna","kaan mein dard"],
+      "possible_diseases": ["Ear Infection","Sinusitis","TMJ Disorder","Swimmer's Ear","Earwax Buildup","Tonsillitis"],
+      "home_remedy": "Apply warm compress on the affected ear. Take paracetamol for pain. Keep ear dry. Do NOT insert anything into ear. Tilt head to drain any water. Chew gum to relieve pressure. Use prescribed ear drops only.",
+      "severity": "mild",
+      "warning_signs": "See a doctor if ear pain is severe, there is discharge (pus/blood) from the ear, hearing loss occurs, or pain is accompanied by high fever."
+    },
+    {
+      "id": "S016",
+      "english": "Toothache",
+      "hindi": "दांत में दर्द",
+      "punjabi": "ਦੰਦ ਦਰਦ",
+      "synonyms": ["tooth pain","dental pain","daant dard","daant mein dard","tooth ache","gum pain","gum swelling","masoodhe","cavity pain","sensitive teeth","jaw pain"],
+      "possible_diseases": ["Dental Cavity","Tooth Abscess","Gum Disease","Wisdom Tooth","TMJ Disorder","Sinusitis"],
+      "home_remedy": "Rinse mouth with warm salt water. Apply clove oil on affected tooth. Take ibuprofen for pain. Apply cold pack on cheek. Avoid very hot or cold food/drinks. Do NOT put aspirin directly on tooth. See a dentist as soon as possible.",
+      "severity": "mild",
+      "warning_signs": "See a dentist urgently if you have swelling in face/jaw, fever with toothache, difficulty opening mouth, or pus around the tooth."
+    },
+    {
+      "id": "S017",
+      "english": "Urination Problem",
+      "hindi": "पेशाब में तकलीफ",
+      "punjabi": "ਪਿਸ਼ਾਬ ਵਿੱਚ ਤਕਲੀਫ਼",
+      "synonyms": ["burning urination","painful urination","frequent urination","peshab mein jalan","peshab mein dard","UTI","urine infection","blood in urine","dark urine","urination problem","baar baar peshab"],
+      "possible_diseases": ["Urinary Tract Infection","Kidney Stones","Diabetes","Prostate Problem","Bladder Infection","STI"],
+      "home_remedy": "Drink 8-10 glasses of water daily. Drink cranberry juice (unsweetened). Avoid holding urine. Maintain hygiene. Avoid caffeine and alcohol. Drink barley water. Wear cotton undergarments. Front-to-back wiping for women.",
+      "severity": "moderate",
+      "warning_signs": "See a doctor if you have blood in urine, severe pain, fever with urinary symptoms, inability to urinate, or symptoms lasting more than 2 days."
+    },
+    {
+      "id": "S018",
+      "english": "Anxiety",
+      "hindi": "चिंता",
+      "punjabi": "ਚਿੰਤਾ",
+      "synonyms": ["anxious","anxiety","panic","panic attack","nervous","stressed","stress","tension","worried","restless","uneasy","fear","chinta","ghabrahat","darr","racing heart","racing thoughts","can't sleep","insomnia","sleep problem","neend nahi aati"],
+      "possible_diseases": ["Anxiety Disorder","Panic Disorder","Depression","Thyroid Disorder","Heart Disease","Insomnia"],
+      "home_remedy": "Practice deep breathing (4-7-8 technique: inhale 4 sec, hold 7 sec, exhale 8 sec). Do regular exercise. Limit caffeine. Practice meditation or yoga. Maintain a regular sleep schedule. Talk to someone you trust. Write down your feelings. Avoid alcohol.",
+      "severity": "moderate",
+      "warning_signs": "Seek professional help if anxiety interferes with daily life, you have thoughts of self-harm, panic attacks are frequent, or you depend on substances to cope."
+    },
+    {
+      "id": "S019",
+      "english": "Swelling",
+      "hindi": "सूजन",
+      "punjabi": "ਸੋਜ",
+      "synonyms": ["swollen","swelling","inflammation","sujan","sooj","puffiness","swollen feet","swollen hands","swollen face","edema","water retention","paer sujna","haath sujna"],
+      "possible_diseases": ["Allergic Reaction","Kidney Disease","Heart Failure","Arthritis","Injury","DVT","Thyroid Disorder","Liver Disease"],
+      "home_remedy": "Elevate the swollen area above heart level. Apply cold compress for 15-20 min. Reduce salt intake. Move and stretch regularly. Wear compression socks for leg swelling. Drink adequate water (not excess).",
+      "severity": "moderate",
+      "warning_signs": "Seek emergency care if swelling is sudden in face/throat (anaphylaxis), one leg is swollen and painful (DVT), or swelling is accompanied by difficulty breathing."
+    },
+    {
+      "id": "S020",
+      "english": "Dizziness",
+      "hindi": "चक्कर आना",
+      "punjabi": "ਚੱਕਰ ਆਉਣਾ",
+      "synonyms": ["dizzy","vertigo","lightheaded","chakkar","chakkar aana","room spinning","off balance","unsteady","fainting","feeling faint","blackout","sir ghoomna"],
+      "possible_diseases": ["Low Blood Pressure","Vertigo","Anemia","Dehydration","Ear Infection","Diabetes","Heart Disease","Migraine"],
+      "home_remedy": "Sit or lie down immediately. Drink water or ORS. Eat something if blood sugar might be low. Avoid sudden position changes (stand up slowly). Focus on a fixed point. Avoid driving. Get fresh air. Check blood pressure if possible.",
+      "severity": "moderate",
+      "warning_signs": "Seek emergency care if dizziness is accompanied by chest pain, severe headache, numbness/weakness on one side, speech difficulty, or loss of consciousness."
+    }
+  ],
+  "diseases": {
+    "Influenza": {
+      "description": "A contagious respiratory illness caused by influenza viruses that infects the nose, throat, and sometimes lungs",
+      "when_to_see_doctor": "If fever lasts more than 3 days, difficulty breathing, persistent chest pain, or symptoms worsen after initial improvement",
+      "precautions": ["Wash hands with soap frequently","Avoid close contact with sick people","Get annual flu vaccine","Cover mouth and nose when coughing/sneezing","Disinfect commonly touched surfaces","Stay home when sick"]
+    },
+    "COVID-19": {
+      "description": "Respiratory illness caused by SARS-CoV-2 virus, ranging from mild to severe",
+      "when_to_see_doctor": "Immediately if you have trouble breathing, persistent chest pain, confusion, bluish lips/face, or inability to stay awake",
+      "precautions": ["Wear mask in crowded/enclosed spaces","Wash hands frequently for 20 seconds","Get vaccinated and take boosters","Isolate if symptomatic","Maintain distance from sick individuals","Improve ventilation indoors"]
+    },
+    "Dengue": {
+      "description": "Mosquito-borne viral disease causing high fever, severe body ache, and potentially life-threatening complications",
+      "when_to_see_doctor": "Immediately if you have severe abdominal pain, persistent vomiting, bleeding from gums/nose, blood in stool/vomit, extreme fatigue, or restlessness",
+      "precautions": ["Use mosquito repellent","Eliminate standing water around house","Wear full-sleeve clothes","Use mosquito nets and screens","Avoid going out during dawn/dusk","Keep surroundings clean"]
+    },
+    "Malaria": {
+      "description": "Mosquito-borne parasitic illness causing recurring episodes of fever, chills, and sweating",
+      "when_to_see_doctor": "As soon as possible if you have recurring high fever with chills, especially if you live in or visited an endemic area",
+      "precautions": ["Sleep under insecticide-treated mosquito nets","Use mosquito repellent","Take antimalarial prophylaxis if in endemic area","Wear protective clothing","Keep windows screened"]
+    },
+    "Typhoid": {
+      "description": "Bacterial infection caused by Salmonella typhi, spread through contaminated food and water",
+      "when_to_see_doctor": "If fever persists more than 3 days with stomach symptoms, weakness, and loss of appetite",
+      "precautions": ["Drink only boiled or filtered water","Eat freshly cooked food","Wash hands before eating and after toilet","Avoid street food and raw food","Get Typhoid vaccine","Ensure proper sanitation"]
+    },
+    "Common Cold": {
+      "description": "A mild viral infection of the upper respiratory tract causing runny nose, sneezing, and mild cough",
+      "when_to_see_doctor": "If symptoms last more than 10 days, high fever develops, or symptoms get significantly worse",
+      "precautions": ["Rest adequately","Stay hydrated","Wash hands frequently","Avoid close contact with infected people","Don't share utensils"]
+    },
+    "Pneumonia": {
+      "description": "Serious lung infection causing inflammation in air sacs, which may fill with fluid or pus",
+      "when_to_see_doctor": "Immediately if you have high fever with breathing difficulty, chest pain, or cough with pus/blood",
+      "precautions": ["Get pneumococcal vaccine","Avoid smoking","Practice good hygiene","Keep immune system strong","Treat respiratory infections early"]
+    },
+    "Food Poisoning": {
+      "description": "Illness from consuming food or water contaminated with bacteria, viruses, or parasites",
+      "when_to_see_doctor": "If vomiting/diarrhea lasts more than 24 hours, you see blood, have high fever, or show signs of dehydration",
+      "precautions": ["Eat freshly cooked food","Check expiry dates","Wash fruits and vegetables thoroughly","Store food at proper temperature","Maintain kitchen hygiene","Avoid street food in unhygienic conditions"]
+    },
+    "Gastritis": {
+      "description": "Inflammation of the stomach lining causing pain, nausea, and indigestion",
+      "when_to_see_doctor": "If symptoms last more than a week, you have blood in vomit or stool, or severe persistent pain",
+      "precautions": ["Eat small frequent meals","Avoid spicy, oily, and acidic food","Limit alcohol and caffeine","Don't take painkillers on empty stomach","Manage stress","Don't skip meals"]
+    },
+    "Asthma": {
+      "description": "Chronic condition causing airways to narrow and swell, producing extra mucus and making breathing difficult",
+      "when_to_see_doctor": "If inhaler doesn't provide relief, breathing worsens rapidly, or you can't speak in full sentences",
+      "precautions": ["Always carry your inhaler","Avoid known triggers (dust, smoke, pollution)","Take controller medications regularly","Get flu vaccine yearly","Exercise with caution","Keep home dust-free"]
+    },
+    "Migraine": {
+      "description": "Recurring episodes of intense, throbbing headache often on one side, sometimes with nausea and sensitivity to light",
+      "when_to_see_doctor": "If migraines become more frequent/severe, don't respond to medication, or are accompanied by vision changes",
+      "precautions": ["Identify and avoid triggers","Maintain regular sleep schedule","Stay hydrated","Manage stress with relaxation techniques","Limit screen time","Avoid skipping meals"]
+    },
+    "Diabetes": {
+      "description": "Chronic condition where the body cannot properly process blood sugar (glucose)",
+      "when_to_see_doctor": "If you have frequent urination, excessive thirst, unexplained weight loss, blurred vision, or slow-healing wounds",
+      "precautions": ["Monitor blood sugar regularly","Follow a balanced diet low in sugar","Exercise for 30 min daily","Take medications as prescribed","Get regular check-ups","Maintain healthy weight"]
+    },
+    "Hypertension": {
+      "description": "Persistently elevated blood pressure that increases risk of heart disease and stroke",
+      "when_to_see_doctor": "If blood pressure readings are consistently above 140/90, or you have headache, chest pain, or vision changes",
+      "precautions": ["Reduce salt intake","Exercise regularly","Maintain healthy weight","Limit alcohol","Manage stress","Take medications as prescribed","Monitor BP at home"]
+    },
+    "Anemia": {
+      "description": "Condition where blood lacks enough healthy red blood cells to carry adequate oxygen to tissues",
+      "when_to_see_doctor": "If you have persistent fatigue, pale skin, rapid heartbeat, shortness of breath, or dizziness",
+      "precautions": ["Eat iron-rich foods (spinach, lentils, red meat, jaggery)","Take iron supplements if prescribed","Eat Vitamin C rich foods to improve iron absorption","Get regular blood tests","Avoid tea/coffee right after meals"]
+    },
+    "Allergic Rhinitis": {
+      "description": "Allergic reaction causing sneezing, runny nose, and nasal congestion triggered by allergens",
+      "when_to_see_doctor": "If allergies significantly affect quality of life, OTC medications don't help, or you develop sinus infections frequently",
+      "precautions": ["Identify and avoid allergens","Keep windows closed during high pollen season","Use air purifier","Wash bedding in hot water weekly","Shower after being outdoors","Take antihistamines as needed"]
+    },
+    "Urinary Tract Infection": {
+      "description": "Bacterial infection in any part of the urinary system — kidneys, bladder, ureters, or urethra",
+      "when_to_see_doctor": "If you have burning urination, blood in urine, fever, back pain, or symptoms lasting more than 2 days",
+      "precautions": ["Drink plenty of water","Don't hold urine","Urinate after intercourse","Wipe front to back","Wear cotton undergarments","Avoid irritating feminine products"]
+    },
+    "Heart Attack": {
+      "description": "Medical emergency where blood flow to the heart is severely reduced or blocked",
+      "when_to_see_doctor": "CALL 112 IMMEDIATELY. Every minute matters. Do not wait.",
+      "precautions": ["Maintain healthy diet and weight","Exercise regularly","Don't smoke","Control blood pressure and cholesterol","Manage stress","Take prescribed heart medications","Know the warning signs"]
+    },
+    "Kidney Stones": {
+      "description": "Hard deposits of minerals and salts that form inside kidneys, causing severe pain when passing through urinary tract",
+      "when_to_see_doctor": "If pain is severe, you have blood in urine, fever with kidney pain, or difficulty urinating",
+      "precautions": ["Drink 2-3 liters of water daily","Reduce salt intake","Limit oxalate-rich foods (spinach, nuts, chocolate)","Eat adequate calcium","Limit animal protein","Avoid excessive vitamin C supplements"]
+    }
+  }
+}
