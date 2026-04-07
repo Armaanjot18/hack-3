@@ -39,15 +39,28 @@ app.use('/auth', authRoutes);
 app.use('/api/nearby', requireAuthApi, nearbyHospitalsRoutes);
 app.use('/api/me', requireAuthApi, meRoutes);
 
-app.get('/login', (req, res) => {
+/* ── No-cache middleware for HTML pages ── */
+function noCache(req, res, next) {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  res.set('Surrogate-Control', 'no-store');
+  return next();
+}
+
+app.get('/login', noCache, (req, res) => {
+  const payload = require('./middleware/auth').verifyAccessToken(req);
+  if (payload) return res.redirect('/');
   return res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-app.get('/signup', (req, res) => {
+app.get('/signup', noCache, (req, res) => {
+  const payload = require('./middleware/auth').verifyAccessToken(req);
+  if (payload) return res.redirect('/');
   return res.sendFile(path.join(__dirname, 'public', 'signup.html'));
 });
 
-app.get('/logout', (req, res) => {
+app.get('/logout', noCache, (req, res) => {
   res.clearCookie('medicheck_access', { path: '/' });
   res.clearCookie('medicheck_refresh', { path: '/auth' });
   return res.redirect('/login');
@@ -57,11 +70,11 @@ app.get('/api/protected/health', requireAuthApi, (req, res) => {
   return res.status(200).json({ status: 'ok', userId: req.userId });
 });
 
-app.get('/', requireAuthPage, (req, res) => {
+app.get('/', requireAuthPage, noCache, (req, res) => {
   return res.sendFile(path.join(__dirname, 'public', 'app.html'));
 });
 
-app.get('/app', requireAuthPage, (req, res) => {
+app.get('/app', requireAuthPage, noCache, (req, res) => {
   return res.sendFile(path.join(__dirname, 'public', 'app.html'));
 });
 

@@ -2408,13 +2408,24 @@
         const res = await fetch('/auth/me', { credentials: 'same-origin' });
         if (!res.ok) {
           window.location.replace('/login');
+          return false;
         }
+        return true;
       } catch (_) {
         window.location.replace('/login');
+        return false;
       }
     }
 
     ensureAuthenticated();
+
+    // Re-check auth when user navigates back/forward (bfcache) or switches tabs
+    window.addEventListener('pageshow', (e) => {
+      if (e.persisted) ensureAuthenticated();
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') ensureAuthenticated();
+    });
 
     /* ─── NAVBAR SCROLL + MOBILE MENU ─── */
     const navbar = document.getElementById('navbar');
