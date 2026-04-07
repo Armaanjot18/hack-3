@@ -213,6 +213,75 @@
       box-shadow: 0 0 24px rgba(0, 229, 255, 0.2);
     }
 
+    /* ─── LANGUAGE SWITCHER ─── */
+    .lang-switcher {
+      position: relative;
+    }
+    .lang-switcher-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(13, 21, 38, 0.6);
+      color: var(--text-primary);
+      font-size: 13px;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      white-space: nowrap;
+    }
+    .lang-switcher-btn:hover {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 12px rgba(0, 229, 255, 0.15);
+    }
+    .lang-switcher-btn .globe { font-size: 16px; }
+    .lang-switcher-btn .arrow { font-size: 10px; opacity: 0.6; }
+    .lang-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      min-width: 160px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      z-index: 1100;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+    .lang-dropdown.open { display: block; }
+    .lang-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      font-size: 14px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+      border: none;
+      background: none;
+      width: 100%;
+      font-family: 'DM Sans', sans-serif;
+      text-align: left;
+    }
+    .lang-option:hover {
+      background: rgba(0, 229, 255, 0.08);
+      color: var(--text-primary);
+    }
+    .lang-option.active {
+      color: var(--accent-cyan);
+      background: rgba(0, 229, 255, 0.06);
+    }
+    .lang-option .lang-native { font-size: 13px; opacity: 0.7; margin-left: auto; }
+    @media (max-width: 900px) {
+      .lang-switcher-nav { display: none; }
+      .lang-switcher-mobile { display: flex !important; margin-top: 8px; }
+      .lang-switcher-mobile .lang-dropdown { right: auto; left: 50%; transform: translateX(-50%); }
+    }
+
     /* ─── SECTION 1: NAVBAR ─── */
     .navbar {
       position: sticky;
@@ -1801,16 +1870,28 @@
         <span>Medi</span><span class="gradient-text">Check</span><span class="live-dot" aria-hidden="true"></span>
       </a>
       <nav class="nav-links" aria-label="Primary">
-        <a class="nav-link" href="#features">Features</a>
-        <a class="nav-link" href="#how-it-works">How It Works</a>
-        <a class="nav-link" href="#hospital-map">📍 Hospitals Map</a>
-        <a class="nav-link" href="#impact">Impact</a>
-        <a class="nav-link" href="#demo">Demo</a>
+        <a class="nav-link" href="#features" data-i18n="nav_features">Features</a>
+        <a class="nav-link" href="#how-it-works" data-i18n="nav_how">How It Works</a>
+        <a class="nav-link" href="#hospital-map">📍 <span data-i18n="nav_hospitals">Hospitals Map</span></a>
+        <a class="nav-link" href="#impact" data-i18n="nav_impact">Impact</a>
+        <a class="nav-link" href="#demo" data-i18n="nav_demo">Demo</a>
       </nav>
       <div class="nav-actions">
-        <a href="#demo" class="btn btn-ghost-cyan">Try Demo</a>
-        <a href="#" class="btn btn-primary">Get the App</a>
-        <a href="/logout" class="btn btn-ghost-cyan">Logout</a>
+        <div class="lang-switcher lang-switcher-nav">
+          <button class="lang-switcher-btn" id="langSwitcherBtn" aria-label="Change language">
+            <span class="globe">🌐</span>
+            <span id="langSwitcherLabel">EN</span>
+            <span class="arrow">▾</span>
+          </button>
+          <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-option active" data-lang="en"><span>English</span><span class="lang-native">English</span></button>
+            <button class="lang-option" data-lang="hi"><span>Hindi</span><span class="lang-native">हिन्दी</span></button>
+            <button class="lang-option" data-lang="pa"><span>Punjabi</span><span class="lang-native">ਪੰਜਾਬੀ</span></button>
+          </div>
+        </div>
+        <a href="#demo" class="btn btn-ghost-cyan" data-i18n="nav_try_demo">Try Demo</a>
+        <a href="#" class="btn btn-primary" data-i18n="nav_get_app">Get the App</a>
+        <a href="/logout" class="btn btn-ghost-cyan" data-i18n="nav_logout">Logout</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
         <span></span><span></span><span></span>
@@ -1819,13 +1900,25 @@
   </header>
 
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile Menu">
-    <a href="#features">Features</a>
-    <a href="#how-it-works">How It Works</a>
-    <a href="#hospital-map">📍 Hospitals Map</a>
-    <a href="#impact">Impact</a>
-    <a href="#demo">Demo</a>
-    <a href="#" class="btn btn-primary">Get the App</a>
-    <a href="/logout" class="btn btn-ghost-cyan">Logout</a>
+    <a href="#features" data-i18n="nav_features">Features</a>
+    <a href="#how-it-works" data-i18n="nav_how">How It Works</a>
+    <a href="#hospital-map">📍 <span data-i18n="nav_hospitals">Hospitals Map</span></a>
+    <a href="#impact" data-i18n="nav_impact">Impact</a>
+    <a href="#demo" data-i18n="nav_demo">Demo</a>
+    <div class="lang-switcher lang-switcher-mobile" style="display:none">
+      <button class="lang-switcher-btn" id="langSwitcherBtnMob" aria-label="Change language">
+        <span class="globe">🌐</span>
+        <span id="langSwitcherLabelMob">EN</span>
+        <span class="arrow">▾</span>
+      </button>
+      <div class="lang-dropdown" id="langDropdownMob">
+        <button class="lang-option active" data-lang="en"><span>English</span><span class="lang-native">English</span></button>
+        <button class="lang-option" data-lang="hi"><span>Hindi</span><span class="lang-native">हिन्दी</span></button>
+        <button class="lang-option" data-lang="pa"><span>Punjabi</span><span class="lang-native">ਪੰਜਾਬੀ</span></button>
+      </div>
+    </div>
+    <a href="#" class="btn btn-primary" data-i18n="nav_get_app">Get the App</a>
+    <a href="/logout" class="btn btn-ghost-cyan" data-i18n="nav_logout">Logout</a>
   </nav>
 
   <!-- ─── SECTION 2: HERO ─── -->
@@ -1834,17 +1927,17 @@
     <div class="hero-blob" aria-hidden="true"></div>
     <div class="container hero-grid">
       <div>
-        <div class="hero-pill fade-in-up" data-delay="0">🟢 Live in Beta · India's First Geo-Aware Health AI</div>
-        <h1 class="hero-title gradient-text fade-in-up" data-delay="0.1">Your Village Doctor,<br />In Your Pocket</h1>
-        <p class="hero-sub fade-in-up" data-delay="0.2">AI-powered symptom triage in your language - voice, photo, or text. Built for 500 million Indians with no doctor nearby.</p>
+        <div class="hero-pill fade-in-up" data-delay="0" data-i18n="hero_pill">🟢 Live in Beta · India's First Geo-Aware Health AI</div>
+        <h1 class="hero-title gradient-text fade-in-up" data-delay="0.1" data-i18n="hero_title">Your Village Doctor,<br />In Your Pocket</h1>
+        <p class="hero-sub fade-in-up" data-delay="0.2" data-i18n="hero_sub">AI-powered symptom triage in your language - voice, photo, or text. Built for 500 million Indians with no doctor nearby.</p>
         <div class="hero-cta fade-in-up" data-delay="0.3">
-          <a href="#demo" class="btn btn-primary">Check Symptoms Now →</a>
-          <a href="#demo" class="btn btn-ghost">▶ Watch Demo</a>
+          <a href="#demo" class="btn btn-primary" data-i18n="hero_cta_check">Check Symptoms Now →</a>
+          <a href="#demo" class="btn btn-ghost" data-i18n="hero_cta_watch">▶ Watch Demo</a>
         </div>
         <div class="trust-badges fade-in-up" data-delay="0.4">
-          <span>✅ Works Offline</span>
-          <span>🎙️ 22 Languages</span>
-          <span>🏥 1.5L+ Facilities</span>
+          <span data-i18n="hero_badge_offline">✅ Works Offline</span>
+          <span data-i18n="hero_badge_langs">🎙️ 22 Languages</span>
+          <span data-i18n="hero_badge_facilities">🏥 1.5L+ Facilities</span>
         </div>
       </div>
 
@@ -1875,10 +1968,10 @@
   <!-- ─── SECTION 3: STATS BAR ─── -->
   <section class="stats-bar">
     <div class="container stats-grid">
-      <div class="stat-item"><div class="stat-number countup" data-value="2847" data-suffix="+">0</div><div class="stat-label">Symptoms Checked</div></div>
-      <div class="stat-item"><div class="stat-number countup" data-value="150000" data-format="indian" data-suffix="+">0</div><div class="stat-label">Facilities Mapped</div></div>
-      <div class="stat-item"><div class="stat-number countup" data-value="22">0</div><div class="stat-label">Indian Languages</div></div>
-      <div class="stat-item"><div class="stat-number countup" data-value="1.1" data-suffix="M">0</div><div class="stat-label">ASHA Workers</div></div>
+      <div class="stat-item"><div class="stat-number countup" data-value="2847" data-suffix="+">0</div><div class="stat-label" data-i18n="stat_symptoms">Symptoms Checked</div></div>
+      <div class="stat-item"><div class="stat-number countup" data-value="150000" data-format="indian" data-suffix="+">0</div><div class="stat-label" data-i18n="stat_facilities">Facilities Mapped</div></div>
+      <div class="stat-item"><div class="stat-number countup" data-value="22">0</div><div class="stat-label" data-i18n="stat_languages">Indian Languages</div></div>
+      <div class="stat-item"><div class="stat-number countup" data-value="1.1" data-suffix="M">0</div><div class="stat-label" data-i18n="stat_asha">ASHA Workers</div></div>
     </div>
   </section>
 
@@ -1886,25 +1979,25 @@
   <section class="problem" id="problem">
     <div class="container">
       <div class="center-copy fade-in-up">
-        <div class="section-label">THE PROBLEM</div>
-        <h2 class="section-title">Every 2 minutes, a rural Indian makes the<br />wrong health decision</h2>
-        <p class="muted">Because they had no guidance. MediCheck fixes the first broken link in India's healthcare chain.</p>
+        <div class="section-label" data-i18n="problem_label">THE PROBLEM</div>
+        <h2 class="section-title" data-i18n="problem_title">Every 2 minutes, a rural Indian makes the<br />wrong health decision</h2>
+        <p class="muted" data-i18n="problem_desc">Because they had no guidance. MediCheck fixes the first broken link in India's healthcare chain.</p>
       </div>
       <div class="problem-grid">
         <article class="problem-card glass fade-in-up" data-delay="0.05" style="border-left:3px solid var(--red)">
           <div class="icon" style="background:rgba(255,76,76,0.14);color:var(--red)">🏥</div>
-          <h3 class="feature-title" style="font-size:20px">No Access</h3>
-          <p class="muted">65% of villages have no doctor within 10 km. 600M rural smartphone users - zero tools for them.</p>
+          <h3 class="feature-title" style="font-size:20px" data-i18n="problem_card1_title">No Access</h3>
+          <p class="muted" data-i18n="problem_card1_desc">65% of villages have no doctor within 10 km. 600M rural smartphone users - zero tools for them.</p>
         </article>
         <article class="problem-card glass fade-in-up" data-delay="0.15" style="border-left:3px solid var(--yellow)">
           <div class="icon" style="background:rgba(255,214,0,0.14);color:var(--yellow)">⏰</div>
-          <h3 class="feature-title" style="font-size:20px">Deadly Delay</h3>
-          <p class="muted">Average 4-6 hour delay before rural patients reach care. By then, treatable becomes critical.</p>
+          <h3 class="feature-title" style="font-size:20px" data-i18n="problem_card2_title">Deadly Delay</h3>
+          <p class="muted" data-i18n="problem_card2_desc">Average 4-6 hour delay before rural patients reach care. By then, treatable becomes critical.</p>
         </article>
         <article class="problem-card glass fade-in-up" data-delay="0.25" style="border-left:3px solid var(--accent-purple)">
           <div class="icon" style="background:rgba(123,97,255,0.14);color:var(--accent-purple)">📱</div>
-          <h3 class="feature-title" style="font-size:20px">Wrong Tools</h3>
-          <p class="muted">Ada, Buoy, Healthily - built for English-speaking urban users. Useless for a farmer in Punjab.</p>
+          <h3 class="feature-title" style="font-size:20px" data-i18n="problem_card3_title">Wrong Tools</h3>
+          <p class="muted" data-i18n="problem_card3_desc">Ada, Buoy, Healthily - built for English-speaking urban users. Useless for a farmer in Punjab.</p>
         </article>
       </div>
     </div>
@@ -1914,21 +2007,21 @@
   <section class="features" id="features">
     <div class="container">
       <div class="center-copy fade-in-up">
-        <div class="section-label">7 UNIQUE FEATURES</div>
-        <h2 class="section-title">Things <span class="gradient-text">No Other</span> Symptom Checker Does</h2>
+        <div class="section-label" data-i18n="features_label">7 UNIQUE FEATURES</div>
+        <h2 class="section-title" data-i18n="features_title">Things <span class="gradient-text">No Other</span> Symptom Checker Does</h2>
       </div>
 
       <div class="feature-rows">
         <div class="feature-row fade-in-up" data-delay="0.05">
           <div class="feature-text">
             <div class="feature-number">01</div>
-            <div class="feature-tag">🌦️ WORLD'S FIRST</div>
-            <h3 class="feature-title">Geo-Contextual Awareness</h3>
-            <p class="feature-desc">MediCheck reads outbreak and weather risk patterns for your exact district before giving advice.</p>
+            <div class="feature-tag" data-i18n="f1_tag">🌦️ WORLD'S FIRST</div>
+            <h3 class="feature-title" data-i18n="f1_title">Geo-Contextual Awareness</h3>
+            <p class="feature-desc" data-i18n="f1_desc">MediCheck reads outbreak and weather risk patterns for your exact district before giving advice.</p>
             <ul class="bullet-list">
-              <li>District-level IDSP signal checks</li>
-              <li>Season and climate-aware triage</li>
-              <li>Hyperlocal alerts in real time</li>
+              <li data-i18n="f1_b1">District-level IDSP signal checks</li>
+              <li data-i18n="f1_b2">Season and climate-aware triage</li>
+              <li data-i18n="f1_b3">Hyperlocal alerts in real time</li>
             </ul>
           </div>
           <div class="feature-visual glass india-map">
@@ -1965,13 +2058,13 @@
           </div>
           <div class="feature-text">
             <div class="feature-number">02</div>
-            <div class="feature-tag">🎤 VOICE-FIRST</div>
-            <h3 class="feature-title">Speak Naturally, In Your Language</h3>
-            <p class="feature-desc">Patients can describe symptoms in Punjabi, Hindi, Marathi, Bhojpuri, and beyond with no typing barrier.</p>
+            <div class="feature-tag" data-i18n="f2_tag">🎤 VOICE-FIRST</div>
+            <h3 class="feature-title" data-i18n="f2_title">Speak Naturally, In Your Language</h3>
+            <p class="feature-desc" data-i18n="f2_desc">Patients can describe symptoms in Punjabi, Hindi, Marathi, Bhojpuri, and beyond with no typing barrier.</p>
             <ul class="bullet-list">
-              <li>Low-literacy voice interaction flow</li>
-              <li>Regional speech understanding</li>
-              <li>Natural multilingual responses</li>
+              <li data-i18n="f2_b1">Low-literacy voice interaction flow</li>
+              <li data-i18n="f2_b2">Regional speech understanding</li>
+              <li data-i18n="f2_b3">Natural multilingual responses</li>
             </ul>
           </div>
         </div>
@@ -1979,13 +2072,13 @@
         <div class="feature-row fade-in-up" data-delay="0.15">
           <div class="feature-text">
             <div class="feature-number">03</div>
-            <div class="feature-tag">📸 VISUAL TRIAGE</div>
-            <h3 class="feature-title">Photo Analysis for Hidden Risk</h3>
-            <p class="feature-desc">When words are not enough, camera-based checks catch visual warning signs like rashes and redness.</p>
+            <div class="feature-tag" data-i18n="f3_tag">📸 VISUAL TRIAGE</div>
+            <h3 class="feature-title" data-i18n="f3_title">Photo Analysis for Hidden Risk</h3>
+            <p class="feature-desc" data-i18n="f3_desc">When words are not enough, camera-based checks catch visual warning signs like rashes and redness.</p>
             <ul class="bullet-list">
-              <li>Guided camera framing</li>
-              <li>Fast on-device style scan flow</li>
-              <li>Visual + symptom fusion triage</li>
+              <li data-i18n="f3_b1">Guided camera framing</li>
+              <li data-i18n="f3_b2">Fast on-device style scan flow</li>
+              <li data-i18n="f3_b3">Visual + symptom fusion triage</li>
             </ul>
           </div>
           <div class="feature-visual glass">
@@ -2016,13 +2109,13 @@
           </div>
           <div class="feature-text">
             <div class="feature-number">04</div>
-            <div class="feature-tag">📈 LONGITUDINAL</div>
-            <h3 class="feature-title">Symptom Timeline, Not One-Off Guess</h3>
-            <p class="feature-desc">MediCheck tracks progression across days to catch worsening patterns before they become emergencies.</p>
+            <div class="feature-tag" data-i18n="f4_tag">📈 LONGITUDINAL</div>
+            <h3 class="feature-title" data-i18n="f4_title">Symptom Timeline, Not One-Off Guess</h3>
+            <p class="feature-desc" data-i18n="f4_desc">MediCheck tracks progression across days to catch worsening patterns before they become emergencies.</p>
             <ul class="bullet-list">
-              <li>Day-by-day severity scoring</li>
-              <li>Escalation trend detection</li>
-              <li>Critical threshold alerts</li>
+              <li data-i18n="f4_b1">Day-by-day severity scoring</li>
+              <li data-i18n="f4_b2">Escalation trend detection</li>
+              <li data-i18n="f4_b3">Critical threshold alerts</li>
             </ul>
           </div>
         </div>
@@ -2030,13 +2123,13 @@
         <div class="feature-row fade-in-up" data-delay="0.25">
           <div class="feature-text">
             <div class="feature-number">05</div>
-            <div class="feature-tag">🗺️ ROUTING</div>
-            <h3 class="feature-title">Nearest Government Facility Routing</h3>
-            <p class="feature-desc">Recommendations include where to go now, open hours, and estimated travel cost.</p>
+            <div class="feature-tag" data-i18n="f5_tag">🗺️ ROUTING</div>
+            <h3 class="feature-title" data-i18n="f5_title">Nearest Government Facility Routing</h3>
+            <p class="feature-desc" data-i18n="f5_desc">Recommendations include where to go now, open hours, and estimated travel cost.</p>
             <ul class="bullet-list">
-              <li>PHC availability and status</li>
-              <li>Distance and route context</li>
-              <li>One-tap facility call actions</li>
+              <li data-i18n="f5_b1">PHC availability and status</li>
+              <li data-i18n="f5_b2">Distance and route context</li>
+              <li data-i18n="f5_b3">One-tap facility call actions</li>
             </ul>
           </div>
           <div class="feature-visual glass">
@@ -2081,13 +2174,13 @@
           </div>
           <div class="feature-text">
             <div class="feature-number">06</div>
-            <div class="feature-tag">👨‍👩‍👧‍👦 FAMILY VAULT</div>
-            <h3 class="feature-title">One Phone, Full Family Health History</h3>
-            <p class="feature-desc">Manage up to eight profiles so every family member gets context-aware triage and follow-ups.</p>
+            <div class="feature-tag" data-i18n="f6_tag">👨‍👩‍👧‍👦 FAMILY VAULT</div>
+            <h3 class="feature-title" data-i18n="f6_title">One Phone, Full Family Health History</h3>
+            <p class="feature-desc" data-i18n="f6_desc">Manage up to eight profiles so every family member gets context-aware triage and follow-ups.</p>
             <ul class="bullet-list">
-              <li>Role-based family profile management</li>
-              <li>Individual symptom history snapshots</li>
-              <li>Risk-color coded quick overview</li>
+              <li data-i18n="f6_b1">Role-based family profile management</li>
+              <li data-i18n="f6_b2">Individual symptom history snapshots</li>
+              <li data-i18n="f6_b3">Risk-color coded quick overview</li>
             </ul>
           </div>
         </div>
@@ -2095,13 +2188,13 @@
         <div class="feature-row fade-in-up" data-delay="0.35">
           <div class="feature-text">
             <div class="feature-number">07</div>
-            <div class="feature-tag">🧑‍⚕️ FRONTLINE MODE</div>
-            <h3 class="feature-title">ASHA Worker Dashboard Mode</h3>
-            <p class="feature-desc">Frontline workers see household risk priorities and escalate cases to PHC quickly with evidence.</p>
+            <div class="feature-tag" data-i18n="f7_tag">🧑‍⚕️ FRONTLINE MODE</div>
+            <h3 class="feature-title" data-i18n="f7_title">ASHA Worker Dashboard Mode</h3>
+            <p class="feature-desc" data-i18n="f7_desc">Frontline workers see household risk priorities and escalate cases to PHC quickly with evidence.</p>
             <ul class="bullet-list">
-              <li>Household risk sorting</li>
-              <li>Urgent referral prioritization</li>
-              <li>Ready weekly report generation</li>
+              <li data-i18n="f7_b1">Household risk sorting</li>
+              <li data-i18n="f7_b2">Urgent referral prioritization</li>
+              <li data-i18n="f7_b3">Ready weekly report generation</li>
             </ul>
           </div>
           <div class="feature-visual glass">
@@ -2125,8 +2218,8 @@
   <!-- ─── SECTION 6: HOW IT WORKS ─── -->
   <section class="how-it-works" id="how-it-works">
     <div class="container center-copy">
-      <div class="section-label">HOW IT WORKS</div>
-      <h2 class="section-title">From Symptom to Action in 90 Seconds</h2>
+      <div class="section-label" data-i18n="how_label">HOW IT WORKS</div>
+      <h2 class="section-title" data-i18n="how_title">From Symptom to Action in 90 Seconds</h2>
       <div class="steps-wrap">
         <article class="step-card glass fade-in-up">
           <div class="step-watermark">01</div>
@@ -2134,8 +2227,8 @@
             <rect x="9" y="3" width="6" height="11" rx="3" stroke="#00E5FF" stroke-width="1.8"/>
             <path d="M6 11.5C6 15 8.5 17 12 17C15.5 17 18 15 18 11.5" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round"/>
           </svg>
-          <h3 class="step-title">Describe Your Symptom</h3>
-          <p class="muted">Speak, type, or photograph in any Indian language. No literacy required.</p>
+          <h3 class="step-title" data-i18n="step1_title">Describe Your Symptom</h3>
+          <p class="muted" data-i18n="step1_desc">Speak, type, or photograph in any Indian language. No literacy required.</p>
         </article>
 
         <div class="dash-arrow" aria-hidden="true"></div>
@@ -2145,8 +2238,8 @@
           <svg class="step-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M12 3C8.1 3 5 6.1 5 10C5 12.8 6.7 15.2 9.2 16.2V19H14.8V16.2C17.3 15.2 19 12.8 19 10C19 6.1 15.9 3 12 3Z" stroke="#7B61FF" stroke-width="1.8"/>
           </svg>
-          <h3 class="step-title">AI Analyses Everything</h3>
-          <p class="muted">Cross-checks your symptoms with local outbreaks, your history, weather data, and visual inputs simultaneously.</p>
+          <h3 class="step-title" data-i18n="step2_title">AI Analyses Everything</h3>
+          <p class="muted" data-i18n="step2_desc">Cross-checks your symptoms with local outbreaks, your history, weather data, and visual inputs simultaneously.</p>
           <div class="orbit-wrap" aria-hidden="true">
             <div class="orbit-center"></div>
             <div class="orbiter"></div>
@@ -2163,8 +2256,8 @@
             <path d="M12 22C12 22 19 15.6 19 10.5C19 6.9 15.9 4 12 4C8.1 4 5 6.9 5 10.5C5 15.6 12 22 12 22Z" stroke="#00E676" stroke-width="1.8"/>
             <circle cx="12" cy="10" r="2.5" stroke="#00E676" stroke-width="1.8"/>
           </svg>
-          <h3 class="step-title">Know Exactly What To Do</h3>
-          <p class="muted">Clear triage verdict, nearest facility with directions, family alert, and doctor escalation - all in one screen.</p>
+          <h3 class="step-title" data-i18n="step3_title">Know Exactly What To Do</h3>
+          <p class="muted" data-i18n="step3_desc">Clear triage verdict, nearest facility with directions, family alert, and doctor escalation - all in one screen.</p>
         </article>
       </div>
     </div>
@@ -2174,9 +2267,9 @@
   <section class="demo" id="demo">
     <div class="container">
       <div class="center-copy fade-in-up">
-        <div class="section-label">TRY IT NOW</div>
-        <h2 class="section-title">Ask MediCheck Anything</h2>
-        <p class="muted">Type a symptom below - our AI responds in real time</p>
+        <div class="section-label" data-i18n="demo_label">TRY IT NOW</div>
+        <h2 class="section-title" data-i18n="demo_title">Ask MediCheck Anything</h2>
+        <p class="muted" data-i18n="demo_desc">Type a symptom below - our AI responds in real time</p>
       </div>
 
       <div class="demo-grid">
@@ -2203,14 +2296,14 @@
               <option value="10">Top 10</option>
               <option value="20">Top 20</option>
             </select>
-            <button id="nearbyHospitalsBtn" class="mini-btn" type="button" aria-label="Find nearby hospitals">Nearby hospitals</button>
+            <button id="nearbyHospitalsBtn" class="mini-btn" type="button" aria-label="Find nearby hospitals" data-i18n="chat_nearby_btn">Nearby hospitals</button>
             <button id="sendBtn" class="send-btn" aria-label="Send">➜</button>
           </div>
         </div>
 
         <aside class="analysis-card glass fade-in-up" id="analysisPanel">
-          <h3 class="analysis-title">Live Analysis</h3>
-          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;color:#c9ddf4"><span>Confidence</span><span id="confidenceText">0%</span></div>
+          <h3 class="analysis-title" data-i18n="analysis_title">Live Analysis</h3>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;color:#c9ddf4"><span data-i18n="analysis_confidence">Confidence</span><span id="confidenceText">0%</span></div>
           <div class="meter"><div id="confidenceBar" class="meter-fill" style="background:var(--yellow)"></div></div>
           <div id="conditionsBox"></div>
           <div class="alert-box">🔴 Local Alert: Dengue activity elevated in Punjab this week. 23 cases reported.</div>
@@ -2226,11 +2319,11 @@
           </div>
 
           <div class="location-settings" aria-live="polite">
-            <h4>My Location</h4>
-            <label for="locationTextInput">Enter your city/address</label>
+            <h4 data-i18n="loc_title">My Location</h4>
+            <label for="locationTextInput" data-i18n="loc_label">Enter your city/address</label>
             <input id="locationTextInput" type="text" placeholder="e.g. Boston, MA" maxlength="200" />
             <div class="location-row">
-              <label for="coordToggle">Enter coordinates instead</label>
+              <label for="coordToggle" data-i18n="loc_coord_label">Enter coordinates instead</label>
               <input id="coordToggle" type="checkbox" style="width:auto;margin:0" />
             </div>
             <div id="coordFields" class="location-coords">
@@ -2238,7 +2331,7 @@
               <input id="lonInput" type="number" step="any" placeholder="Longitude" />
             </div>
             <div class="location-row">
-              <button id="saveLocationBtn" class="mini-btn" type="button">Save location</button>
+              <button id="saveLocationBtn" class="mini-btn" type="button" data-i18n="loc_save_btn">Save location</button>
             </div>
             <div id="savedLocationInfo" class="saved-location">Loading your saved location...</div>
           </div>
@@ -2251,9 +2344,9 @@
   <section class="map-section" id="hospital-map">
     <div class="container">
       <div class="center-copy fade-in-up">
-        <div class="section-label">FIND HOSPITALS</div>
-        <h2 class="section-title">Nearby Hospitals on <span class="gradient-text">OpenStreetMap</span></h2>
-        <p class="muted">Search any location manually, use your GPS, or click on the map to find hospitals near that spot.</p>
+        <div class="section-label" data-i18n="map_label">FIND HOSPITALS</div>
+        <h2 class="section-title" data-i18n="map_title">Nearby Hospitals on <span class="gradient-text">OpenStreetMap</span></h2>
+        <p class="muted" data-i18n="map_desc">Search any location manually, use your GPS, or click on the map to find hospitals near that spot.</p>
       </div>
       <div class="map-wrap fade-in-up">
         <div class="map-loading-overlay" id="mapLoadingOverlay">
@@ -2277,8 +2370,8 @@
             <option value="10" selected>Top 10</option>
             <option value="20">Top 20</option>
           </select>
-          <button id="mapSearchBtn" class="map-ctrl-btn primary" type="button">🔍 Search</button>
-          <button id="mapLocateBtn" class="map-ctrl-btn" type="button">📍 My Location</button>
+          <button id="mapSearchBtn" class="map-ctrl-btn primary" type="button" data-i18n="map_search_btn">🔍 Search</button>
+          <button id="mapLocateBtn" class="map-ctrl-btn" type="button" data-i18n="map_locate_btn">📍 My Location</button>
         </div>
         <div id="hospitalMap"></div>
         <div id="mapStatus" class="map-status hidden"></div>
@@ -2291,25 +2384,25 @@
   <section class="impact" id="impact">
     <div class="container">
       <div class="center-copy fade-in-up">
-        <div class="section-label">OUR IMPACT POTENTIAL</div>
-        <h2 class="section-title">Built for the Largest Underserved<br/>Health Market on Earth</h2>
+        <div class="section-label" data-i18n="impact_label">OUR IMPACT POTENTIAL</div>
+        <h2 class="section-title" data-i18n="impact_title">Built for the Largest Underserved<br/>Health Market on Earth</h2>
       </div>
       <div class="impact-grid">
         <article class="impact-card glow-cyan fade-in-up">
           <div class="impact-num countup gradient-text" data-value="500" data-suffix="M">0</div>
-          <p class="impact-desc">Rural Indians who can benefit</p>
+          <p class="impact-desc" data-i18n="impact_rural">Rural Indians who can benefit</p>
         </article>
         <article class="impact-card glow-purple fade-in-up">
           <div class="impact-num countup" style="color:#9f8dff" data-value="1.1" data-suffix="M">0</div>
-          <p class="impact-desc">ASHA workers empowered</p>
+          <p class="impact-desc" data-i18n="impact_asha">ASHA workers empowered</p>
         </article>
         <article class="impact-card glow-green fade-in-up">
           <div class="impact-num countup" style="color:#6dffbf" data-value="40" data-prefix="30-" data-suffix="%">0</div>
-          <p class="impact-desc">Fewer unnecessary ER visits</p>
+          <p class="impact-desc" data-i18n="impact_er">Fewer unnecessary ER visits</p>
         </article>
         <article class="impact-card glow-yellow fade-in-up">
           <div class="impact-num countup" style="color:#ffe26f" data-value="0" data-prefix="₹" data-suffix="">0</div>
-          <p class="impact-desc">Cost to patients - always free</p>
+          <p class="impact-desc" data-i18n="impact_cost">Cost to patients - always free</p>
         </article>
       </div>
     </div>
@@ -2321,7 +2414,7 @@
       <div class="footer-grid">
         <div class="footer-col">
           <h5 style="font-family:'Cabinet Grotesk',Georgia,serif;font-size:28px"><span>Medi</span><span class="gradient-text">Check</span></h5>
-          <p class="muted">Your village doctor, always available.</p>
+          <p class="muted" data-i18n="footer_tagline">Your village doctor, always available.</p>
           <div class="socials">
             <a href="#" aria-label="Twitter/X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.3 2H21L14.7 9.2L22 22H16.3L11.8 14.2L5.4 22H2.7L9.4 13.8L2.4 2H8.2L12.3 9.2L18.3 2Z"/></svg></a>
             <a href="#" aria-label="GitHub"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.8 5.4.8 11.7c0 5 3.2 9.3 7.7 10.8.6.1.8-.2.8-.6v-2.1c-3.1.7-3.7-1.5-3.7-1.5-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.5 2.4 1.1 2.9.9.1-.7.4-1.1.7-1.4-2.5-.3-5.1-1.2-5.1-5.6 0-1.2.4-2.2 1-3-.1-.3-.4-1.5.1-3.1 0 0 .8-.3 3.1 1.1.9-.2 1.9-.3 2.8-.3s1.9.1 2.8.3c2.3-1.5 3.1-1.1 3.1-1.1.5 1.6.2 2.8.1 3.1.6.8 1 1.8 1 3 0 4.4-2.6 5.3-5.1 5.6.4.3.7 1 .7 2v3c0 .4.2.7.8.6 4.5-1.5 7.7-5.8 7.7-10.8C23.2 5.4 18.3.5 12 .5Z"/></svg></a>
@@ -2329,16 +2422,16 @@
           </div>
         </div>
         <div class="footer-col">
-          <h5>Product</h5>
+          <h5 data-i18n="footer_product">Product</h5>
           <ul>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#how-it-works">How It Works</a></li>
-            <li><a href="#demo">Live Demo</a></li>
-            <li><a href="#">Download App</a></li>
+            <li><a href="#features" data-i18n="nav_features">Features</a></li>
+            <li><a href="#how-it-works" data-i18n="nav_how">How It Works</a></li>
+            <li><a href="#demo" data-i18n="footer_live_demo">Live Demo</a></li>
+            <li><a href="#" data-i18n="footer_download">Download App</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h5>Built With</h5>
+          <h5 data-i18n="footer_built">Built With</h5>
           <ul>
             <li>Claude API</li>
             <li>AI4Bharat</li>
@@ -2347,18 +2440,18 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h5>Hackathon</h5>
+          <h5 data-i18n="footer_hackathon">Hackathon</h5>
           <ul>
             <li>[Event Name]</li>
             <li>[Date]</li>
             <li>[Team Name]</li>
-            <li>Built in 24 hours for rural India</li>
+            <li data-i18n="footer_built_24">Built in 24 hours for rural India</li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2025 MediCheck · Made with ❤️ in India</span>
-        <span>⚕️ Not a substitute for professional medical advice</span>
+        <span data-i18n="footer_copyright">© 2025 MediCheck · Made with ❤️ in India</span>
+        <span data-i18n="footer_medical">⚕️ Not a substitute for professional medical advice</span>
       </div>
     </div>
   </footer>
@@ -2426,6 +2519,322 @@
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') ensureAuthenticated();
     });
+
+    /* ═══════════════════════════════════════════════════
+       ─── i18n: FULL UI TRANSLATION ENGINE ───
+       ═══════════════════════════════════════════════════ */
+    const i18n = {
+      en: {
+        // Navbar
+        nav_features: 'Features', nav_how: 'How It Works', nav_hospitals: 'Hospitals Map',
+        nav_impact: 'Impact', nav_demo: 'Demo', nav_try_demo: 'Try Demo',
+        nav_get_app: 'Get the App', nav_logout: 'Logout',
+        // Hero
+        hero_pill: '🟢 Live in Beta · India\'s First Geo-Aware Health AI',
+        hero_title: 'Your Village Doctor,<br />In Your Pocket',
+        hero_sub: 'AI-powered symptom triage in your language - voice, photo, or text. Built for 500 million Indians with no doctor nearby.',
+        hero_cta_check: 'Check Symptoms Now →', hero_cta_watch: '▶ Watch Demo',
+        hero_badge_offline: '✅ Works Offline', hero_badge_langs: '🎙️ 22 Languages', hero_badge_facilities: '🏥 1.5L+ Facilities',
+        // Stats
+        stat_symptoms: 'Symptoms Checked', stat_facilities: 'Facilities Mapped',
+        stat_languages: 'Indian Languages', stat_asha: 'ASHA Workers',
+        // Problem
+        problem_label: 'THE PROBLEM',
+        problem_title: 'Every 2 minutes, a rural Indian makes the<br />wrong health decision',
+        problem_desc: 'Because they had no guidance. MediCheck fixes the first broken link in India\'s healthcare chain.',
+        problem_card1_title: 'No Access', problem_card1_desc: '65% of villages have no doctor within 10 km. 600M rural smartphone users - zero tools for them.',
+        problem_card2_title: 'Deadly Delay', problem_card2_desc: 'Average 4-6 hour delay before rural patients reach care. By then, treatable becomes critical.',
+        problem_card3_title: 'Wrong Tools', problem_card3_desc: 'Ada, Buoy, Healthily - built for English-speaking urban users. Useless for a farmer in Punjab.',
+        // Features header
+        features_label: '7 UNIQUE FEATURES',
+        features_title: 'Things <span class="gradient-text">No Other</span> Symptom Checker Does',
+        // Feature 1
+        f1_tag: '🌦️ WORLD\'S FIRST', f1_title: 'Geo-Contextual Awareness',
+        f1_desc: 'MediCheck reads outbreak and weather risk patterns for your exact district before giving advice.',
+        f1_b1: 'District-level IDSP signal checks', f1_b2: 'Season and climate-aware triage', f1_b3: 'Hyperlocal alerts in real time',
+        // Feature 2
+        f2_tag: '🎤 VOICE-FIRST', f2_title: 'Speak Naturally, In Your Language',
+        f2_desc: 'Patients can describe symptoms in Punjabi, Hindi, Marathi, Bhojpuri, and beyond with no typing barrier.',
+        f2_b1: 'Low-literacy voice interaction flow', f2_b2: 'Regional speech understanding', f2_b3: 'Natural multilingual responses',
+        // Feature 3
+        f3_tag: '📸 VISUAL TRIAGE', f3_title: 'Photo Analysis for Hidden Risk',
+        f3_desc: 'When words are not enough, camera-based checks catch visual warning signs like rashes and redness.',
+        f3_b1: 'Guided camera framing', f3_b2: 'Fast on-device style scan flow', f3_b3: 'Visual + symptom fusion triage',
+        // Feature 4
+        f4_tag: '📈 LONGITUDINAL', f4_title: 'Symptom Timeline, Not One-Off Guess',
+        f4_desc: 'MediCheck tracks progression across days to catch worsening patterns before they become emergencies.',
+        f4_b1: 'Day-by-day severity scoring', f4_b2: 'Escalation trend detection', f4_b3: 'Critical threshold alerts',
+        // Feature 5
+        f5_tag: '🗺️ ROUTING', f5_title: 'Nearest Government Facility Routing',
+        f5_desc: 'Recommendations include where to go now, open hours, and estimated travel cost.',
+        f5_b1: 'PHC availability and status', f5_b2: 'Distance and route context', f5_b3: 'One-tap facility call actions',
+        // Feature 6
+        f6_tag: '👨‍👩‍👧‍👦 FAMILY VAULT', f6_title: 'One Phone, Full Family Health History',
+        f6_desc: 'Manage up to eight profiles so every family member gets context-aware triage and follow-ups.',
+        f6_b1: 'Role-based family profile management', f6_b2: 'Individual symptom history snapshots', f6_b3: 'Risk-color coded quick overview',
+        // Feature 7
+        f7_tag: '🧑‍⚕️ FRONTLINE MODE', f7_title: 'ASHA Worker Dashboard Mode',
+        f7_desc: 'Frontline workers see household risk priorities and escalate cases to PHC quickly with evidence.',
+        f7_b1: 'Household risk sorting', f7_b2: 'Urgent referral prioritization', f7_b3: 'Ready weekly report generation',
+        // How It Works
+        how_label: 'HOW IT WORKS', how_title: 'From Symptom to Action in 90 Seconds',
+        step1_title: 'Describe Your Symptom', step1_desc: 'Speak, type, or photograph in any Indian language. No literacy required.',
+        step2_title: 'AI Analyses Everything', step2_desc: 'Cross-checks your symptoms with local outbreaks, your history, weather data, and visual inputs simultaneously.',
+        step3_title: 'Know Exactly What To Do', step3_desc: 'Clear triage verdict, nearest facility with directions, family alert, and doctor escalation - all in one screen.',
+        // Demo
+        demo_label: 'TRY IT NOW', demo_title: 'Ask MediCheck Anything',
+        demo_desc: 'Type a symptom below - our AI responds in real time',
+        chat_nearby_btn: 'Nearby hospitals', analysis_title: 'Live Analysis', analysis_confidence: 'Confidence',
+        // Location
+        loc_title: 'My Location', loc_label: 'Enter your city/address',
+        loc_coord_label: 'Enter coordinates instead', loc_save_btn: 'Save location',
+        // Map
+        map_label: 'FIND HOSPITALS', map_title: 'Nearby Hospitals on <span class="gradient-text">OpenStreetMap</span>',
+        map_desc: 'Search any location manually, use your GPS, or click on the map to find hospitals near that spot.',
+        map_search_btn: '🔍 Search', map_locate_btn: '📍 My Location',
+        // Impact
+        impact_label: 'OUR IMPACT POTENTIAL', impact_title: 'Built for the Largest Underserved<br/>Health Market on Earth',
+        impact_rural: 'Rural Indians who can benefit', impact_asha: 'ASHA workers empowered',
+        impact_er: 'Fewer unnecessary ER visits', impact_cost: 'Cost to patients - always free',
+        // Footer
+        footer_tagline: 'Your village doctor, always available.',
+        footer_product: 'Product', footer_live_demo: 'Live Demo', footer_download: 'Download App',
+        footer_built: 'Built With', footer_hackathon: 'Hackathon',
+        footer_built_24: 'Built in 24 hours for rural India',
+        footer_copyright: '© 2025 MediCheck · Made with ❤️ in India',
+        footer_medical: '⚕️ Not a substitute for professional medical advice',
+      },
+
+      hi: {
+        // Navbar
+        nav_features: 'विशेषताएँ', nav_how: 'कैसे काम करता है', nav_hospitals: 'अस्पताल मैप',
+        nav_impact: 'प्रभाव', nav_demo: 'डेमो', nav_try_demo: 'डेमो देखें',
+        nav_get_app: 'ऐप डाउनलोड करें', nav_logout: 'लॉगआउट',
+        // Hero
+        hero_pill: '🟢 बीटा में लाइव · भारत का पहला जियो-अवेयर हेल्थ AI',
+        hero_title: 'आपका गाँव का डॉक्टर,<br />आपकी जेब में',
+        hero_sub: 'AI-संचालित लक्षण जाँच आपकी भाषा में - आवाज़, फ़ोटो, या टेक्स्ट। 50 करोड़ भारतीयों के लिए जिनके पास कोई डॉक्टर नहीं।',
+        hero_cta_check: 'लक्षण जाँचें →', hero_cta_watch: '▶ डेमो देखें',
+        hero_badge_offline: '✅ ऑफ़लाइन काम करे', hero_badge_langs: '🎙️ 22 भाषाएँ', hero_badge_facilities: '🏥 1.5 लाख+ सुविधाएँ',
+        // Stats
+        stat_symptoms: 'लक्षण जाँचे गए', stat_facilities: 'सुविधाएँ मैप की गईं',
+        stat_languages: 'भारतीय भाषाएँ', stat_asha: 'आशा कार्यकर्ता',
+        // Problem
+        problem_label: 'समस्या',
+        problem_title: 'हर 2 मिनट में, एक ग्रामीण भारतीय<br />गलत स्वास्थ्य निर्णय लेता है',
+        problem_desc: 'क्योंकि उन्हें कोई मार्गदर्शन नहीं मिला। MediCheck भारत की स्वास्थ्य श्रृंखला की पहली टूटी कड़ी को जोड़ता है।',
+        problem_card1_title: 'पहुँच नहीं', problem_card1_desc: '65% गाँवों में 10 किमी के भीतर कोई डॉक्टर नहीं। 60 करोड़ ग्रामीण स्मार्टफ़ोन उपयोगकर्ता - उनके लिए कोई टूल नहीं।',
+        problem_card2_title: 'घातक देरी', problem_card2_desc: 'ग्रामीण मरीज़ों को देखभाल तक पहुँचने में औसतन 4-6 घंटे की देरी। तब तक इलाज योग्य गंभीर हो जाता है।',
+        problem_card3_title: 'गलत टूल', problem_card3_desc: 'Ada, Buoy, Healthily - अंग्रेज़ी बोलने वाले शहरी उपयोगकर्ताओं के लिए बने हैं। पंजाब के किसान के लिए बेकार।',
+        // Features
+        features_label: '7 अनूठी विशेषताएँ',
+        features_title: 'ऐसी चीज़ें जो <span class="gradient-text">कोई और</span> सिम्पटम चेकर नहीं करता',
+        f1_tag: '🌦️ दुनिया में पहला', f1_title: 'भौगोलिक-संदर्भ जागरूकता',
+        f1_desc: 'MediCheck सलाह देने से पहले आपके ज़िले की महामारी और मौसम जोखिम पैटर्न पढ़ता है।',
+        f1_b1: 'ज़िला-स्तरीय IDSP सिग्नल जाँच', f1_b2: 'मौसम-जागरूक ट्राइएज', f1_b3: 'रीयल-टाइम हाइपरलोकल अलर्ट',
+        f2_tag: '🎤 आवाज़-पहले', f2_title: 'अपनी भाषा में स्वाभाविक रूप से बोलें',
+        f2_desc: 'मरीज़ पंजाबी, हिंदी, मराठी, भोजपुरी में बिना टाइपिंग बाधा के लक्षण बता सकते हैं।',
+        f2_b1: 'कम साक्षरता आवाज़ इंटरैक्शन', f2_b2: 'क्षेत्रीय भाषा समझ', f2_b3: 'प्राकृतिक बहुभाषी उत्तर',
+        f3_tag: '📸 विज़ुअल ट्राइएज', f3_title: 'छिपे जोखिम के लिए फ़ोटो विश्लेषण',
+        f3_desc: 'जब शब्द काफ़ी नहीं हों, कैमरा-आधारित जाँच रैश और लालिमा जैसे दृश्य चेतावनी संकेतों को पकड़ती है।',
+        f3_b1: 'गाइडेड कैमरा फ़्रेमिंग', f3_b2: 'तेज़ ऑन-डिवाइस स्कैन', f3_b3: 'विज़ुअल + लक्षण फ़्यूज़न ट्राइएज',
+        f4_tag: '📈 दीर्घकालिक', f4_title: 'लक्षण टाइमलाइन, एक बार का अनुमान नहीं',
+        f4_desc: 'MediCheck दिनों में प्रगति को ट्रैक करता है ताकि बिगड़ते पैटर्न को आपातकाल बनने से पहले पकड़ सके।',
+        f4_b1: 'दिन-प्रतिदिन गंभीरता स्कोरिंग', f4_b2: 'बढ़ोतरी ट्रेंड पहचान', f4_b3: 'गंभीर सीमा अलर्ट',
+        f5_tag: '🗺️ रूटिंग', f5_title: 'निकटतम सरकारी सुविधा मार्ग',
+        f5_desc: 'सिफ़ारिशों में शामिल है कि अभी कहाँ जाना है, खुलने का समय, और अनुमानित यात्रा लागत।',
+        f5_b1: 'PHC उपलब्धता और स्थिति', f5_b2: 'दूरी और मार्ग संदर्भ', f5_b3: 'एक-टैप सुविधा कॉल',
+        f6_tag: '👨‍👩‍👧‍👦 फैमिली वॉल्ट', f6_title: 'एक फ़ोन, पूरे परिवार का स्वास्थ्य इतिहास',
+        f6_desc: 'आठ प्रोफ़ाइल तक प्रबंधित करें ताकि हर परिवार के सदस्य को संदर्भ-जागरूक ट्राइएज मिले।',
+        f6_b1: 'भूमिका-आधारित पारिवारिक प्रोफ़ाइल', f6_b2: 'व्यक्तिगत लक्षण इतिहास स्नैपशॉट', f6_b3: 'जोखिम-रंग कोडित त्वरित अवलोकन',
+        f7_tag: '🧑‍⚕️ फ़्रंटलाइन मोड', f7_title: 'आशा कार्यकर्ता डैशबोर्ड मोड',
+        f7_desc: 'फ़्रंटलाइन कार्यकर्ता घरेलू जोखिम प्राथमिकताएँ देखें और सबूतों के साथ PHC को तुरंत रेफ़र करें।',
+        f7_b1: 'घरेलू जोखिम छँटाई', f7_b2: 'तत्काल रेफ़रल प्राथमिकता', f7_b3: 'तैयार साप्ताहिक रिपोर्ट जनरेशन',
+        // How It Works
+        how_label: 'कैसे काम करता है', how_title: '90 सेकंड में लक्षण से कार्रवाई तक',
+        step1_title: 'अपना लक्षण बताएँ', step1_desc: 'किसी भी भारतीय भाषा में बोलें, टाइप करें, या फ़ोटो लें। साक्षरता ज़रूरी नहीं।',
+        step2_title: 'AI सब कुछ विश्लेषित करता है', step2_desc: 'आपके लक्षणों को स्थानीय महामारी, आपके इतिहास, मौसम डेटा और विज़ुअल इनपुट के साथ क्रॉस-चेक करता है।',
+        step3_title: 'जानें ठीक क्या करना है', step3_desc: 'स्पष्ट ट्राइएज फ़ैसला, दिशा-निर्देशों के साथ निकटतम सुविधा, परिवार अलर्ट - सब एक स्क्रीन में।',
+        // Demo
+        demo_label: 'अभी आज़माएँ', demo_title: 'MediCheck से कुछ भी पूछें',
+        demo_desc: 'नीचे कोई लक्षण टाइप करें - हमारा AI रीयल-टाइम में जवाब देगा',
+        chat_nearby_btn: 'नज़दीकी अस्पताल', analysis_title: 'लाइव विश्लेषण', analysis_confidence: 'विश्वास',
+        // Location
+        loc_title: 'मेरा स्थान', loc_label: 'अपना शहर/पता दर्ज करें',
+        loc_coord_label: 'इसके बजाय निर्देशांक दर्ज करें', loc_save_btn: 'स्थान सहेजें',
+        // Map
+        map_label: 'अस्पताल खोजें', map_title: '<span class="gradient-text">OpenStreetMap</span> पर नज़दीकी अस्पताल',
+        map_desc: 'मैन्युअल रूप से कोई भी स्थान खोजें, अपना GPS उपयोग करें, या मैप पर क्लिक करें।',
+        map_search_btn: '🔍 खोजें', map_locate_btn: '📍 मेरा स्थान',
+        // Impact
+        impact_label: 'हमारा प्रभाव', impact_title: 'पृथ्वी पर सबसे बड़े वंचित<br/>स्वास्थ्य बाज़ार के लिए बनाया गया',
+        impact_rural: 'ग्रामीण भारतीय जो लाभ उठा सकते हैं', impact_asha: 'आशा कार्यकर्ता सशक्त',
+        impact_er: 'अनावश्यक ER विज़िट में कमी', impact_cost: 'मरीज़ों को लागत - हमेशा मुफ़्त',
+        // Footer
+        footer_tagline: 'आपका गाँव का डॉक्टर, हमेशा उपलब्ध।',
+        footer_product: 'उत्पाद', footer_live_demo: 'लाइव डेमो', footer_download: 'ऐप डाउनलोड',
+        footer_built: 'इससे बनाया गया', footer_hackathon: 'हैकाथॉन',
+        footer_built_24: 'ग्रामीण भारत के लिए 24 घंटे में बनाया गया',
+        footer_copyright: '© 2025 MediCheck · भारत में ❤️ से बनाया',
+        footer_medical: '⚕️ पेशेवर चिकित्सा सलाह का विकल्प नहीं है',
+      },
+
+      pa: {
+        // Navbar
+        nav_features: 'ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ', nav_how: 'ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ', nav_hospitals: 'ਹਸਪਤਾਲ ਨਕਸ਼ਾ',
+        nav_impact: 'ਪ੍ਰਭਾਵ', nav_demo: 'ਡੈਮੋ', nav_try_demo: 'ਡੈਮੋ ਵੇਖੋ',
+        nav_get_app: 'ਐਪ ਡਾਊਨਲੋਡ ਕਰੋ', nav_logout: 'ਲੌਗਆਊਟ',
+        // Hero
+        hero_pill: '🟢 ਬੀਟਾ ਵਿੱਚ ਲਾਈਵ · ਭਾਰਤ ਦਾ ਪਹਿਲਾ ਜੀਓ-ਅਵੇਅਰ ਹੈਲਥ AI',
+        hero_title: 'ਤੁਹਾਡੇ ਪਿੰਡ ਦਾ ਡਾਕਟਰ,<br />ਤੁਹਾਡੀ ਜੇਬ ਵਿੱਚ',
+        hero_sub: 'AI-ਸੰਚਾਲਿਤ ਲੱਛਣ ਜਾਂਚ ਤੁਹਾਡੀ ਭਾਸ਼ਾ ਵਿੱਚ - ਆਵਾਜ਼, ਫ਼ੋਟੋ, ਜਾਂ ਟੈਕਸਟ। 50 ਕਰੋੜ ਭਾਰਤੀਆਂ ਲਈ ਜਿਨ੍ਹਾਂ ਕੋਲ ਕੋਈ ਡਾਕਟਰ ਨਹੀਂ।',
+        hero_cta_check: 'ਲੱਛਣ ਜਾਂਚੋ →', hero_cta_watch: '▶ ਡੈਮੋ ਵੇਖੋ',
+        hero_badge_offline: '✅ ਔਫ਼ਲਾਈਨ ਕੰਮ ਕਰੇ', hero_badge_langs: '🎙️ 22 ਭਾਸ਼ਾਵਾਂ', hero_badge_facilities: '🏥 1.5 ਲੱਖ+ ਸਹੂਲਤਾਂ',
+        // Stats
+        stat_symptoms: 'ਲੱਛਣ ਜਾਂਚੇ ਗਏ', stat_facilities: 'ਸਹੂਲਤਾਂ ਮੈਪ ਕੀਤੀਆਂ',
+        stat_languages: 'ਭਾਰਤੀ ਭਾਸ਼ਾਵਾਂ', stat_asha: 'ਆਸ਼ਾ ਵਰਕਰ',
+        // Problem
+        problem_label: 'ਸਮੱਸਿਆ',
+        problem_title: 'ਹਰ 2 ਮਿੰਟ ਵਿੱਚ, ਇੱਕ ਪੇਂਡੂ ਭਾਰਤੀ<br />ਗਲਤ ਸਿਹਤ ਫ਼ੈਸਲਾ ਕਰਦਾ ਹੈ',
+        problem_desc: 'ਕਿਉਂਕਿ ਉਨ੍ਹਾਂ ਨੂੰ ਕੋਈ ਮਾਰਗਦਰਸ਼ਨ ਨਹੀਂ ਮਿਲਿਆ। MediCheck ਭਾਰਤ ਦੀ ਸਿਹਤ ਲੜੀ ਦੀ ਪਹਿਲੀ ਟੁੱਟੀ ਕੜੀ ਨੂੰ ਜੋੜਦਾ ਹੈ।',
+        problem_card1_title: 'ਪਹੁੰਚ ਨਹੀਂ', problem_card1_desc: '65% ਪਿੰਡਾਂ ਵਿੱਚ 10 ਕਿਮੀ ਦੇ ਅੰਦਰ ਕੋਈ ਡਾਕਟਰ ਨਹੀਂ। 60 ਕਰੋੜ ਪੇਂਡੂ ਸਮਾਰਟਫ਼ੋਨ ਯੂਜ਼ਰ - ਉਨ੍ਹਾਂ ਲਈ ਕੋਈ ਟੂਲ ਨਹੀਂ।',
+        problem_card2_title: 'ਘਾਤਕ ਦੇਰੀ', problem_card2_desc: 'ਪੇਂਡੂ ਮਰੀਜ਼ਾਂ ਨੂੰ ਦੇਖਭਾਲ ਤੱਕ ਪਹੁੰਚਣ ਵਿੱਚ ਔਸਤ 4-6 ਘੰਟੇ ਦੀ ਦੇਰੀ। ਤਦ ਤੱਕ ਇਲਾਜ ਯੋਗ ਗੰਭੀਰ ਹੋ ਜਾਂਦਾ ਹੈ।',
+        problem_card3_title: 'ਗਲਤ ਟੂਲ', problem_card3_desc: 'Ada, Buoy, Healthily - ਅੰਗਰੇਜ਼ੀ ਬੋਲਣ ਵਾਲੇ ਸ਼ਹਿਰੀ ਉਪਭੋਗਤਾਵਾਂ ਲਈ ਬਣੇ ਹਨ। ਪੰਜਾਬ ਦੇ ਕਿਸਾਨ ਲਈ ਬੇਕਾਰ।',
+        // Features
+        features_label: '7 ਵਿਲੱਖਣ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ',
+        features_title: 'ਉਹ ਚੀਜ਼ਾਂ ਜੋ <span class="gradient-text">ਕੋਈ ਹੋਰ</span> ਸਿੰਪਟਮ ਚੈਕਰ ਨਹੀਂ ਕਰਦਾ',
+        f1_tag: '🌦️ ਦੁਨੀਆ ਵਿੱਚ ਪਹਿਲਾ', f1_title: 'ਭੂਗੋਲਿਕ-ਸੰਦਰਭ ਜਾਗਰੂਕਤਾ',
+        f1_desc: 'MediCheck ਸਲਾਹ ਦੇਣ ਤੋਂ ਪਹਿਲਾਂ ਤੁਹਾਡੇ ਜ਼ਿਲ੍ਹੇ ਦੇ ਮਹਾਂਮਾਰੀ ਅਤੇ ਮੌਸਮ ਜੋਖਮ ਪੈਟਰਨ ਪੜ੍ਹਦਾ ਹੈ।',
+        f1_b1: 'ਜ਼ਿਲ੍ਹਾ-ਪੱਧਰੀ IDSP ਸਿਗਨਲ ਜਾਂਚ', f1_b2: 'ਮੌਸਮ-ਜਾਗਰੂਕ ਟ੍ਰਾਈਏਜ', f1_b3: 'ਰੀਅਲ-ਟਾਈਮ ਹਾਈਪਰਲੋਕਲ ਅਲਰਟ',
+        f2_tag: '🎤 ਆਵਾਜ਼-ਪਹਿਲਾਂ', f2_title: 'ਆਪਣੀ ਭਾਸ਼ਾ ਵਿੱਚ ਕੁਦਰਤੀ ਤੌਰ \'ਤੇ ਬੋਲੋ',
+        f2_desc: 'ਮਰੀਜ਼ ਪੰਜਾਬੀ, ਹਿੰਦੀ, ਮਰਾਠੀ, ਭੋਜਪੁਰੀ ਵਿੱਚ ਬਿਨਾਂ ਟਾਈਪਿੰਗ ਰੁਕਾਵਟ ਦੇ ਲੱਛਣ ਦੱਸ ਸਕਦੇ ਹਨ।',
+        f2_b1: 'ਘੱਟ ਸਾਖਰਤਾ ਆਵਾਜ਼ ਇੰਟਰੈਕਸ਼ਨ', f2_b2: 'ਖੇਤਰੀ ਭਾਸ਼ਾ ਸਮਝ', f2_b3: 'ਕੁਦਰਤੀ ਬਹੁਭਾਸ਼ੀ ਜਵਾਬ',
+        f3_tag: '📸 ਵਿਜ਼ੁਅਲ ਟ੍ਰਾਈਏਜ', f3_title: 'ਲੁਕੇ ਜੋਖਮ ਲਈ ਫ਼ੋਟੋ ਵਿਸ਼ਲੇਸ਼ਣ',
+        f3_desc: 'ਜਦੋਂ ਸ਼ਬਦ ਕਾਫ਼ੀ ਨਹੀਂ ਹੁੰਦੇ, ਕੈਮਰਾ-ਆਧਾਰਿਤ ਜਾਂਚ ਰੈਸ਼ ਅਤੇ ਲਾਲੀ ਵਰਗੇ ਦ੍ਰਿਸ਼ ਚੇਤਾਵਨੀ ਸੰਕੇਤਾਂ ਨੂੰ ਫੜ੍ਹਦੀ ਹੈ।',
+        f3_b1: 'ਗਾਈਡਡ ਕੈਮਰਾ ਫ਼੍ਰੇਮਿੰਗ', f3_b2: 'ਤੇਜ਼ ਆਨ-ਡਿਵਾਈਸ ਸਕੈਨ', f3_b3: 'ਵਿਜ਼ੂਅਲ + ਲੱਛਣ ਫ਼ਿਊਜ਼ਨ ਟ੍ਰਾਈਏਜ',
+        f4_tag: '📈 ਲੰਬੇ ਸਮੇਂ ਦਾ', f4_title: 'ਲੱਛਣ ਟਾਈਮਲਾਈਨ, ਇੱਕ ਵਾਰ ਦਾ ਅੰਦਾਜ਼ਾ ਨਹੀਂ',
+        f4_desc: 'MediCheck ਦਿਨਾਂ ਵਿੱਚ ਤਰੱਕੀ ਨੂੰ ਟ੍ਰੈਕ ਕਰਦਾ ਹੈ ਤਾਂ ਜੋ ਵਿਗੜਦੇ ਪੈਟਰਨ ਨੂੰ ਐਮਰਜੈਂਸੀ ਬਣਨ ਤੋਂ ਪਹਿਲਾਂ ਫੜ ਸਕੇ।',
+        f4_b1: 'ਦਿਨ-ਬ-ਦਿਨ ਗੰਭੀਰਤਾ ਸਕੋਰਿੰਗ', f4_b2: 'ਵਾਧੇ ਦੇ ਰੁਝਾਨ ਦੀ ਪਛਾਣ', f4_b3: 'ਗੰਭੀਰ ਸੀਮਾ ਅਲਰਟ',
+        f5_tag: '🗺️ ਰੂਟਿੰਗ', f5_title: 'ਨਜ਼ਦੀਕੀ ਸਰਕਾਰੀ ਸਹੂਲਤ ਰੂਟ',
+        f5_desc: 'ਸਿਫ਼ਾਰਸ਼ਾਂ ਵਿੱਚ ਸ਼ਾਮਲ ਹੈ ਕਿ ਹੁਣ ਕਿੱਥੇ ਜਾਣਾ ਹੈ, ਖੁੱਲ੍ਹਣ ਦਾ ਸਮਾਂ, ਅਤੇ ਅੰਦਾਜ਼ਨ ਯਾਤਰਾ ਲਾਗਤ।',
+        f5_b1: 'PHC ਉਪਲਬਧਤਾ ਅਤੇ ਸਥਿਤੀ', f5_b2: 'ਦੂਰੀ ਅਤੇ ਮਾਰਗ ਸੰਦਰਭ', f5_b3: 'ਇੱਕ-ਟੈਪ ਸਹੂਲਤ ਕਾਲ',
+        f6_tag: '👨‍👩‍👧‍👦 ਫੈਮਿਲੀ ਵਾਲਟ', f6_title: 'ਇੱਕ ਫ਼ੋਨ, ਪੂਰੇ ਪਰਿਵਾਰ ਦਾ ਸਿਹਤ ਇਤਿਹਾਸ',
+        f6_desc: 'ਅੱਠ ਪ੍ਰੋਫ਼ਾਈਲਾਂ ਤੱਕ ਪ੍ਰਬੰਧਿਤ ਕਰੋ ਤਾਂ ਜੋ ਹਰ ਪਰਿਵਾਰਕ ਮੈਂਬਰ ਨੂੰ ਸੰਦਰਭ-ਜਾਗਰੂਕ ਟ੍ਰਾਈਏਜ ਮਿਲੇ।',
+        f6_b1: 'ਭੂਮਿਕਾ-ਆਧਾਰਿਤ ਪਰਿਵਾਰਕ ਪ੍ਰੋਫ਼ਾਈਲ', f6_b2: 'ਵਿਅਕਤੀਗਤ ਲੱਛਣ ਇਤਿਹਾਸ ਸਨੈਪਸ਼ਾਟ', f6_b3: 'ਜੋਖਮ-ਰੰਗ ਕੋਡਡ ਤੇਜ਼ ਸੰਖੇਪ',
+        f7_tag: '🧑‍⚕️ ਫ਼ਰੰਟਲਾਈਨ ਮੋਡ', f7_title: 'ਆਸ਼ਾ ਵਰਕਰ ਡੈਸ਼ਬੋਰਡ ਮੋਡ',
+        f7_desc: 'ਫ਼ਰੰਟਲਾਈਨ ਵਰਕਰ ਘਰੇਲੂ ਜੋਖਮ ਤਰਜੀਹਾਂ ਵੇਖਣ ਅਤੇ ਸਬੂਤਾਂ ਨਾਲ PHC ਨੂੰ ਤੁਰੰਤ ਰੈਫ਼ਰ ਕਰਨ।',
+        f7_b1: 'ਘਰੇਲੂ ਜੋਖਮ ਛਾਂਟੀ', f7_b2: 'ਤੁਰੰਤ ਰੈਫ਼ਰਲ ਤਰਜੀਹ', f7_b3: 'ਤਿਆਰ ਹਫ਼ਤਾਵਾਰੀ ਰਿਪੋਰਟ ਜਨਰੇਸ਼ਨ',
+        // How It Works
+        how_label: 'ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ', how_title: '90 ਸਕਿੰਟਾਂ ਵਿੱਚ ਲੱਛਣ ਤੋਂ ਕਾਰਵਾਈ ਤੱਕ',
+        step1_title: 'ਆਪਣਾ ਲੱਛਣ ਦੱਸੋ', step1_desc: 'ਕਿਸੇ ਵੀ ਭਾਰਤੀ ਭਾਸ਼ਾ ਵਿੱਚ ਬੋਲੋ, ਟਾਈਪ ਕਰੋ, ਜਾਂ ਫ਼ੋਟੋ ਲਓ। ਸਾਖਰਤਾ ਜ਼ਰੂਰੀ ਨਹੀਂ।',
+        step2_title: 'AI ਸਭ ਕੁਝ ਵਿਸ਼ਲੇਸ਼ਣ ਕਰਦਾ ਹੈ', step2_desc: 'ਤੁਹਾਡੇ ਲੱਛਣਾਂ ਨੂੰ ਸਥਾਨਕ ਮਹਾਂਮਾਰੀ, ਤੁਹਾਡੇ ਇਤਿਹਾਸ, ਮੌਸਮ ਡੇਟਾ ਅਤੇ ਵਿਜ਼ੁਅਲ ਇਨਪੁੱਟ ਨਾਲ ਕ੍ਰਾਸ-ਚੈੱਕ ਕਰਦਾ ਹੈ।',
+        step3_title: 'ਜਾਣੋ ਬਿਲਕੁਲ ਕੀ ਕਰਨਾ ਹੈ', step3_desc: 'ਸਪੱਸ਼ਟ ਟ੍ਰਾਈਏਜ ਫ਼ੈਸਲਾ, ਦਿਸ਼ਾ-ਨਿਰਦੇਸ਼ਾਂ ਨਾਲ ਨਜ਼ਦੀਕੀ ਸਹੂਲਤ, ਪਰਿਵਾਰ ਅਲਰਟ - ਸਭ ਇੱਕ ਸਕ੍ਰੀਨ ਵਿੱਚ।',
+        // Demo
+        demo_label: 'ਹੁਣੇ ਅਜ਼ਮਾਓ', demo_title: 'MediCheck ਤੋਂ ਕੁਝ ਵੀ ਪੁੱਛੋ',
+        demo_desc: 'ਹੇਠਾਂ ਕੋਈ ਲੱਛਣ ਟਾਈਪ ਕਰੋ - ਸਾਡਾ AI ਰੀਅਲ-ਟਾਈਮ ਵਿੱਚ ਜਵਾਬ ਦੇਵੇਗਾ',
+        chat_nearby_btn: 'ਨਜ਼ਦੀਕੀ ਹਸਪਤਾਲ', analysis_title: 'ਲਾਈਵ ਵਿਸ਼ਲੇਸ਼ਣ', analysis_confidence: 'ਭਰੋਸਾ',
+        // Location
+        loc_title: 'ਮੇਰਾ ਟਿਕਾਣਾ', loc_label: 'ਆਪਣਾ ਸ਼ਹਿਰ/ਪਤਾ ਦਰਜ ਕਰੋ',
+        loc_coord_label: 'ਇਸ ਦੀ ਬਜਾਏ ਕੋਆਰਡੀਨੇਟ ਦਰਜ ਕਰੋ', loc_save_btn: 'ਟਿਕਾਣਾ ਸੇਵ ਕਰੋ',
+        // Map
+        map_label: 'ਹਸਪਤਾਲ ਲੱਭੋ', map_title: '<span class="gradient-text">OpenStreetMap</span> \'ਤੇ ਨਜ਼ਦੀਕੀ ਹਸਪਤਾਲ',
+        map_desc: 'ਮੈਨੁਅਲੀ ਕੋਈ ਵੀ ਥਾਂ ਲੱਭੋ, ਆਪਣਾ GPS ਵਰਤੋ, ਜਾਂ ਨਕਸ਼ੇ \'ਤੇ ਕਲਿੱਕ ਕਰੋ।',
+        map_search_btn: '🔍 ਖੋਜੋ', map_locate_btn: '📍 ਮੇਰਾ ਟਿਕਾਣਾ',
+        // Impact
+        impact_label: 'ਸਾਡਾ ਪ੍ਰਭਾਵ', impact_title: 'ਧਰਤੀ \'ਤੇ ਸਭ ਤੋਂ ਵੱਡੇ ਵਾਂਝੇ<br/>ਸਿਹਤ ਬਾਜ਼ਾਰ ਲਈ ਬਣਾਇਆ ਗਿਆ',
+        impact_rural: 'ਪੇਂਡੂ ਭਾਰਤੀ ਜੋ ਲਾਭ ਲੈ ਸਕਦੇ ਹਨ', impact_asha: 'ਆਸ਼ਾ ਵਰਕਰ ਸ਼ਕਤੀਸ਼ਾਲੀ',
+        impact_er: 'ਬੇਲੋੜੀਆਂ ER ਮੁਲਾਕਾਤਾਂ ਵਿੱਚ ਕਮੀ', impact_cost: 'ਮਰੀਜ਼ਾਂ ਲਈ ਲਾਗਤ - ਹਮੇਸ਼ਾ ਮੁਫ਼ਤ',
+        // Footer
+        footer_tagline: 'ਤੁਹਾਡੇ ਪਿੰਡ ਦਾ ਡਾਕਟਰ, ਹਮੇਸ਼ਾ ਉਪਲਬਧ।',
+        footer_product: 'ਉਤਪਾਦ', footer_live_demo: 'ਲਾਈਵ ਡੈਮੋ', footer_download: 'ਐਪ ਡਾਊਨਲੋਡ',
+        footer_built: 'ਇਸ ਨਾਲ ਬਣਾਇਆ', footer_hackathon: 'ਹੈਕਾਥਾਨ',
+        footer_built_24: 'ਪੇਂਡੂ ਭਾਰਤ ਲਈ 24 ਘੰਟਿਆਂ ਵਿੱਚ ਬਣਾਇਆ',
+        footer_copyright: '© 2025 MediCheck · ਭਾਰਤ ਵਿੱਚ ❤️ ਨਾਲ ਬਣਾਇਆ',
+        footer_medical: '⚕️ ਪੇਸ਼ੇਵਰ ਡਾਕਟਰੀ ਸਲਾਹ ਦਾ ਬਦਲ ਨਹੀਂ ਹੈ',
+      }
+    };
+
+    const langLabels = { en: 'EN', hi: 'हिं', pa: 'ਪੰ' };
+
+    function applyLanguage(lang) {
+      if (!i18n[lang]) return;
+      const dict = i18n[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) {
+          el.innerHTML = dict[key];
+        }
+      });
+      // Update placeholder for chat input
+      const chatInput = document.getElementById('chatInput');
+      if (chatInput) {
+        const placeholders = { en: 'Type your symptom...', hi: 'अपना लक्षण टाइप करें...', pa: 'ਆਪਣਾ ਲੱਛਣ ਟਾਈਪ ਕਰੋ...' };
+        chatInput.placeholder = placeholders[lang] || placeholders.en;
+      }
+      // Update map search placeholder
+      const mapInput = document.getElementById('mapSearchInput');
+      if (mapInput) {
+        const mapPlaceholders = { en: 'Search city, address, or landmark...', hi: 'शहर, पता, या स्थान खोजें...', pa: 'ਸ਼ਹਿਰ, ਪਤਾ, ਜਾਂ ਥਾਂ ਲੱਭੋ...' };
+        mapInput.placeholder = mapPlaceholders[lang] || mapPlaceholders.en;
+      }
+      // Update location text placeholder
+      const locInput = document.getElementById('locationTextInput');
+      if (locInput) {
+        const locPlaceholders = { en: 'e.g. Boston, MA', hi: 'जैसे दिल्ली, भारत', pa: 'ਜਿਵੇਂ ਅੰਮ੍ਰਿਤਸਰ, ਪੰਜਾਬ' };
+        locInput.placeholder = locPlaceholders[lang] || locPlaceholders.en;
+      }
+      // Update switcher button labels
+      const label = langLabels[lang] || 'EN';
+      const btn = document.getElementById('langSwitcherLabel');
+      const btnMob = document.getElementById('langSwitcherLabelMob');
+      if (btn) btn.textContent = label;
+      if (btnMob) btnMob.textContent = label;
+      // Update active states in dropdowns
+      document.querySelectorAll('.lang-option').forEach(opt => {
+        opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
+      });
+      // Update html lang attribute
+      document.documentElement.lang = lang === 'pa' ? 'pa' : lang === 'hi' ? 'hi' : 'en';
+      // Persist
+      try { localStorage.setItem('medicheck_lang', lang); } catch(_) {}
+    }
+
+    // Initialize language switcher
+    (function initLangSwitcher() {
+      const saved = localStorage.getItem('medicheck_lang') || 'en';
+
+      // Toggle dropdown on click
+      function setupSwitcher(btnId, dropdownId) {
+        const btn = document.getElementById(btnId);
+        const dropdown = document.getElementById(dropdownId);
+        if (!btn || !dropdown) return;
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          // Close all other dropdowns
+          document.querySelectorAll('.lang-dropdown').forEach(d => { if (d !== dropdown) d.classList.remove('open'); });
+          dropdown.classList.toggle('open');
+        });
+        dropdown.querySelectorAll('.lang-option').forEach(opt => {
+          opt.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const lang = opt.getAttribute('data-lang');
+            applyLanguage(lang);
+            document.querySelectorAll('.lang-dropdown').forEach(d => d.classList.remove('open'));
+          });
+        });
+      }
+
+      setupSwitcher('langSwitcherBtn', 'langDropdown');
+      setupSwitcher('langSwitcherBtnMob', 'langDropdownMob');
+
+      // Close dropdowns on outside click
+      document.addEventListener('click', () => {
+        document.querySelectorAll('.lang-dropdown').forEach(d => d.classList.remove('open'));
+      });
+
+      // Apply saved language
+      applyLanguage(saved);
+    })();
 
     /* ─── NAVBAR SCROLL + MOBILE MENU ─── */
     const navbar = document.getElementById('navbar');
