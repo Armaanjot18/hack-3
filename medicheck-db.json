@@ -20,6 +20,13 @@
       "email": "hosp1941627692@test.com",
       "password_hash": "$2a$12$05XnbVpLPReq6Vc.oPWaqewr7dlMP33MltI4PjZt3YHO2xDwbKTHO",
       "created_at": "2026-04-07T05:17:15.092Z"
+    },
+    {
+      "id": "acb90ee9-38c3-44e2-83d8-977e3da540a2",
+      "name": "Test User",
+      "email": "testuser1384479313@example.com",
+      "password_hash": "$2a$12$UD9ThuYLh8rcgc/Uh8IFL.uQocfdHrBNZkD8qqBCxCEBIZaWxM7Na",
+      "created_at": "2026-04-07T06:00:12.807Z"
     }
   ]
 }
