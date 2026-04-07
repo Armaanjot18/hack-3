@@ -1,1 +1,5 @@
-﻿node_modules/
+node_modules/
+.env
+medicheck.db
+medicheck.db-wal
+medicheck.db-shm
