@@ -3436,11 +3436,12 @@
 
     function getResponse(input) {
       // AI chatbot - calls the /chat API endpoint
+      const chatLang = localStorage.getItem('medicheck_lang') || 'en';
       return fetch('/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin',
-        body: JSON.stringify({ userId: chatUserId, message: input })
+        body: JSON.stringify({ userId: chatUserId, message: input, lang: chatLang })
       })
         .then(r => r.json())
         .then(data => data.message || 'Sorry, I could not process that.')

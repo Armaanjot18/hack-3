@@ -8,6 +8,7 @@
       "synonyms": ["high temperature","body hot","temperature","feverish","pyrexia","hot body","burning up","feeling hot","garmi","bukhar","tapman","high fever","low grade fever","mild fever","102 fever","101 fever","100 fever","body temperature high"],
       "possible_diseases": ["Influenza","COVID-19","Malaria","Dengue","Typhoid","Pneumonia","Urinary Tract Infection","Meningitis"],
       "home_remedy": "Take paracetamol (500mg) every 6 hours. Apply cold compress on forehead. Drink plenty of water, ORS, coconut water and clear soups. Wear light clothing and rest. Sponge body with lukewarm water if fever is high.",
+      "home_remedy_pa": "ਪੈਰਾਸੀਟਾਮੋਲ (500mg) ਹਰ 6 ਘੰਟੇ ਬਾਅਦ ਲਓ। ਮੱਥੇ ਤੇ ਠੰਡੀ ਪੱਟੀ ਲਗਾਓ। ਕਾਫ਼ੀ ਮਾਤਰਾ ਵਿੱਚ ਪਾਣੀ, ORS, ਨਾਰੀਅਲ ਪਾਣੀ ਅਤੇ ਸਾਫ਼ ਸੂਪ ਪੀਓ। ਹਲਕੇ ਕੱਪੜੇ ਪਾਓ ਅਤੇ ਆਰਾਮ ਕਰੋ। ਜੇ ਬੁਖਾਰ ਜ਼ਿਆਦਾ ਹੋਵੇ ਤਾਂ ਕੋਸੇ ਪਾਣੀ ਨਾਲ ਸਰੀਰ ਪੂੰਝੋ।",
       "severity": "moderate",
       "warning_signs": "Seek emergency care if fever exceeds 103°F (39.4°C), lasts more than 3 days, or is accompanied by rash, stiff neck, confusion, or seizures."
     },
@@ -19,6 +20,7 @@
       "synonyms": ["dry cough","coughing","khansi","persistent cough","wet cough","barking cough","hacking","chest cough","productive cough","phlegm","mucus cough","khasi","morning cough","night cough","whooping cough"],
       "possible_diseases": ["Common Cold","Influenza","COVID-19","Bronchitis","Tuberculosis","Pneumonia","Asthma","Allergic Rhinitis","GERD"],
       "home_remedy": "Drink warm water with honey and ginger 3 times a day. Gargle with warm salt water. Steam inhalation with eucalyptus oil. Drink tulsi (basil) tea. Avoid cold drinks, ice cream, and fried food. Sleep with head elevated.",
+      "home_remedy_pa": "ਦਿਨ ਵਿੱਚ 3 ਵਾਰ ਸ਼ਹਿਦ ਅਤੇ ਅਦਰਕ ਵਾਲਾ ਗਰਮ ਪਾਣੀ ਪੀਓ। ਗਰਮ ਲੂਣ ਵਾਲੇ ਪਾਣੀ ਨਾਲ ਗਰਾਰੇ ਕਰੋ। ਯੂਕੇਲਿਪਟਸ ਤੇਲ ਨਾਲ ਭਾਫ਼ ਲਓ। ਤੁਲਸੀ ਦੀ ਚਾਹ ਪੀਓ। ਠੰਡੇ ਪੀਣੇ, ਆਈਸਕ੍ਰੀਮ ਅਤੇ ਤਲੇ ਭੋਜਨ ਤੋਂ ਪਰਹੇਜ਼ ਕਰੋ। ਸਿਰ ਉੱਚਾ ਕਰਕੇ ਸੌਂਵੋ।",
       "severity": "mild",
       "warning_signs": "See a doctor if cough lasts more than 2 weeks, produces blood or green/yellow mucus, or is accompanied by high fever and weight loss."
     },
@@ -30,6 +32,7 @@
       "synonyms": ["head pain","migraine","pressure in head","sir dard","sar dard","head ache","throbbing head","dizzy","dizziness","lightheaded","spinning","pounding head","tension headache","cluster headache","head heavy","sir bhari"],
       "possible_diseases": ["Migraine","Dengue","Influenza","COVID-19","Hypertension","Sinusitis","Tension Headache","Meningitis","Brain Tumor"],
       "home_remedy": "Rest in a dark, quiet room. Apply cold pack on forehead and warm pack on neck. Stay hydrated. Take paracetamol or ibuprofen. Massage temples gently. Practice deep breathing. Avoid bright screens.",
+      "home_remedy_pa": "ਹਨੇਰੇ ਅਤੇ ਸ਼ਾਂਤ ਕਮਰੇ ਵਿੱਚ ਆਰਾਮ ਕਰੋ। ਮੱਥੇ ਤੇ ਠੰਡੀ ਅਤੇ ਗਰਦਨ ਤੇ ਗਰਮ ਪੱਟੀ ਲਗਾਓ। ਕਾਫ਼ੀ ਪਾਣੀ ਪੀਓ। ਪੈਰਾਸੀਟਾਮੋਲ ਜਾਂ ਆਈਬੁਪਰੋਫ਼ੇਨ ਲਓ। ਕਣਪਟੀਆਂ ਨੂੰ ਹੌਲੀ-ਹੌਲੀ ਮਾਲਿਸ਼ ਕਰੋ। ਡੂੰਘੇ ਸਾਹ ਲਓ। ਚਮਕਦੀਆਂ ਸਕਰੀਨਾਂ ਤੋਂ ਬਚੋ।",
       "severity": "mild",
       "warning_signs": "Seek immediate help if headache is sudden and extremely severe, accompanied by stiff neck, fever, confusion, seizures, vision changes, or weakness on one side of body."
     },
@@ -41,6 +44,7 @@
       "synonyms": ["throat pain","scratchy throat","throat irritation","gala dard","itchy throat","throat ache","throat burning","swollen throat","gale mein dard","gala kharab","difficulty swallowing","painful swallowing","hoarse voice","gala sukhna"],
       "possible_diseases": ["Common Cold","Influenza","COVID-19","Strep Throat","Tonsillitis","Pharyngitis","Allergic Rhinitis"],
       "home_remedy": "Gargle with warm salt water 4-5 times daily. Drink warm turmeric milk at night. Sip warm lemon-honey water. Suck on throat lozenges. Avoid spicy, acidic, and cold foods. Keep throat moist by drinking warm fluids frequently.",
+      "home_remedy_pa": "ਦਿਨ ਵਿੱਚ 4-5 ਵਾਰ ਗਰਮ ਲੂਣ ਵਾਲੇ ਪਾਣੀ ਨਾਲ ਗਰਾਰੇ ਕਰੋ। ਰਾਤ ਨੂੰ ਗਰਮ ਹਲਦੀ ਵਾਲਾ ਦੁੱਧ ਪੀਓ। ਗਰਮ ਨਿੰਬੂ-ਸ਼ਹਿਦ ਵਾਲਾ ਪਾਣੀ ਪੀਓ। ਗਲੇ ਦੀਆਂ ਗੋਲੀਆਂ ਚੂਸੋ। ਮਸਾਲੇਦਾਰ, ਖੱਟੇ ਅਤੇ ਠੰਡੇ ਭੋਜਨ ਤੋਂ ਬਚੋ। ਗਰਮ ਤਰਲ ਪਦਾਰਥ ਵਾਰ-ਵਾਰ ਪੀ ਕੇ ਗਲਾ ਗਿੱਲਾ ਰੱਖੋ।",
       "severity": "mild",
       "warning_signs": "See a doctor if sore throat lasts more than a week, causes difficulty breathing or swallowing, or is accompanied by high fever, rash, or swollen lymph nodes."
     },
@@ -52,6 +56,7 @@
       "synonyms": ["difficulty breathing","breathing problem","breathlessness","cant breathe","can't breathe","breathless","hard to breathe","saans","saans ki takleef","breathing issue","wheezing","gasping","panting","shortness of breath","saans phoolna","dam ghutna","breathing difficulty"],
       "possible_diseases": ["Asthma","Pneumonia","Heart Disease","COPD","Anxiety","Pulmonary Embolism","Anemia"],
       "home_remedy": "Sit upright and try pursed-lip breathing (breathe in through nose, out through pursed lips slowly). Use prescribed inhaler. Stay in a well-ventilated area. Practice diaphragmatic breathing. Avoid smoke and pollution.",
+      "home_remedy_pa": "ਸਿੱਧੇ ਬੈਠੋ ਅਤੇ ਬੁੱਲ੍ਹਾਂ ਨੂੰ ਸੁੰਗੜ ਕੇ ਸਾਹ ਲਓ (ਨੱਕ ਰਾਹੀਂ ਅੰਦਰ, ਸੁੰਗੜੇ ਬੁੱਲ੍ਹਾਂ ਰਾਹੀਂ ਹੌਲੀ ਬਾਹਰ)। ਦੱਸੀ ਇਨਹੇਲਰ ਵਰਤੋ। ਹਵਾਦਾਰ ਥਾਂ ਵਿੱਚ ਰਹੋ। ਡਾਇਆਫ੍ਰੈਗਮੈਟਿਕ ਸਾਹ ਦਾ ਅਭਿਆਸ ਕਰੋ। ਧੂੰਏ ਅਤੇ ਪ੍ਰਦੂਸ਼ਣ ਤੋਂ ਬਚੋ।",
       "severity": "high",
       "warning_signs": "CALL EMERGENCY (112) if breathing gets rapidly worse, lips or fingertips turn blue, you feel chest tightness or pain, or you cannot speak in full sentences."
     },
@@ -63,6 +68,7 @@
       "synonyms": ["tired","weakness","low energy","exhaustion","body ache","muscle pain","body pain","joint pain","weak","lethargic","no energy","thakan","kamzori","feeling weak","sluggish","drowsy","run down","fatigued","malaise","body heavy","muscles aching","joints hurting"],
       "possible_diseases": ["Influenza","COVID-19","Anemia","Diabetes","Thyroid Disorder","Depression","Chronic Fatigue Syndrome","Vitamin D Deficiency"],
       "home_remedy": "Sleep 7-8 hours daily. Eat iron-rich foods (spinach, lentils, jaggery, dates). Stay hydrated. Do light exercise like walking. Eat balanced meals with protein. Get Vitamin D from morning sunlight (15 min). Reduce caffeine and sugar intake.",
+      "home_remedy_pa": "ਰੋਜ਼ਾਨਾ 7-8 ਘੰਟੇ ਸੌਂਵੋ। ਆਇਰਨ ਯੁਕਤ ਭੋਜਨ ਖਾਓ (ਪਾਲਕ, ਦਾਲਾਂ, ਗੁੜ, ਖਜੂਰ)। ਕਾਫ਼ੀ ਪਾਣੀ ਪੀਓ। ਪੈਦਲ ਚੱਲਣਾ ਵਰਗੀ ਹਲਕੀ ਕਸਰਤ ਕਰੋ। ਪ੍ਰੋਟੀਨ ਵਾਲਾ ਸੰਤੁਲਿਤ ਭੋਜਨ ਖਾਓ। ਸਵੇਰੇ 15 ਮਿੰਟ ਧੁੱਪ ਵਿੱਚ ਬੈਠੋ (ਵਿਟਾਮਿਨ D ਲਈ)। ਕੈਫ਼ੀਨ ਅਤੇ ਸ਼ੱਕਰ ਘੱਟ ਕਰੋ।",
       "severity": "mild",
       "warning_signs": "See a doctor if fatigue persists for more than 2 weeks, causes difficulty in daily activities, or is accompanied by unexplained weight loss, fever, or swollen lymph nodes."
     },
@@ -74,6 +80,7 @@
       "synonyms": ["throwing up","nausea","vomit","ulti","nausea and vomiting","feel sick","queasy","puking","retching","uneasy stomach","nauseated","feeling nauseous","ji machlana","ji ghabrana","morning sickness"],
       "possible_diseases": ["Food Poisoning","Dengue","Malaria","Gastroenteritis","Migraine","Pregnancy","Appendicitis","Gastritis"],
       "home_remedy": "Sip ORS or clear fluids slowly in small amounts. Eat bland foods (plain rice, toast, crackers). Avoid dairy, oily, and spicy food. Try ginger tea or ginger candy for nausea. Rest in a propped-up position. Eat small frequent meals instead of large ones.",
+      "home_remedy_pa": "ORS ਜਾਂ ਸਾਫ਼ ਤਰਲ ਪਦਾਰਥ ਥੋੜ੍ਹੀ-ਥੋੜ੍ਹੀ ਮਾਤਰਾ ਵਿੱਚ ਪੀਓ। ਸਾਦਾ ਭੋਜਨ ਖਾਓ (ਸਾਦੇ ਚੌਲ, ਟੋਸਟ, ਕਰੈਕਰ)। ਡੇਅਰੀ, ਤੇਲਯੁਕਤ ਅਤੇ ਮਸਾਲੇਦਾਰ ਭੋਜਨ ਤੋਂ ਬਚੋ। ਮਤਲੀ ਲਈ ਅਦਰਕ ਦੀ ਚਾਹ ਪੀਓ। ਸਿਰ ਉੱਚਾ ਕਰਕੇ ਆਰਾਮ ਕਰੋ। ਇੱਕ ਵਾਰ ਬਹੁਤਾ ਖਾਣ ਦੀ ਬਜਾਏ ਥੋੜ੍ਹਾ-ਥੋੜ੍ਹਾ ਵਾਰ-ਵਾਰ ਖਾਓ।",
       "severity": "moderate",
       "warning_signs": "Seek medical help if vomiting lasts more than 24 hours, contains blood (red or coffee-ground appearance), is accompanied by severe abdominal pain, or causes signs of dehydration (dry mouth, no urination, dizziness)."
     },
@@ -85,6 +92,7 @@
       "synonyms": ["loose motion","loose stool","frequent stool","dast","watery stool","stomach upset","stomach cramp","stomach ache","stomach pain","belly pain","abdominal pain","poop problem","pet dard","pet kharab","pet mein dard","tummy ache","runny tummy","pet phoolna"],
       "possible_diseases": ["Food Poisoning","Cholera","Gastroenteritis","IBS","Typhoid","Celiac Disease","Lactose Intolerance"],
       "home_remedy": "Drink ORS after every loose stool. Follow BRAT diet (bananas, rice, applesauce, toast). Eat curd/yogurt for probiotics. Drink buttermilk (chaas). Avoid milk, oily food, raw vegetables, and street food. Boil drinking water. Wash hands frequently.",
+      "home_remedy_pa": "ਹਰ ਦਸਤ ਤੋਂ ਬਾਅਦ ORS ਪੀਓ। BRAT ਖੁਰਾਕ ਅਪਣਾਓ (ਕੇਲੇ, ਚੌਲ, ਸੇਬ ਦੀ ਚਟਣੀ, ਟੋਸਟ)। ਦਹੀਂ ਖਾਓ। ਮੱਠਾ ਪੀਓ। ਦੁੱਧ, ਤੇਲਯੁਕਤ ਭੋਜਨ, ਕੱਚੀਆਂ ਸਬਜ਼ੀਆਂ ਅਤੇ ਬਾਹਰੀ ਖਾਣੇ ਤੋਂ ਬਚੋ। ਪੀਣ ਵਾਲਾ ਪਾਣੀ ਉਬਾਲੋ। ਵਾਰ-ਵਾਰ ਹੱਥ ਧੋਵੋ।",
       "severity": "moderate",
       "warning_signs": "See a doctor if diarrhea lasts more than 3 days, stools contain blood or are black, you have severe dehydration signs, or fever above 102°F."
     },
@@ -96,6 +104,7 @@
       "synonyms": ["chest pressure","tight chest","chest tightness","heart pain","seene mein dard","chhati dard","chest discomfort","chest heaviness","left chest pain","heart racing","palpitations","chest squeezing","angina"],
       "possible_diseases": ["Heart Attack","Angina","Pneumonia","Acid Reflux","Anxiety","Costochondritis","Pulmonary Embolism","Pericarditis"],
       "home_remedy": "EMERGENCY: Call 112 immediately. Chew one aspirin (325mg) if not allergic. Sit upright and stay calm. Loosen tight clothing. Do NOT lie flat. Do NOT ignore chest pain. If caused by acidity: take antacid, sip cold milk, avoid spicy food.",
+      "home_remedy_pa": "ਐਮਰਜੈਂਸੀ: ਤੁਰੰਤ 112 ਕਾਲ ਕਰੋ। ਜੇ ਐਸਪਰੀਨ ਤੋਂ ਐਲਰਜੀ ਨਹੀਂ ਤਾਂ ਇੱਕ ਐਸਪਰੀਨ (325mg) ਚਬਾਓ। ਸਿੱਧੇ ਬੈਠੋ ਅਤੇ ਸ਼ਾਂਤ ਰਹੋ। ਤੰਗ ਕੱਪੜੇ ਢਿੱਲੇ ਕਰੋ। ਲੇਟੋ ਨਾ। ਛਾਤੀ ਦੇ ਦਰਦ ਨੂੰ ਨਜ਼ਰਅੰਦਾਜ਼ ਨਾ ਕਰੋ। ਜੇ ਐਸਿਡਿਟੀ ਕਾਰਨ ਹੋਵੇ: ਐਂਟਾਸਿਡ ਲਓ, ਠੰਡਾ ਦੁੱਧ ਪੀਓ, ਮਸਾਲੇਦਾਰ ਭੋਜਨ ਤੋਂ ਬਚੋ।",
       "severity": "critical",
       "warning_signs": "CALL 112 NOW if chest pain radiates to jaw/arm/back, you feel crushing pressure, have difficulty breathing, break into cold sweat, or feel nauseous with the pain."
     },
@@ -107,6 +116,7 @@
       "synonyms": ["nasal discharge","runny nose","cold","stuffy nose","blocked nose","congestion","nasal congestion","sneezing","allergy","rhinitis","naak behna","nazla","sardi","nose running","nose blocked","naak band"],
       "possible_diseases": ["Common Cold","Influenza","Allergic Rhinitis","Sinusitis","COVID-19"],
       "home_remedy": "Steam inhalation 2-3 times daily (add eucalyptus oil if available). Drink warm fluids (ginger tea, soups). Use saline nasal drops/spray. Keep head elevated while sleeping. Stay in warm environment. Blow nose gently.",
+      "home_remedy_pa": "ਦਿਨ ਵਿੱਚ 2-3 ਵਾਰ ਭਾਫ਼ ਲਓ (ਯੂਕੇਲਿਪਟਸ ਤੇਲ ਮਿਲਾਓ ਜੇ ਉਪਲਬਧ ਹੋਵੇ)। ਗਰਮ ਤਰਲ ਪਦਾਰਥ ਪੀਓ (ਅਦਰਕ ਦੀ ਚਾਹ, ਸੂਪ)। ਲੂਣ ਵਾਲੇ ਨੱਕ ਦੇ ਤੁਪਕੇ ਵਰਤੋ। ਸੌਂਦੇ ਸਮੇਂ ਸਿਰ ਉੱਚਾ ਰੱਖੋ। ਗਰਮ ਥਾਂ ਵਿੱਚ ਰਹੋ। ਨੱਕ ਹੌਲੀ ਨਾਲ ਸਾਫ਼ ਕਰੋ।",
       "severity": "mild",
       "warning_signs": "See a doctor if symptoms last more than 10 days, nasal discharge is green/yellow and thick, you have facial pain, or discharge has blood."
     },
@@ -118,6 +128,7 @@
       "synonyms": ["backache","lower back pain","upper back pain","kamar dard","peeth dard","spine pain","back ache","slipped disc","back stiffness","back spasm","sciatica"],
       "possible_diseases": ["Muscle Strain","Slipped Disc","Sciatica","Kidney Stones","Arthritis","Osteoporosis","Urinary Tract Infection"],
       "home_remedy": "Apply hot or cold pack for 15-20 minutes. Maintain good posture. Do gentle stretching exercises. Avoid heavy lifting. Sleep on a firm mattress. Use pain relief spray/gel. Take ibuprofen if needed. Walk gently — don't stay in bed all day.",
+      "home_remedy_pa": "15-20 ਮਿੰਟ ਲਈ ਗਰਮ ਜਾਂ ਠੰਡੀ ਪੱਟੀ ਲਗਾਓ। ਸਹੀ ਮੁਦਰਾ ਅਪਣਾਓ। ਹੌਲੀ ਖਿੱਚਣ ਦੀਆਂ ਕਸਰਤਾਂ ਕਰੋ। ਭਾਰੀ ਚੁੱਕਣ ਤੋਂ ਬਚੋ। ਸਖ਼ਤ ਗੱਦੇ ਤੇ ਸੌਂਵੋ। ਦਰਦ ਤੋਂ ਰਾਹਤ ਲਈ ਸਪਰੇਅ/ਜੈਲ ਵਰਤੋ। ਲੋੜ ਪਈ ਤਾਂ ਆਈਬੁਪਰੋਫ਼ੇਨ ਲਓ। ਹੌਲੀ ਚੱਲੋ — ਸਾਰਾ ਦਿਨ ਮੰਜੇ ਤੇ ਨਾ ਪਏ ਰਹੋ।",
       "severity": "mild",
       "warning_signs": "See a doctor if pain radiates down legs, you have numbness/tingling, difficulty urinating, fever with back pain, or pain after an injury."
     },
@@ -129,6 +140,7 @@
       "synonyms": ["rash","skin rash","itching","itchy skin","hives","red spots","bumps on skin","skin allergy","khujli","daad","daane","skin irritation","eczema","urticaria","red patches","skin bumps"],
       "possible_diseases": ["Allergic Reaction","Eczema","Dengue","Chickenpox","Measles","Fungal Infection","Psoriasis","Scabies"],
       "home_remedy": "Apply calamine lotion for itching. Take antihistamine (cetirizine). Keep skin clean and dry. Avoid scratching. Wear loose cotton clothes. Apply aloe vera gel. Avoid harsh soaps. If allergy-related, identify and avoid the trigger.",
+      "home_remedy_pa": "ਖੁਜਲੀ ਲਈ ਕੈਲਾਮਾਈਨ ਲੋਸ਼ਨ ਲਗਾਓ। ਐਂਟੀਹਿਸਟਾਮਾਈਨ (ਸੇਟੀਰੀਜ਼ੀਨ) ਲਓ। ਚਮੜੀ ਸਾਫ਼ ਅਤੇ ਸੁੱਕੀ ਰੱਖੋ। ਖੁਰਕਣ ਤੋਂ ਬਚੋ। ਢਿੱਲੇ ਕਾਟਨ ਕੱਪੜੇ ਪਾਓ। ਐਲੋਵੀਰਾ ਜੈੱਲ ਲਗਾਓ। ਤਿੱਖੇ ਸਾਬਣ ਤੋਂ ਬਚੋ। ਜੇ ਐਲਰਜੀ ਕਾਰਨ ਹੋਵੇ ਤਾਂ ਕਾਰਨ ਲੱਭੋ ਅਤੇ ਉਸ ਤੋਂ ਬਚੋ।",
       "severity": "mild",
       "warning_signs": "Seek emergency care if rash spreads rapidly, you have difficulty breathing with rash, face/lips swell, or rash is accompanied by high fever and joint pain."
     },
@@ -140,6 +152,7 @@
       "synonyms": ["stomach pain","tummy pain","belly ache","pet mein dard","cramps","abdominal cramps","stomach cramps","bloating","gas","acidity","acid reflux","heartburn","pet phoolna","gas problem","pet mein jalan","gastric"],
       "possible_diseases": ["Gastritis","Appendicitis","Gastroenteritis","Acid Reflux","IBS","Ulcer","Gallstones","Kidney Stones","Pancreatitis"],
       "home_remedy": "For acidity: drink cold milk, take antacid, avoid spicy food. For gas: drink ajwain water or jeera water. For cramps: apply warm compress. Eat light meals. Avoid oily, spicy, and fried food. Drink mint/fennel tea. Walk after meals.",
+      "home_remedy_pa": "ਐਸਿਡਿਟੀ ਲਈ: ਠੰਡਾ ਦੁੱਧ ਪੀਓ, ਐਂਟਾਸਿਡ ਲਓ, ਮਸਾਲੇਦਾਰ ਭੋਜਨ ਤੋਂ ਬਚੋ। ਗੈਸ ਲਈ: ਅਜਵਾਇਣ ਜਾਂ ਜੀਰੇ ਦਾ ਪਾਣੀ ਪੀਓ। ਮਰੋੜ ਲਈ: ਗਰਮ ਪੱਟੀ ਲਗਾਓ। ਹਲਕਾ ਭੋਜਨ ਖਾਓ। ਤੇਲਯੁਕਤ ਅਤੇ ਮਸਾਲੇਦਾਰ ਭੋਜਨ ਤੋਂ ਬਚੋ। ਪੁਦੀਨੇ/ਸੌਂਫ਼ ਦੀ ਚਾਹ ਪੀਓ। ਖਾਣੇ ਤੋਂ ਬਾਅਦ ਥੋੜ੍ਹਾ ਚੱਲੋ।",
       "severity": "moderate",
       "warning_signs": "Seek emergency care if pain is severe and sudden, abdomen is rigid/tender, you have bloody stools, persistent vomiting, or the pain is in lower right abdomen (possible appendicitis)."
     },
@@ -151,6 +164,7 @@
       "synonyms": ["eye pain","red eye","eye irritation","watery eyes","blurry vision","aankh dard","aankh lal","itchy eyes","eye burning","eye swelling","conjunctivitis","pink eye","aankh se paani","dry eyes","eye strain"],
       "possible_diseases": ["Conjunctivitis","Allergic Reaction","Glaucoma","Migraine","Sinusitis","Eye Strain","Dengue"],
       "home_remedy": "Wash eyes with clean cool water. Apply cold compress. Avoid touching/rubbing eyes. Wear sunglasses outdoors. Use lubricating eye drops. Take screen breaks (20-20-20 rule: every 20 min, look 20 feet away for 20 seconds). Avoid sharing towels.",
+      "home_remedy_pa": "ਸਾਫ਼ ਠੰਡੇ ਪਾਣੀ ਨਾਲ ਅੱਖਾਂ ਧੋਵੋ। ਠੰਡੀ ਪੱਟੀ ਲਗਾਓ। ਅੱਖਾਂ ਨੂੰ ਛੂਹਣ/ਮਲਣ ਤੋਂ ਬਚੋ। ਬਾਹਰ ਧੁੱਪ ਦੇ ਐਨਕ ਪਾਓ। ਲੁਬਰੀਕੇਟਿੰਗ ਅੱਖਾਂ ਦੇ ਤੁਪਕੇ ਵਰਤੋ। ਸਕਰੀਨ ਤੋਂ ਬਰੇਕ ਲਓ (20-20-20 ਨਿਯਮ: ਹਰ 20 ਮਿੰਟ ਬਾਅਦ, 20 ਫੁੱਟ ਦੂਰ 20 ਸਕਿੰਟ ਦੇਖੋ)। ਤੌਲੀਏ ਸਾਂਝੇ ਨਾ ਕਰੋ।",
       "severity": "mild",
       "warning_signs": "See a doctor immediately if you have sudden vision loss, severe eye pain with nausea, see flashing lights or floaters, or have eye injury."
     },
@@ -162,6 +176,7 @@
       "synonyms": ["earache","ear ache","ear pain","kaan dard","ear infection","ear blocked","hearing problem","ear ringing","tinnitus","ear discharge","kaan behna","kaan mein dard"],
       "possible_diseases": ["Ear Infection","Sinusitis","TMJ Disorder","Swimmer's Ear","Earwax Buildup","Tonsillitis"],
       "home_remedy": "Apply warm compress on the affected ear. Take paracetamol for pain. Keep ear dry. Do NOT insert anything into ear. Tilt head to drain any water. Chew gum to relieve pressure. Use prescribed ear drops only.",
+      "home_remedy_pa": "ਪ੍ਰਭਾਵਿਤ ਕੰਨ ਤੇ ਗਰਮ ਪੱਟੀ ਲਗਾਓ। ਦਰਦ ਲਈ ਪੈਰਾਸੀਟਾਮੋਲ ਲਓ। ਕੰਨ ਸੁੱਕਾ ਰੱਖੋ। ਕੰਨ ਵਿੱਚ ਕੁਝ ਨਾ ਪਾਓ। ਪਾਣੀ ਕੱਢਣ ਲਈ ਸਿਰ ਝੁਕਾਓ। ਦਬਾਅ ਘੱਟ ਕਰਨ ਲਈ ਚਿਊਇੰਗਮ ਚਬਾਓ। ਸਿਰਫ਼ ਦੱਸੇ ਗਏ ਕੰਨ ਦੇ ਤੁਪਕੇ ਵਰਤੋ।",
       "severity": "mild",
       "warning_signs": "See a doctor if ear pain is severe, there is discharge (pus/blood) from the ear, hearing loss occurs, or pain is accompanied by high fever."
     },
@@ -173,6 +188,7 @@
       "synonyms": ["tooth pain","dental pain","daant dard","daant mein dard","tooth ache","gum pain","gum swelling","masoodhe","cavity pain","sensitive teeth","jaw pain"],
       "possible_diseases": ["Dental Cavity","Tooth Abscess","Gum Disease","Wisdom Tooth","TMJ Disorder","Sinusitis"],
       "home_remedy": "Rinse mouth with warm salt water. Apply clove oil on affected tooth. Take ibuprofen for pain. Apply cold pack on cheek. Avoid very hot or cold food/drinks. Do NOT put aspirin directly on tooth. See a dentist as soon as possible.",
+      "home_remedy_pa": "ਗਰਮ ਲੂਣ ਵਾਲੇ ਪਾਣੀ ਨਾਲ ਕੁਰਲੀ ਕਰੋ। ਪ੍ਰਭਾਵਿਤ ਦੰਦ ਤੇ ਲੌਂਗ ਦਾ ਤੇਲ ਲਗਾਓ। ਦਰਦ ਲਈ ਆਈਬੁਪਰੋਫ਼ੇਨ ਲਓ। ਗੱਲ੍ਹ ਤੇ ਠੰਡੀ ਪੱਟੀ ਲਗਾਓ। ਬਹੁਤ ਗਰਮ ਜਾਂ ਠੰਡੇ ਭੋਜਨ ਤੋਂ ਬਚੋ। ਐਸਪਰੀਨ ਸਿੱਧੀ ਦੰਦ ਤੇ ਨਾ ਲਗਾਓ। ਜਿੰਨੀ ਜਲਦੀ ਹੋ ਸਕੇ ਦੰਦਾਂ ਦੇ ਡਾਕਟਰ ਕੋਲ ਜਾਓ।",
       "severity": "mild",
       "warning_signs": "See a dentist urgently if you have swelling in face/jaw, fever with toothache, difficulty opening mouth, or pus around the tooth."
     },
@@ -184,6 +200,7 @@
       "synonyms": ["burning urination","painful urination","frequent urination","peshab mein jalan","peshab mein dard","UTI","urine infection","blood in urine","dark urine","urination problem","baar baar peshab"],
       "possible_diseases": ["Urinary Tract Infection","Kidney Stones","Diabetes","Prostate Problem","Bladder Infection","STI"],
       "home_remedy": "Drink 8-10 glasses of water daily. Drink cranberry juice (unsweetened). Avoid holding urine. Maintain hygiene. Avoid caffeine and alcohol. Drink barley water. Wear cotton undergarments. Front-to-back wiping for women.",
+      "home_remedy_pa": "ਰੋਜ਼ਾਨਾ 8-10 ਗਿਲਾਸ ਪਾਣੀ ਪੀਓ। ਕ੍ਰੈਨਬੇਰੀ ਜੂਸ (ਬਿਨਾਂ ਮਿੱਠੇ) ਪੀਓ। ਪਿਸ਼ਾਬ ਰੋਕਣ ਤੋਂ ਬਚੋ। ਸਫ਼ਾਈ ਦਾ ਧਿਆਨ ਰੱਖੋ। ਕੈਫ਼ੀਨ ਅਤੇ ਅਲਕੋਹਲ ਤੋਂ ਬਚੋ। ਜੌਂ ਦਾ ਪਾਣੀ ਪੀਓ। ਕਾਟਨ ਦੇ ਕੱਪੜੇ ਪਾਓ। ਔਰਤਾਂ ਅੱਗੇ ਤੋਂ ਪਿੱਛੇ ਵੱਲ ਸਾਫ਼ ਕਰੋ।",
       "severity": "moderate",
       "warning_signs": "See a doctor if you have blood in urine, severe pain, fever with urinary symptoms, inability to urinate, or symptoms lasting more than 2 days."
     },
@@ -195,6 +212,7 @@
       "synonyms": ["anxious","anxiety","panic","panic attack","nervous","stressed","stress","tension","worried","restless","uneasy","fear","chinta","ghabrahat","darr","racing heart","racing thoughts","can't sleep","insomnia","sleep problem","neend nahi aati"],
       "possible_diseases": ["Anxiety Disorder","Panic Disorder","Depression","Thyroid Disorder","Heart Disease","Insomnia"],
       "home_remedy": "Practice deep breathing (4-7-8 technique: inhale 4 sec, hold 7 sec, exhale 8 sec). Do regular exercise. Limit caffeine. Practice meditation or yoga. Maintain a regular sleep schedule. Talk to someone you trust. Write down your feelings. Avoid alcohol.",
+      "home_remedy_pa": "ਡੂੰਘੇ ਸਾਹ ਦਾ ਅਭਿਆਸ ਕਰੋ (4-7-8 ਤਕਨੀਕ: 4 ਸਕਿੰਟ ਅੰਦਰ, 7 ਸਕਿੰਟ ਰੋਕੋ, 8 ਸਕਿੰਟ ਬਾਹਰ)। ਨਿਯਮਿਤ ਕਸਰਤ ਕਰੋ। ਕੈਫ਼ੀਨ ਘੱਟ ਕਰੋ। ਧਿਆਨ ਜਾਂ ਯੋਗਾ ਕਰੋ। ਨਿਯਮਿਤ ਸੌਣ ਦਾ ਸਮਾਂ ਤੈਅ ਕਰੋ। ਕਿਸੇ ਭਰੋਸੇਯੋਗ ਇਨਸਾਨ ਨਾਲ ਗੱਲ ਕਰੋ। ਆਪਣੀਆਂ ਭਾਵਨਾਵਾਂ ਲਿਖੋ। ਅਲਕੋਹਲ ਤੋਂ ਬਚੋ।",
       "severity": "moderate",
       "warning_signs": "Seek professional help if anxiety interferes with daily life, you have thoughts of self-harm, panic attacks are frequent, or you depend on substances to cope."
     },
@@ -206,6 +224,7 @@
       "synonyms": ["swollen","swelling","inflammation","sujan","sooj","puffiness","swollen feet","swollen hands","swollen face","edema","water retention","paer sujna","haath sujna"],
       "possible_diseases": ["Allergic Reaction","Kidney Disease","Heart Failure","Arthritis","Injury","DVT","Thyroid Disorder","Liver Disease"],
       "home_remedy": "Elevate the swollen area above heart level. Apply cold compress for 15-20 min. Reduce salt intake. Move and stretch regularly. Wear compression socks for leg swelling. Drink adequate water (not excess).",
+      "home_remedy_pa": "ਸੁੱਜੇ ਹੋਏ ਅੰਗ ਨੂੰ ਦਿਲ ਤੋਂ ਉੱਚਾ ਕਰੋ। 15-20 ਮਿੰਟ ਲਈ ਠੰਡੀ ਪੱਟੀ ਲਗਾਓ। ਲੂਣ ਘੱਟ ਖਾਓ। ਨਿਯਮਿਤ ਹਿਲਾਉਂਦੇ ਅਤੇ ਖਿੱਚਦੇ ਰਹੋ। ਪੈਰਾਂ ਦੀ ਸੋਜ ਲਈ ਕੰਪਰੈਸ਼ਨ ਮੋਜ਼ੇ ਪਾਓ। ਲੋੜੀਂਦਾ ਪਾਣੀ ਪੀਓ (ਬਹੁਤਾ ਨਹੀਂ)।",
       "severity": "moderate",
       "warning_signs": "Seek emergency care if swelling is sudden in face/throat (anaphylaxis), one leg is swollen and painful (DVT), or swelling is accompanied by difficulty breathing."
     },
@@ -217,6 +236,7 @@
       "synonyms": ["dizzy","vertigo","lightheaded","chakkar","chakkar aana","room spinning","off balance","unsteady","fainting","feeling faint","blackout","sir ghoomna"],
       "possible_diseases": ["Low Blood Pressure","Vertigo","Anemia","Dehydration","Ear Infection","Diabetes","Heart Disease","Migraine"],
       "home_remedy": "Sit or lie down immediately. Drink water or ORS. Eat something if blood sugar might be low. Avoid sudden position changes (stand up slowly). Focus on a fixed point. Avoid driving. Get fresh air. Check blood pressure if possible.",
+      "home_remedy_pa": "ਤੁਰੰਤ ਬੈਠ ਜਾਓ ਜਾਂ ਲੇਟ ਜਾਓ। ਪਾਣੀ ਜਾਂ ORS ਪੀਓ। ਜੇ ਖ਼ੂਨ ਵਿੱਚ ਸ਼ੱਕਰ ਘੱਟ ਹੋਵੇ ਤਾਂ ਕੁਝ ਖਾਓ। ਅਚਾਨਕ ਉੱਠਣ ਤੋਂ ਬਚੋ (ਹੌਲੀ-ਹੌਲੀ ਉੱਠੋ)। ਕਿਸੇ ਇੱਕ ਬਿੰਦੂ ਤੇ ਧਿਆਨ ਕੇਂਦਰਿਤ ਕਰੋ। ਗੱਡੀ ਚਲਾਉਣ ਤੋਂ ਬਚੋ। ਤਾਜ਼ੀ ਹਵਾ ਲਓ। ਜੇ ਸੰਭਵ ਹੋਵੇ ਤਾਂ ਬਲੱਡ ਪ੍ਰੈਸ਼ਰ ਚੈੱਕ ਕਰੋ।",
       "severity": "moderate",
       "warning_signs": "Seek emergency care if dizziness is accompanied by chest pain, severe headache, numbness/weakness on one side, speech difficulty, or loss of consciousness."
     }
