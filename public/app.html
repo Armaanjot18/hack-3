@@ -1193,7 +1193,7 @@
     .demo-grid {
       margin-top: 32px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 24px;
     }
 
@@ -1201,8 +1201,32 @@
       padding: 16px;
     }
 
+    .quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .quick-btn {
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      color: var(--accent-cyan);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+
+    .quick-btn:hover {
+      background: rgba(0, 229, 255, 0.22);
+      transform: translateY(-1px);
+    }
+
     .chat-window {
-      height: 400px;
+      height: 600px;
       overflow-y: auto;
       border: 1px solid rgba(0, 229, 255, 0.3);
       border-radius: 20px;
@@ -1219,8 +1243,106 @@
       font-size: 14px;
     }
 
-    .msg.ai { background: #13213a; border: 1px solid rgba(0, 229, 255, 0.25); color: #d3e7ff; }
+    .msg.ai { background: #13213a; border: 1px solid rgba(0, 229, 255, 0.25); color: #d3e7ff; line-height: 1.65; }
     .msg.user { margin-left: auto; background: var(--accent-cyan); color: #051021; }
+
+    .msg-section-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--accent-cyan);
+      margin: 10px 0 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .msg-divider {
+      border: none;
+      border-top: 1px solid rgba(0,229,255,0.15);
+      margin: 8px 0;
+    }
+    .msg-report-header {
+      background: rgba(0,229,255,0.08);
+      border-left: 3px solid var(--accent-cyan);
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: #e8f6ff;
+    }
+    .msg-bullet-list {
+      list-style: none;
+      padding: 0;
+      margin: 4px 0 6px 0;
+    }
+    .msg-bullet-list li {
+      position: relative;
+      padding-left: 16px;
+      margin-bottom: 4px;
+      font-size: 13.5px;
+    }
+    .msg-bullet-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--accent-cyan);
+    }
+    .msg-numbered-list {
+      list-style: none;
+      padding: 0;
+      margin: 4px 0 6px 0;
+      counter-reset: msg-counter;
+    }
+    .msg-numbered-list li {
+      counter-increment: msg-counter;
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 5px;
+      font-size: 13.5px;
+    }
+    .msg-numbered-list li::before {
+      content: counter(msg-counter) '.';
+      position: absolute;
+      left: 0;
+      color: var(--accent-cyan);
+      font-weight: 700;
+    }
+    .msg-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      margin-left: 6px;
+    }
+    .msg-badge.high   { background: rgba(255,76,76,0.18); color: #ff8a8a; border: 1px solid rgba(255,76,76,0.35); }
+    .msg-badge.moderate { background: rgba(255,214,0,0.15); color: #ffe070; border: 1px solid rgba(255,214,0,0.35); }
+    .msg-badge.low    { background: rgba(0,230,118,0.12); color: #7fffb8; border: 1px solid rgba(0,230,118,0.3); }
+    .msg-urgent {
+      background: rgba(255,76,76,0.12);
+      border: 1px solid rgba(255,76,76,0.4);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: #ffadad;
+      font-size: 13px;
+      margin: 6px 0;
+    }
+    .msg-important {
+      background: rgba(255,214,0,0.1);
+      border: 1px solid rgba(255,214,0,0.4);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: #ffe88d;
+      font-size: 13px;
+      margin: 6px 0;
+    }
+    .msg-disclaimer {
+      font-size: 11.5px;
+      color: #607B96;
+      border-top: 1px solid rgba(96,123,150,0.2);
+      margin-top: 10px;
+      padding-top: 8px;
+    }
 
     .typing {
       display: inline-flex;
@@ -1246,7 +1368,7 @@
     .chat-controls {
       margin-top: 12px;
       display: grid;
-      grid-template-columns: 1fr auto auto auto auto;
+      grid-template-columns: 1fr auto auto auto auto auto auto;
       gap: 8px;
     }
 
@@ -1411,6 +1533,24 @@
       padding: 6px 10px;
       font-size: 12px;
       cursor: pointer;
+    }
+
+    .voice-btn.active {
+      background: rgba(0, 229, 255, 0.16);
+      box-shadow: 0 0 18px rgba(0, 229, 255, 0.22);
+    }
+
+    .voice-btn.listening {
+      color: #051021;
+      background: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      animation: pulseVoice 1.1s infinite;
+    }
+
+    @keyframes pulseVoice {
+      0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.35); }
+      70% { box-shadow: 0 0 0 10px rgba(0, 229, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); }
     }
 
     /* ─── MAP SECTION ─── */
@@ -2284,13 +2424,23 @@
           <div class="chat-window" id="chatWindow" aria-live="polite">
             <div class="msg ai">Namaste! Main MediCheck hoon. Aapke kya symptoms hain? (Hello! I'm MediCheck. What are your symptoms?)</div>
           </div>
+          <div id="quickActions" class="quick-actions">
+            <button class="quick-btn" onclick="quickSend('I have fever')">🤒 Fever</button>
+            <button class="quick-btn" onclick="quickSend('I have cough')">😷 Cough</button>
+            <button class="quick-btn" onclick="quickSend('I have headache')">🤕 Headache</button>
+            <button class="quick-btn" onclick="quickSend('stomach pain')">🤢 Stomach</button>
+            <button class="quick-btn" onclick="quickSend('body pain and weakness')">😩 Body Pain</button>
+            <button class="quick-btn" onclick="quickSend('reset')">🔄 Reset</button>
+          </div>
           <div class="chat-controls">
             <input id="chatInput" class="chat-input" type="text" placeholder="Type your symptom..." aria-label="Type your symptom" />
             <select id="langSelect" class="lang-select" aria-label="Choose language">
-              <option>English</option>
-              <option>Hindi</option>
-              <option>Punjabi</option>
+              <option value="en">English</option>
+              <option value="hi">Hindi हिंदी</option>
+              <option value="pa">Punjabi ਪੰਜਾਬੀ</option>
             </select>
+            <button id="voiceInputBtn" class="mini-btn voice-btn" type="button" aria-label="Start voice input" title="Speak your symptoms">🎤 Speak</button>
+            <button id="voiceReplyBtn" class="mini-btn voice-btn active" type="button" aria-label="Toggle spoken replies" title="Spoken replies on">🔊 Voice on</button>
             <select id="radiusSelect" class="lang-select" aria-label="Nearby radius">
               <option value="1">1 km</option>
               <option value="2">2 km</option>
@@ -2308,41 +2458,7 @@
           </div>
         </div>
 
-        <aside class="analysis-card glass fade-in-up" id="analysisPanel">
-          <h3 class="analysis-title" data-i18n="analysis_title">Live Analysis</h3>
-          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;color:#c9ddf4"><span data-i18n="analysis_confidence">Confidence</span><span id="confidenceText">0%</span></div>
-          <div class="meter"><div id="confidenceBar" class="meter-fill" style="background:var(--yellow)"></div></div>
-          <div id="conditionsBox"></div>
-          <div class="alert-box">🔴 Local Alert: Dengue activity elevated in Punjab this week. 23 cases reported.</div>
-          <div class="facility-card">
-            <strong>📍 PHC Raikot</strong><br/>
-            Distance: 2.8 km<br/>
-            Status: 🟢 Open<br/>
-            OPD: Free till 2:00 PM
-            <div class="facility-actions">
-              <button class="mini-btn" type="button">📞 Call</button>
-              <button class="mini-btn" type="button">🗺️ Directions</button>
-            </div>
-          </div>
 
-          <div class="location-settings" aria-live="polite">
-            <h4 data-i18n="loc_title">My Location</h4>
-            <label for="locationTextInput" data-i18n="loc_label">Enter your city/address</label>
-            <input id="locationTextInput" type="text" placeholder="e.g. Boston, MA" maxlength="200" />
-            <div class="location-row">
-              <label for="coordToggle" data-i18n="loc_coord_label">Enter coordinates instead</label>
-              <input id="coordToggle" type="checkbox" style="width:auto;margin:0" />
-            </div>
-            <div id="coordFields" class="location-coords">
-              <input id="latInput" type="number" step="any" placeholder="Latitude" />
-              <input id="lonInput" type="number" step="any" placeholder="Longitude" />
-            </div>
-            <div class="location-row">
-              <button id="saveLocationBtn" class="mini-btn" type="button" data-i18n="loc_save_btn">Save location</button>
-            </div>
-            <div id="savedLocationInfo" class="saved-location">Loading your saved location...</div>
-          </div>
-        </aside>
       </div>
     </div>
   </section>
@@ -2796,6 +2912,10 @@
       const btnMob = document.getElementById('langSwitcherLabelMob');
       if (btn) btn.textContent = label;
       if (btnMob) btnMob.textContent = label;
+      const chatLangSelect = document.getElementById('langSelect');
+      if (chatLangSelect && chatLangSelect.querySelector(`option[value="${lang}"]`)) {
+        chatLangSelect.value = lang;
+      }
       // Update active states in dropdowns
       document.querySelectorAll('.lang-option').forEach(opt => {
         opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
@@ -3086,6 +3206,8 @@
     const radiusSelect = document.getElementById('radiusSelect');
     const limitSelect = document.getElementById('limitSelect');
     const sendBtn = document.getElementById('sendBtn');
+    const voiceInputBtn = document.getElementById('voiceInputBtn');
+    const voiceReplyBtn = document.getElementById('voiceReplyBtn');
     const confidenceBar = document.getElementById('confidenceBar');
     const confidenceText = document.getElementById('confidenceText');
     const conditionsBox = document.getElementById('conditionsBox');
@@ -3100,6 +3222,9 @@
     let savedLocation = null;
     let pendingLocationSave = null;
     let waitingForLocation = false;
+    let voiceReplyEnabled = true;
+    let speechRecognition = null;
+    let isListening = false;
 
     const chatbotSystemInstructions =
       'When a user asks for nearby hospitals, the bot must call the find_nearby_hospitals tool and then show a numbered list.';
@@ -3117,10 +3242,119 @@
       }
     };
 
+    function formatAiText(text) {
+      const esc = (s) => String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+
+      // Split into lines, trim separator lines
+      const lines = text.split('\n');
+      let html = '';
+      let bulletBuf = [];
+      let numberedBuf = [];
+
+      function flushBullets() {
+        if (bulletBuf.length) {
+          html += '<ul class="msg-bullet-list">' + bulletBuf.map(l => `<li>${l}</li>`).join('') + '</ul>';
+          bulletBuf = [];
+        }
+      }
+      function flushNumbered() {
+        if (numberedBuf.length) {
+          html += '<ol class="msg-numbered-list">' + numberedBuf.map(l => `<li>${l}</li>`).join('') + '</ol>';
+          numberedBuf = [];
+        }
+      }
+
+      for (let i = 0; i < lines.length; i++) {
+        const raw = lines[i];
+        const line = raw.trim();
+
+        if (!line || /^[━─=]{4,}$/.test(line)) {
+          flushBullets(); flushNumbered();
+          if (html && !html.endsWith('<hr class="msg-divider">')) html += '<hr class="msg-divider">';
+          continue;
+        }
+
+        // Report header
+        if (/📋/.test(line)) {
+          flushBullets(); flushNumbered();
+          html += `<div class="msg-report-header">${esc(line)}</div>`;
+          continue;
+        }
+
+        // Urgent / important banners
+        if (/🚨/.test(line)) {
+          flushBullets(); flushNumbered();
+          html += `<div class="msg-urgent">${esc(line)}</div>`;
+          continue;
+        }
+        if (/⚠️/.test(line) && (line.toLowerCase().includes('urgent') || line.toLowerCase().includes('important') || line.toLowerCase().includes('see a doctor'))) {
+          flushBullets(); flushNumbered();
+          html += `<div class="msg-important">${esc(line)}</div>`;
+          continue;
+        }
+        // Disclaimer (shorter ⚠️ line at the bottom)
+        if (/⚠️/.test(line) && line.toLowerCase().includes('disclaimer')) {
+          flushBullets(); flushNumbered();
+          html += `<div class="msg-disclaimer">${esc(line)}</div>`;
+          continue;
+        }
+
+        // Section titles: lines starting with emoji/icon + colon less text OR ending with colon
+        if (/^[🩺💊🔍📋🏥🌿📍📞🗺️✅❌🔄👋]+/.test(line) && !line.startsWith('•') && !/^\d+\./.test(line)) {
+          flushBullets(); flushNumbered();
+          html += `<div class="msg-section-title">${esc(line)}</div>`;
+          continue;
+        }
+
+        // Numbered list: "  1. Something (High)" or "1. text"
+        const numMatch = line.match(/^(\d+)\.\s+(.+)/);
+        if (numMatch) {
+          flushBullets();
+          let content = esc(numMatch[2]);
+          // Append severity badge if present
+          content = content.replace(/\((High|Moderate|Low|उच्च|मध्यम|कम|ਉੱਚ|ਮੱਧਮ|ਘੱਟ)\)/gi, (m, badge) => {
+            const cls = /high|उच्च|ਉੱਚ/i.test(badge) ? 'high' : /moderate|मध्यम|ਮੱਧਮ/i.test(badge) ? 'moderate' : 'low';
+            return `<span class="msg-badge ${cls}">${esc(badge)}</span>`;
+          });
+          numberedBuf.push(content);
+          continue;
+        }
+
+        // Bullet: lines starting with • or -
+        if (/^[•\-–]\s/.test(line)) {
+          flushNumbered();
+          bulletBuf.push(esc(line.replace(/^[•\-–]\s/, '')));
+          continue;
+        }
+
+        // Indented bullet (from backend: "  • name: remedy")
+        if (/^\s{2,}[•\-]/.test(raw)) {
+          flushNumbered();
+          bulletBuf.push(esc(line.replace(/^[•\-]\s*/, '')));
+          continue;
+        }
+
+        // Plain line
+        flushBullets(); flushNumbered();
+        html += `<p style="margin:3px 0">${esc(line)}</p>`;
+      }
+
+      flushBullets();
+      flushNumbered();
+      // Remove leading/trailing dividers
+      html = html.replace(/^(<hr class="msg-divider">)+/, '').replace(/(<hr class="msg-divider">)+$/, '');
+      return html;
+    }
+
     function addMessage(text, type = 'ai') {
       const div = document.createElement('div');
       div.className = `msg ${type}`;
-      div.textContent = text;
+      if (type === 'ai') {
+        div.innerHTML = formatAiText(text);
+        speakReply(text);
+      } else {
+        div.textContent = text;
+      }
       chatWindow.appendChild(div);
       chatWindow.scrollTop = chatWindow.scrollHeight;
       return div;
@@ -3249,6 +3483,10 @@
     }
 
     function renderSavedLocationInfo(location) {
+      if (!savedLocationInfo) {
+        return;
+      }
+
       if (!location || location.location_lat === null || location.location_lon === null) {
         savedLocationInfo.textContent = 'No location saved yet.';
         return;
@@ -3370,7 +3608,9 @@
           addMessage('No saved location found. Type your city or address below (e.g. "Boston, MA") and I will find hospitals near you.', 'ai');
           chatInput.placeholder = 'Type your city or address...';
           chatInput.focus();
-          locationTextInput.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          if (locationTextInput) {
+            locationTextInput.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
           return true;
         }
 
@@ -3409,6 +3649,10 @@
     }
 
     function renderConditions(conditions, toneColor) {
+      if (!conditionsBox) {
+        return;
+      }
+
       conditionsBox.innerHTML = '';
       conditions.forEach((item) => {
         const row = document.createElement('div');
@@ -3425,6 +3669,10 @@
     }
 
     function applyAnalysis(data) {
+      if (!confidenceText || !confidenceBar || !conditionsBox) {
+        return;
+      }
+
       confidenceText.textContent = `${data.confidence}%`;
       confidenceBar.style.background = data.color;
       confidenceBar.style.width = '0';
@@ -3434,18 +3682,39 @@
       renderConditions(data.conditions, data.color);
     }
 
-    function getResponse(input) {
+    async function getResponse(input) {
       // AI chatbot - calls the /chat API endpoint
-      const chatLang = localStorage.getItem('medicheck_lang') || 'en';
-      return fetch('/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'same-origin',
-        body: JSON.stringify({ userId: chatUserId, message: input, lang: chatLang })
-      })
-        .then(r => r.json())
-        .then(data => data.message || 'Sorry, I could not process that.')
-        .catch(() => '⚠️ Connection error. Please try again.');
+      const langSelect = document.getElementById('langSelect');
+      const chatLang = (langSelect && langSelect.value) || localStorage.getItem('medicheck_lang') || 'en';
+
+      try {
+        const response = await fetch('/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ userId: chatUserId, message: input, lang: chatLang })
+        });
+
+        if (!response.ok) {
+          if (response.status === 401 || response.status === 403) {
+            return '⚠️ Your session expired. Please log in again.';
+          }
+          return '⚠️ Chat service is temporarily unavailable. Please try again.';
+        }
+
+        const contentType = response.headers.get('content-type') || '';
+        if (contentType.includes('application/json')) {
+          const data = await response.json();
+          return data.message || 'Sorry, I could not process that.';
+        }
+
+        // Guard against unexpected HTML/text responses.
+        const text = await response.text();
+        if (text && text.trim()) return text.trim();
+        return '⚠️ Unexpected server response. Please try again.';
+      } catch (_) {
+        return '⚠️ Connection error. Please try again.';
+      }
     }
 
     // Generate a unique chat user ID for this session
@@ -3497,10 +3766,225 @@
         const aiReply = await getResponse(value);
         typing.remove();
         addMessage(aiReply, 'ai');
+        updateQuickButtons(aiReply);
       } catch (err) {
         typing.remove();
         addMessage('⚠️ Sorry, I encountered an error. Please try again.', 'ai');
       }
+    }
+
+    function quickSend(text) {
+      chatInput.value = text;
+      handleSend();
+    }
+
+    const quickLabels = {
+      en: [
+        { text: 'I have fever',            label: '🤒 Fever' },
+        { text: 'I have cough',             label: '😷 Cough' },
+        { text: 'I have headache',          label: '🤕 Headache' },
+        { text: 'stomach pain',             label: '🤢 Stomach' },
+        { text: 'body pain and weakness',   label: '😩 Body Pain' },
+        { text: 'reset',                    label: '🔄 Reset' }
+      ],
+      hi: [
+        { text: 'बुखार है',                   label: '🤒 बुखार' },
+        { text: 'खांसी है',                   label: '😷 खांसी' },
+        { text: 'सिरदर्द है',                label: '🤕 सिरदर्द' },
+        { text: 'पेट दर्द',                   label: '🤢 पेट दर्द' },
+        { text: 'बदन दर्द और कमजोरी',        label: '😩 बदन दर्द' },
+        { text: 'reset',                    label: '🔄 नई जांच' }
+      ],
+      pa: [
+        { text: 'ਬੁਖ਼ਾਰ ਹੈ',                  label: '🤒 ਬੁਖ਼ਾਰ' },
+        { text: 'ਖੰਘ ਹੈ',                   label: '😷 ਖੰਘ' },
+        { text: 'ਸਿਰ ਦਰਦ ਹੈ',               label: '🤕 ਸਿਰ ਦਰਦ' },
+        { text: 'ਪੇਟ ਦਰਦ',                  label: '🤢 ਪੇਟ ਦਰਦ' },
+        { text: 'ਸਰੀਰ ਦਰਦ ਅਤੇ ਕਮਜ਼ੋਰੀ', label: '😩 ਸਰੀਰ ਦਰਦ' },
+        { text: 'reset',                    label: '🔄 ਨਵੀਂ ਜਾਂਚ' }
+      ]
+    };
+
+    function getChatLang() {
+      const sel = document.getElementById('langSelect');
+      return (sel && sel.value) || localStorage.getItem('medicheck_lang') || 'en';
+    }
+
+    function getSpeechLocale() {
+      const lang = getChatLang();
+      if (lang === 'hi') return 'hi-IN';
+      if (lang === 'pa') return 'pa-IN';
+      return 'en-IN';
+    }
+
+    function getVoiceUiText() {
+      const lang = getChatLang();
+      return {
+        en: {
+          listening: 'Listening... speak your symptoms now.',
+          unsupported: 'Voice input is not supported in this browser. Try Chrome or Edge.',
+          denied: 'Microphone access was blocked. Please allow microphone access and try again.',
+          noSpeech: 'I could not hear anything. Please try again.',
+          replyOn: '🔊 Voice on',
+          replyOff: '🔇 Voice off',
+          speak: '🎤 Speak',
+          listeningBtn: '🎙️ Listening...'
+        },
+        hi: {
+          listening: 'सुन रहा हूँ... अब अपने लक्षण बोलें।',
+          unsupported: 'इस ब्राउज़र में वॉइस इनपुट उपलब्ध नहीं है। Chrome या Edge आज़माएँ।',
+          denied: 'माइक्रोफोन की अनुमति नहीं मिली। कृपया अनुमति दें और फिर कोशिश करें।',
+          noSpeech: 'आवाज़ साफ़ नहीं मिली। कृपया फिर से बोलें।',
+          replyOn: '🔊 आवाज़ चालू',
+          replyOff: '🔇 आवाज़ बंद',
+          speak: '🎤 बोलें',
+          listeningBtn: '🎙️ सुन रहा हूँ...'
+        },
+        pa: {
+          listening: 'ਸੁਣ ਰਿਹਾ ਹਾਂ... ਹੁਣ ਆਪਣੇ ਲੱਛਣ ਦੱਸੋ।',
+          unsupported: 'ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ voice input ਉਪਲਬਧ ਨਹੀਂ ਹੈ। Chrome ਜਾਂ Edge ਵਰਤੋ।',
+          denied: 'ਮਾਈਕ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਮਿਲੀ। ਕਿਰਪਾ ਕਰਕੇ ਇਜਾਜ਼ਤ ਦਿਓ ਅਤੇ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ।',
+          noSpeech: 'ਆਵਾਜ਼ ਠੀਕ ਤਰ੍ਹਾਂ ਨਹੀਂ ਸੁਣੀ ਗਈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਬੋਲੋ।',
+          replyOn: '🔊 ਆਵਾਜ਼ ਚਾਲੂ',
+          replyOff: '🔇 ਆਵਾਜ਼ ਬੰਦ',
+          speak: '🎤 ਬੋਲੋ',
+          listeningBtn: '🎙️ ਸੁਣ ਰਿਹਾ ਹਾਂ...'
+        }
+      }[lang] || {
+        listening: 'Listening... speak your symptoms now.',
+        unsupported: 'Voice input is not supported in this browser. Try Chrome or Edge.',
+        denied: 'Microphone access was blocked. Please allow microphone access and try again.',
+        noSpeech: 'I could not hear anything. Please try again.',
+        replyOn: '🔊 Voice on',
+        replyOff: '🔇 Voice off',
+        speak: '🎤 Speak',
+        listeningBtn: '🎙️ Listening...'
+      };
+    }
+
+    function updateVoiceButtons() {
+      const text = getVoiceUiText();
+      if (voiceReplyBtn) {
+        voiceReplyBtn.classList.toggle('active', voiceReplyEnabled);
+        voiceReplyBtn.textContent = voiceReplyEnabled ? text.replyOn : text.replyOff;
+        voiceReplyBtn.title = voiceReplyEnabled ? text.replyOn : text.replyOff;
+      }
+      if (voiceInputBtn) {
+        voiceInputBtn.classList.toggle('listening', isListening);
+        voiceInputBtn.textContent = isListening ? text.listeningBtn : text.speak;
+      }
+    }
+
+    function speakReply(text) {
+      if (!voiceReplyEnabled || !window.speechSynthesis || !text) return;
+      const cleaned = String(text)
+        .replace(/⚠️ DISCLAIMER:[\s\S]*/i, '')
+        .replace(/━━━━━━━━━━━━━━━━━━━━━━━━/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+      if (!cleaned) return;
+
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(cleaned);
+      utterance.lang = getSpeechLocale();
+      utterance.rate = 1;
+      utterance.pitch = 1;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function ensureSpeechRecognition() {
+      const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!Recognition) return null;
+      if (!speechRecognition) {
+        speechRecognition = new Recognition();
+        speechRecognition.continuous = false;
+        speechRecognition.interimResults = true;
+        speechRecognition.maxAlternatives = 1;
+
+        speechRecognition.onresult = (event) => {
+          const transcript = Array.from(event.results)
+            .map((result) => result[0] && result[0].transcript ? result[0].transcript : '')
+            .join(' ')
+            .trim();
+          if (transcript) {
+            chatInput.value = transcript;
+          }
+        };
+
+        speechRecognition.onerror = (event) => {
+          const ui = getVoiceUiText();
+          isListening = false;
+          updateVoiceButtons();
+          if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+            addMessage(ui.denied, 'ai');
+            return;
+          }
+          if (event.error === 'no-speech') {
+            addMessage(ui.noSpeech, 'ai');
+            return;
+          }
+          addMessage(ui.unsupported, 'ai');
+        };
+
+        speechRecognition.onend = async () => {
+          const transcript = chatInput.value.trim();
+          isListening = false;
+          updateVoiceButtons();
+          if (transcript) {
+            await handleSend();
+          }
+        };
+      }
+      speechRecognition.lang = getSpeechLocale();
+      return speechRecognition;
+    }
+
+    function startVoiceInput() {
+      const ui = getVoiceUiText();
+      const recognition = ensureSpeechRecognition();
+      if (!recognition) {
+        addMessage(ui.unsupported, 'ai');
+        return;
+      }
+      if (isListening) {
+        recognition.stop();
+        return;
+      }
+      chatInput.value = '';
+      isListening = true;
+      updateVoiceButtons();
+      addMessage(ui.listening, 'ai');
+      recognition.start();
+    }
+
+    function updateQuickButtons(botMessage) {
+      const actions = document.getElementById('quickActions');
+      const lang = getChatLang();
+      const msg = (botMessage || '').toLowerCase();
+      const yesLabel  = { en: '✅ Yes',          hi: '✅ हाँ',       pa: '✅ ਹਾਂ' };
+      const noLabel   = { en: '❌ No',           hi: '❌ नहीं',      pa: '❌ ਨਹੀਂ' };
+      const resetLbl  = { en: '🔄 Reset',       hi: '🔄 नई जांच',  pa: '🔄 ਨਵੀਂ ਜਾਂਚ' };
+      const byeLabel  = { en: '👋 Goodbye',     hi: '👋 अलविदा',   pa: '👋 ਅਲਵਿਦਾ' };
+      const newLbl    = { en: '🔄 New Consultation', hi: '🔄 नई जांच', pa: '🔄 ਨਵੀਂ ਜਾਂਚ' };
+
+      if (msg.includes('?') && (msg.includes('do you') || msg.includes('are you') || msg.includes('have you') || msg.includes('क्या') || msg.includes('ਕੀ'))) {
+        actions.innerHTML = `
+          <button class="quick-btn" onclick="quickSend('yes')">${yesLabel[lang]||yesLabel.en}</button>
+          <button class="quick-btn" onclick="quickSend('no')">${noLabel[lang]||noLabel.en}</button>
+          <button class="quick-btn" onclick="quickSend('reset')">${resetLbl[lang]||resetLbl.en}</button>
+        `;
+        return;
+      }
+      if (msg.includes('health report') || msg.includes('स्वास्थ्य रिपोर्ट') || msg.includes('ਸਿਹੱਤ ਰਿਪੋਰਟ') || msg.includes('consultation is complete') || msg.includes('जांच पूरी') || msg.includes('ਜਾਂਚ ਪੂਰੀ') || msg.includes('type "reset"') || msg.includes('reset” टाइप') || msg.includes('reset” ਟਾਈਪ')) {
+        actions.innerHTML = `
+          <button class="quick-btn" onclick="quickSend('reset')">${newLbl[lang]||newLbl.en}</button>
+          <button class="quick-btn" onclick="quickSend('thanks')">${byeLabel[lang]||byeLabel.en}</button>
+        `;
+        return;
+      }
+      // Default symptom buttons based on language
+      const btns = (quickLabels[lang] || quickLabels.en);
+      actions.innerHTML = btns.map(b => `<button class="quick-btn" onclick="quickSend('${b.text}')">${b.label}</button>`).join('');
     }
 
     nearbyHospitalsBtn.addEventListener('click', async () => {
@@ -3553,51 +4037,92 @@
     });
 
     sendBtn.addEventListener('click', handleSend);
+    if (voiceInputBtn) {
+      voiceInputBtn.addEventListener('click', startVoiceInput);
+    }
+    if (voiceReplyBtn) {
+      voiceReplyBtn.addEventListener('click', () => {
+        voiceReplyEnabled = !voiceReplyEnabled;
+        if (!voiceReplyEnabled && window.speechSynthesis) {
+          window.speechSynthesis.cancel();
+        }
+        updateVoiceButtons();
+      });
+    }
     chatInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') handleSend();
     });
 
-    coordToggle.addEventListener('change', () => {
-      coordFields.classList.toggle('active', coordToggle.checked);
-    });
+    if (coordToggle && coordFields) {
+      coordToggle.addEventListener('change', () => {
+        coordFields.classList.toggle('active', coordToggle.checked);
+      });
+    }
 
-    saveLocationBtn.addEventListener('click', async () => {
-      const locationText = locationTextInput.value.trim();
-      const payload = coordToggle.checked
-        ? {
-            location_text: locationText || null,
-            lat: latInput.value,
-            lon: lonInput.value
+    if (saveLocationBtn && locationTextInput) {
+      saveLocationBtn.addEventListener('click', async () => {
+        const locationText = locationTextInput.value.trim();
+        const payload = coordToggle && coordToggle.checked
+          ? {
+              location_text: locationText || null,
+              lat: latInput ? latInput.value : undefined,
+              lon: lonInput ? lonInput.value : undefined
+            }
+          : {
+              location_text: locationText
+            };
+
+        try {
+          saveLocationBtn.disabled = true;
+          const location = await saveLocation(payload);
+          addMessage(`Location saved: ${location.location_text || `${location.location_lat.toFixed(4)}, ${location.location_lon.toFixed(4)}`}`, 'ai');
+        } catch (error) {
+          if (error.code === 'AMBIGUOUS_LOCATION' && error.suggestions && error.suggestions.length) {
+            addMessage(`Please clarify your location: ${error.suggestions.join(' | ')}`, 'ai');
+          } else {
+            addMessage(error.message || 'Could not save location.', 'ai');
           }
-        : {
-            location_text: locationText
-          };
-
-      try {
-        saveLocationBtn.disabled = true;
-        const location = await saveLocation(payload);
-        addMessage(`Location saved: ${location.location_text || `${location.location_lat.toFixed(4)}, ${location.location_lon.toFixed(4)}`}`, 'ai');
-      } catch (error) {
-        if (error.code === 'AMBIGUOUS_LOCATION' && error.suggestions && error.suggestions.length) {
-          addMessage(`Please clarify your location: ${error.suggestions.join(' | ')}`, 'ai');
-        } else {
-          addMessage(error.message || 'Could not save location.', 'ai');
+        } finally {
+          saveLocationBtn.disabled = false;
         }
-      } finally {
-        saveLocationBtn.disabled = false;
-      }
-    });
+      });
+    }
 
     fetchSavedLocation()
       .then((location) => {
         renderSavedLocationInfo(location);
-        if (location && location.location_text) {
+        if (locationTextInput && location && location.location_text) {
           locationTextInput.value = location.location_text;
         }
       })
       .catch(() => {
-        savedLocationInfo.textContent = 'Unable to load saved location right now.';
+        if (savedLocationInfo) {
+          savedLocationInfo.textContent = 'Unable to load saved location right now.';
+        }
       });
+
+    // Sync langSelect with saved language and listen for changes
+    (function initChatLangSelect() {
+      const sel = document.getElementById('langSelect');
+      if (!sel) return;
+      const saved = localStorage.getItem('medicheck_lang') || 'en';
+      if (sel.querySelector(`option[value="${saved}"]`)) sel.value = saved;
+      sel.addEventListener('change', () => {
+        const lang = sel.value;
+        applyLanguage(lang);   // syncs localStorage + nav switcher labels
+        updateQuickButtons(''); // refresh quick buttons for new language
+        updateVoiceButtons();
+        // Show a greeting in the new language
+        const greetings = {
+          en: 'Language switched to English. Tell me your symptoms.',
+          hi: 'भाषा हिंदी में बदली गई। अपने लक्षण बताएं।',
+          pa: 'ਭਾਸ਼ਾ ਪੰਜਾਬੀ ਵਿੱਚ ਬਦਲ ਗਈ। ਆਪਣੇ ਲੱਛਣ ਦੱਸੋ।'
+        };
+        addMessage(greetings[lang] || greetings.en, 'ai');
+      });
+    })();
+
+    updateVoiceButtons();
 
     // Seed panel with initial state.
     applyAnalysis({
