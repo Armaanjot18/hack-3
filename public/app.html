@@ -1,0 +1,2804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediCheck | Rural Health AI</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap');
+
+    /* ─── ROOT + GLOBAL ─── */
+    :root {
+      --bg-deep: #060B18;
+      --bg-card: #0D1526;
+      --bg-elevated: #121F35;
+      --border: #1A2F4A;
+      --accent-cyan: #00E5FF;
+      --accent-purple: #7B61FF;
+      --green: #00E676;
+      --yellow: #FFD600;
+      --red: #FF4C4C;
+      --text-primary: #EDF2FF;
+      --text-muted: #607B96;
+      --text-dim: #2D4261;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1200px, 92vw);
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent-cyan);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: 'Cabinet Grotesk', Georgia, serif;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.15;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .muted {
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #00E5FF, #7B61FF);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .glass {
+      background: rgba(13, 21, 38, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 229, 255, 0.12);
+      border-radius: 20px;
+    }
+
+    .cyan-glow {
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
+    }
+
+    .purple-glow {
+      box-shadow: 0 0 30px rgba(123, 97, 255, 0.2);
+    }
+
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: transform 0.6s ease, opacity 0.6s ease;
+    }
+
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── KEYFRAMES ─── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 rgba(0, 229, 255, 0); transform: scale(1); }
+      50% { box-shadow: 0 0 8px rgba(0, 229, 255, 0.6); transform: scale(1.05); }
+      100% { box-shadow: 0 0 0 rgba(0, 229, 255, 0); transform: scale(1); }
+    }
+
+    @keyframes ecgDraw {
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(-8px); }
+      50% { transform: translateY(0); }
+      100% { transform: translateY(-8px); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    @keyframes scanLine {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100%); }
+    }
+
+    @keyframes ringWave {
+      from { transform: scale(1); opacity: 1; }
+      to { transform: scale(2); opacity: 0; }
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @keyframes dashMove {
+      from { background-position: 0 0; }
+      to { background-position: 40px 0; }
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    @keyframes bounceDot {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+      30% { transform: translateY(-4px); opacity: 1; }
+    }
+
+    @keyframes orbit {
+      from { transform: rotate(0deg) translateX(20px) rotate(0deg); }
+      to { transform: rotate(360deg) translateX(20px) rotate(-360deg); }
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn {
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 12px 22px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: var(--accent-cyan);
+      color: #051021;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 40px rgba(0, 229, 255, 0.4);
+      transform: scale(1.03);
+    }
+
+    .btn-ghost-cyan {
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      background: transparent;
+    }
+
+    .btn-ghost {
+      color: var(--text-primary);
+      border-color: rgba(237, 242, 255, 0.6);
+      background: transparent;
+    }
+
+    .btn-ghost:hover,
+    .btn-ghost-cyan:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 24px rgba(0, 229, 255, 0.2);
+    }
+
+    /* ─── SECTION 1: NAVBAR ─── */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+      transition: background 0.25s ease, backdrop-filter 0.25s ease, border-color 0.25s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .navbar.scrolled {
+      backdrop-filter: blur(14px);
+      background: rgba(6, 11, 24, 0.9);
+      border-color: rgba(0, 229, 255, 0.14);
+    }
+
+    .nav-inner {
+      width: min(1240px, 94vw);
+      margin: 0 auto;
+      height: 78px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Cabinet Grotesk', Georgia, serif;
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .live-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s infinite;
+      margin-left: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      font-size: 14px;
+      position: relative;
+      padding: 8px 0;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-cyan);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-link:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .hamburger {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      width: 18px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 11, 24, 0.98);
+      z-index: 999;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .mobile-menu.active {
+      transform: translateX(0);
+    }
+
+    .mobile-menu a {
+      font-size: 28px;
+      color: var(--text-primary);
+      transform: translateX(40px);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .mobile-menu.active a {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    /* ─── SECTION 2: HERO ─── */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding: 40px 0 70px;
+    }
+
+    #particleCanvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-blob {
+      position: absolute;
+      right: -180px;
+      top: 50%;
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      transform: translateY(-50%);
+      background: radial-gradient(ellipse, rgba(0, 229, 255, 0.04), transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      background: rgba(0, 229, 255, 0.08);
+      color: var(--text-primary);
+      font-size: 12px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: 'Cabinet Grotesk', Georgia, serif;
+      font-size: clamp(40px, 6vw, 64px);
+      line-height: 1.02;
+      margin-bottom: 16px;
+      font-weight: 800;
+    }
+
+    .hero-sub {
+      max-width: 480px;
+      color: var(--text-muted);
+      font-size: 18px;
+      margin-bottom: 26px;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .trust-badges {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .trust-badges span + span {
+      border-left: 1px solid var(--border);
+      padding-left: 12px;
+    }
+
+    .phone-zone {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      perspective: 1000px;
+      transform-style: preserve-3d;
+    }
+
+    .phone-group {
+      position: relative;
+      transition: transform 0.1s ease-out;
+      transform-style: preserve-3d;
+    }
+
+    .phone-shell {
+      width: 280px;
+      height: 560px;
+      border-radius: 40px;
+      background: #0a1428;
+      border: 2px solid rgba(0, 229, 255, 0.3);
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
+      padding: 14px;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 30px;
+      background: #0D1526;
+      border: 1px solid rgba(123, 97, 255, 0.35);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .chat-mini-title {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+    }
+
+    .mini-bubble {
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      max-width: 90%;
+      line-height: 1.45;
+    }
+
+    .mini-bubble.user {
+      margin-left: auto;
+      background: var(--accent-cyan);
+      color: #051021;
+    }
+
+    .mini-bubble.ai {
+      margin-right: auto;
+      background: var(--bg-elevated);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      color: var(--text-primary);
+    }
+
+    .mini-bubble .ai-label {
+      display: block;
+      font-size: 10px;
+      color: var(--accent-cyan);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .mini-result {
+      margin-top: 8px;
+      background: rgba(255, 214, 0, 0.12);
+      border: 1px solid rgba(255, 214, 0, 0.45);
+      color: #ffe66c;
+      border-radius: 14px;
+      padding: 10px;
+      font-size: 11px;
+    }
+
+    .float-card {
+      position: absolute;
+      width: 190px;
+      padding: 12px;
+      font-size: 12px;
+      border-radius: 14px;
+      line-height: 1.4;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .float-card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+
+    .float-card.red { top: 10px; right: -130px; border-left: 3px solid var(--red); animation-delay: 0s; }
+    .float-card.green { bottom: 40px; left: -140px; border-left: 3px solid var(--green); animation-delay: 1s; }
+    .float-card.yellow { top: 45%; right: -140px; border-left: 3px solid var(--yellow); animation-delay: 2s; }
+
+    .hero-ecg {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 40px;
+      z-index: 1;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    /* ─── SECTION 3: STATS BAR ─── */
+    .stats-bar {
+      background: #0D1526;
+      border-top: 1px solid rgba(0, 229, 255, 0.1);
+      border-bottom: 1px solid rgba(0, 229, 255, 0.1);
+    }
+
+    .stats-grid {
+      min-height: 80px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stat-item {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 16px 8px;
+    }
+
+    .stat-item + .stat-item {
+      border-left: 1px solid rgba(0, 229, 255, 0.15);
+    }
+
+    .stat-number {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-cyan);
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+    }
+
+    /* ─── SECTION 4: PROBLEM ─── */
+    .problem {
+      background: #080F1E;
+      padding: 100px 0;
+    }
+
+    .center-copy {
+      text-align: center;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .problem-grid {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .problem-card {
+      padding: 24px;
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .problem-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 28px rgba(0, 229, 255, 0.15);
+    }
+
+    .problem-card .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 21px;
+      margin-bottom: 12px;
+    }
+
+    /* ─── SECTION 5: FEATURES ─── */
+    .features {
+      padding: 100px 0;
+    }
+
+    .feature-rows {
+      margin-top: 46px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+      padding: 30px 0;
+      border-top: 1px solid rgba(0, 229, 255, 0.12);
+    }
+
+    .feature-row:last-child {
+      border-bottom: 1px solid rgba(0, 229, 255, 0.12);
+    }
+
+    .feature-text {
+      position: relative;
+      padding: 10px 4px;
+    }
+
+    .feature-number {
+      position: absolute;
+      top: -10px;
+      left: -8px;
+      font-family: 'Cabinet Grotesk', Georgia, serif;
+      font-size: 80px;
+      opacity: 0.06;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .feature-tag {
+      display: inline-flex;
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      background: rgba(0, 229, 255, 0.08);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .feature-title {
+      font-family: 'Cabinet Grotesk', Georgia, serif;
+      font-size: 28px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .feature-desc {
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: grid;
+      gap: 6px;
+      color: #b7c8dd;
+      font-size: 15px;
+    }
+
+    .bullet-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bullet-list li::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 12px rgba(0, 229, 255, 0.65);
+      flex-shrink: 0;
+    }
+
+    .feature-visual {
+      min-height: 250px;
+      padding: 20px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .india-map svg {
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .alert-dot {
+      fill: var(--red);
+      transform-origin: center;
+      animation: pulse 1.8s infinite;
+    }
+
+    .mic-wrap {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      display: grid;
+      place-items: center;
+    }
+
+    .wave-ring {
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      border-radius: 50%;
+      animation: ringWave 1.8s linear infinite;
+    }
+
+    .wave-ring:nth-child(1) { animation-delay: 0s; }
+    .wave-ring:nth-child(2) { animation-delay: 0.4s; }
+    .wave-ring:nth-child(3) { animation-delay: 0.8s; }
+
+    .typewriter {
+      margin-top: 12px;
+      color: #b9d6f2;
+      font-family: 'JetBrains Mono', monospace;
+      min-height: 26px;
+    }
+
+    .cursor {
+      animation: blink 0.9s infinite;
+    }
+
+    .lang-pill {
+      margin-top: 10px;
+      font-size: 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      padding: 5px 11px;
+    }
+
+    .viewfinder {
+      width: min(320px, 100%);
+      height: 190px;
+      border-radius: 18px;
+      border: 1px solid rgba(0, 229, 255, 0.26);
+      background: radial-gradient(circle at center, rgba(255, 76, 76, 0.2), rgba(13, 21, 38, 0.95));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .viewfinder::before,
+    .viewfinder::after {
+      content: '';
+      position: absolute;
+      inset: 10px;
+      border: 2px solid transparent;
+      border-radius: 14px;
+      pointer-events: none;
+    }
+
+    .viewfinder::before {
+      border-top-color: rgba(0, 229, 255, 0.5);
+      border-left-color: rgba(0, 229, 255, 0.5);
+      width: 44px;
+      height: 44px;
+      inset: 12px auto auto 12px;
+    }
+
+    .viewfinder::after {
+      border-bottom-color: rgba(0, 229, 255, 0.5);
+      border-right-color: rgba(0, 229, 255, 0.5);
+      width: 44px;
+      height: 44px;
+      inset: auto 12px 12px auto;
+    }
+
+    .scan-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 2px;
+      background: rgba(0, 229, 255, 0.7);
+      box-shadow: 0 0 12px rgba(0, 229, 255, 0.5);
+      animation: scanLine 2s linear infinite;
+    }
+
+    .rash-dot {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 76, 76, 0.95), rgba(140, 24, 24, 0.2));
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .timeline-card svg {
+      width: 100%;
+      max-width: 360px;
+      overflow: visible;
+    }
+
+    .timeline-path {
+      stroke-dasharray: 500;
+      stroke-dashoffset: 500;
+      transition: stroke-dashoffset 1.5s ease;
+    }
+
+    .timeline-card.play .timeline-path {
+      stroke-dashoffset: 0;
+    }
+
+    .critical-dot {
+      opacity: 0;
+      transform-origin: center;
+    }
+
+    .timeline-card.play .critical-dot {
+      opacity: 1;
+      animation: pulse 1.3s infinite;
+      transition: opacity 0.4s ease 1.2s;
+    }
+
+    .facility-map {
+      width: 100%;
+      max-width: 360px;
+      height: 210px;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      background: repeating-linear-gradient(0deg, rgba(96, 123, 150, 0.08), rgba(96, 123, 150, 0.08) 1px, transparent 1px, transparent 20px),
+                  repeating-linear-gradient(90deg, rgba(96, 123, 150, 0.08), rgba(96, 123, 150, 0.08) 1px, transparent 1px, transparent 20px),
+                  #0d1526;
+      position: relative;
+      padding: 14px;
+    }
+
+    .pin {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid #041021;
+      box-shadow: 0 0 10px currentColor;
+    }
+
+    .pin.you { color: var(--accent-cyan); background: var(--accent-cyan); top: 134px; left: 70px; }
+    .pin.phc { color: var(--green); background: var(--green); top: 72px; right: 84px; }
+
+    .dashed-route {
+      position: absolute;
+      top: 96px;
+      left: 82px;
+      width: 170px;
+      border-top: 2px dashed rgba(0, 229, 255, 0.6);
+      transform: rotate(-20deg);
+      transform-origin: left center;
+    }
+
+    .facility-info {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 12px;
+      font-size: 12px;
+      padding: 10px;
+      border-radius: 10px;
+      background: rgba(6, 11, 24, 0.9);
+      border: 1px solid rgba(0, 229, 255, 0.25);
+    }
+
+    .call-chip {
+      margin-top: 12px;
+      display: inline-flex;
+      border: 1px solid var(--accent-cyan);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: var(--accent-cyan);
+    }
+
+    .family-row {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .member-card {
+      text-align: center;
+      padding: 10px 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 229, 255, 0.16);
+      background: rgba(6, 11, 24, 0.65);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      overflow: hidden;
+      max-height: 90px;
+    }
+
+    .member-card.active {
+      max-height: 180px;
+      transform: translateY(-3px);
+      border-color: rgba(0, 229, 255, 0.45);
+    }
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      margin: 0 auto 6px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      background: linear-gradient(135deg, #0b2f49, #12395a);
+    }
+
+    .health-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin: 5px auto 0;
+    }
+
+    .member-extra {
+      margin-top: 7px;
+      font-size: 11px;
+      color: var(--text-muted);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .member-card.active .member-extra {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .asha-mini {
+      width: 100%;
+      max-width: 360px;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(6, 11, 24, 0.8);
+      border: 1px solid rgba(123, 97, 255, 0.35);
+    }
+
+    .asha-mini h4 {
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #dbe8ff;
+    }
+
+    .asha-mini ul {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      color: #bad0ea;
+      font-size: 13px;
+      max-height: 160px;
+      overflow: auto;
+    }
+
+    .asha-mini .report-btn {
+      margin-top: 10px;
+      width: 100%;
+      border: 1px solid rgba(0, 229, 255, 0.4);
+      padding: 8px;
+      border-radius: 10px;
+      text-align: center;
+      color: var(--accent-cyan);
+      font-size: 12px;
+    }
+
+    /* ─── SECTION 6: HOW IT WORKS ─── */
+    .how-it-works {
+      padding: 100px 0;
+    }
+
+    .steps-wrap {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .step-card {
+      padding: 24px;
+      position: relative;
+      min-height: 280px;
+    }
+
+    .step-watermark {
+      position: absolute;
+      right: 16px;
+      top: 8px;
+      font-size: 72px;
+      font-family: 'Cabinet Grotesk', Georgia, serif;
+      opacity: 0.06;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .step-icon {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 10px;
+    }
+
+    .step-title {
+      font-family: 'Cabinet Grotesk', Georgia, serif;
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .dash-arrow {
+      width: 70px;
+      height: 2px;
+      background: repeating-linear-gradient(90deg, rgba(0, 229, 255, 0.8), rgba(0, 229, 255, 0.8) 6px, transparent 6px, transparent 12px);
+      animation: dashMove 1.2s linear infinite;
+      position: relative;
+    }
+
+    .dash-arrow::after {
+      content: '';
+      position: absolute;
+      right: -2px;
+      top: -4px;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 7px solid rgba(0, 229, 255, 0.8);
+    }
+
+    .orbit-wrap {
+      margin-top: 10px;
+      width: 56px;
+      height: 56px;
+      position: relative;
+    }
+
+    .orbit-center {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-purple);
+      border-radius: 50%;
+      position: absolute;
+      top: 24px;
+      left: 24px;
+    }
+
+    .orbiter {
+      position: absolute;
+      top: 22px;
+      left: 22px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(123, 97, 255, 0.8);
+      animation: orbit 1.8s linear infinite;
+    }
+
+    .orbiter:nth-child(2) { animation-delay: 0.6s; }
+    .orbiter:nth-child(3) { animation-delay: 1.2s; }
+
+    /* ─── SECTION 7: LIVE DEMO ─── */
+    .demo {
+      padding: 100px 0;
+      background: #070E1C;
+    }
+
+    .demo-grid {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .chat-card {
+      padding: 16px;
+    }
+
+    .chat-window {
+      height: 400px;
+      overflow-y: auto;
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: 20px;
+      padding: 14px;
+      background: rgba(6, 11, 24, 0.9);
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
+    }
+
+    .msg {
+      max-width: 82%;
+      margin-bottom: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 14px;
+    }
+
+    .msg.ai { background: #13213a; border: 1px solid rgba(0, 229, 255, 0.25); color: #d3e7ff; }
+    .msg.user { margin-left: auto; background: var(--accent-cyan); color: #051021; }
+
+    .typing {
+      display: inline-flex;
+      gap: 4px;
+      padding: 10px;
+      border-radius: 12px;
+      background: #13213a;
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      margin-bottom: 10px;
+    }
+
+    .typing span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      animation: bounceDot 1s infinite;
+    }
+
+    .typing span:nth-child(2) { animation-delay: 0.15s; }
+    .typing span:nth-child(3) { animation-delay: 0.3s; }
+
+    .chat-controls {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: 8px;
+    }
+
+    .chat-input,
+    .lang-select {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-primary);
+      padding: 10px 12px;
+      outline: none;
+    }
+
+    .send-btn {
+      background: var(--accent-cyan);
+      color: #051021;
+      border: none;
+      border-radius: 10px;
+      width: 42px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .send-btn:hover { transform: translateY(-2px); box-shadow: 0 0 24px rgba(0, 229, 255, 0.45); }
+
+    .result-card {
+      margin-top: 10px;
+      border-radius: 14px;
+      padding: 12px;
+      border: 1px solid transparent;
+      font-size: 13px;
+    }
+
+    .result-card.green { background: rgba(0, 230, 118, 0.1); border-color: rgba(0, 230, 118, 0.35); color: #8dffd0; }
+    .result-card.yellow { background: rgba(255, 214, 0, 0.12); border-color: rgba(255, 214, 0, 0.4); color: #ffe88d; }
+    .result-card.red { background: rgba(255, 76, 76, 0.14); border-color: rgba(255, 76, 76, 0.45); color: #ffadad; }
+
+    .analysis-card {
+      padding: 18px;
+    }
+
+    .analysis-title {
+      font-family: 'Cabinet Grotesk', Georgia, serif;
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .meter {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(96, 123, 150, 0.25);
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .meter-fill {
+      height: 100%;
+      width: 0;
+      transition: width 0.7s ease;
+    }
+
+    .condition {
+      margin-bottom: 8px;
+    }
+
+    .condition-head {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 4px;
+      color: #cce0f6;
+    }
+
+    .cond-bar {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(96, 123, 150, 0.2);
+      overflow: hidden;
+    }
+
+    .cond-fill {
+      height: 100%;
+      width: 0;
+      transition: width 0.8s ease;
+    }
+
+    .alert-box,
+    .facility-card {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 229, 255, 0.22);
+      background: rgba(6, 11, 24, 0.85);
+      font-size: 13px;
+    }
+
+    .facility-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .mini-btn {
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      color: var(--accent-cyan);
+      background: transparent;
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    /* ─── SECTION 8: ASHA SPOTLIGHT ─── */
+    .asha-spot {
+      padding: 100px 0;
+      background: #0A1628;
+      border-top: 4px solid transparent;
+      border-image: linear-gradient(90deg, #00E5FF, #7B61FF) 1;
+    }
+
+    .asha-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .quote-wrap {
+      position: relative;
+      padding-top: 20px;
+    }
+
+    .quote-mark {
+      position: absolute;
+      top: -20px;
+      left: -5px;
+      font-size: 120px;
+      color: var(--accent-cyan);
+      opacity: 0.2;
+      line-height: 1;
+    }
+
+    .quote-text {
+      font-size: 24px;
+      font-style: italic;
+      line-height: 1.5;
+      margin-bottom: 18px;
+      max-width: 580px;
+    }
+
+    .avatar-id {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      background: linear-gradient(135deg, #00E5FF, #7B61FF);
+      color: #041021;
+      margin-bottom: 10px;
+    }
+
+    .asha-stats {
+      margin-top: 20px;
+      color: #b7cbe2;
+      display: grid;
+      gap: 6px;
+    }
+
+    .dash-panel {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      background: rgba(6, 11, 24, 0.85);
+    }
+
+    .dash-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .offline-dot { color: var(--red); }
+
+    .dash-list {
+      max-height: 220px;
+      overflow: auto;
+      display: grid;
+      gap: 8px;
+    }
+
+    .dash-row {
+      border: 1px solid rgba(26, 47, 74, 0.9);
+      border-radius: 10px;
+      padding: 8px 10px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.7fr;
+      gap: 10px;
+      font-size: 12px;
+      color: #c7d8ec;
+      background: rgba(13, 21, 38, 0.7);
+    }
+
+    .dash-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    /* ─── SECTION 9: IMPACT ─── */
+    .impact {
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .impact-grid {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .impact-card {
+      padding: 26px;
+      text-align: left;
+      border-radius: 18px;
+      border: 1px solid rgba(0, 229, 255, 0.12);
+      background: rgba(13, 21, 38, 0.7);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .impact-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .impact-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .impact-desc {
+      color: var(--text-muted);
+    }
+
+    .glow-cyan:hover { box-shadow: 0 0 32px rgba(0, 229, 255, 0.25); }
+    .glow-purple:hover { box-shadow: 0 0 32px rgba(123, 97, 255, 0.25); }
+    .glow-green:hover { box-shadow: 0 0 32px rgba(0, 230, 118, 0.25); }
+    .glow-yellow:hover { box-shadow: 0 0 32px rgba(255, 214, 0, 0.25); }
+
+    /* ─── SECTION 10: TECH STACK ─── */
+    .tech {
+      padding: 80px 0;
+      background: #080F1E;
+      text-align: center;
+    }
+
+    .marquee-wrap {
+      margin-top: 26px;
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 18s linear infinite;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .tech-pill {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      background: #0D1526;
+      color: #bfd1e5;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .pillars {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      text-align: left;
+    }
+
+    .pillar {
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(123, 97, 255, 0.25);
+      background: rgba(13, 21, 38, 0.75);
+    }
+
+    .pillar h4 {
+      margin-bottom: 8px;
+      font-size: 19px;
+      font-family: 'Cabinet Grotesk', Georgia, serif;
+    }
+
+    .pillar p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ─── SECTION 11: FOOTER ─── */
+    footer {
+      background: #040810;
+      border-top: 1px solid #1A2F4A;
+      padding: 60px 0 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 20px;
+    }
+
+    .footer-col h5 {
+      font-size: 15px;
+      margin-bottom: 10px;
+      color: #d7e8ff;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      color: var(--text-muted);
+      display: grid;
+      gap: 6px;
+      font-size: 14px;
+    }
+
+    .socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .socials a {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: var(--text-muted);
+      transition: transform 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .socials a:hover {
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      margin-top: 24px;
+      border-top: 1px solid #1A2F4A;
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .section-title { font-size: clamp(28px, 3.5vw, 38px); }
+      .hero-title { font-size: clamp(36px, 5vw, 54px); }
+      .hero-sub { font-size: 16px; }
+      .feature-title { font-size: 24px; }
+    }
+
+    @media (max-width: 900px) {
+      .nav-inner { grid-template-columns: 1fr auto; }
+      .nav-links, .nav-actions { display: none; }
+      .hamburger { display: inline-flex; justify-self: end; }
+      .hero-grid,
+      .demo-grid,
+      .asha-grid,
+      .pillars,
+      .problem-grid,
+      .feature-row,
+      .footer-grid { grid-template-columns: 1fr; }
+      .steps-wrap { grid-template-columns: 1fr; }
+      .dash-arrow { width: 2px; height: 34px; margin: 0 auto; background: repeating-linear-gradient(180deg, rgba(0, 229, 255, 0.8), rgba(0, 229, 255, 0.8) 6px, transparent 6px, transparent 12px); }
+      .dash-arrow::after { right: -4px; top: auto; bottom: -3px; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 8px solid rgba(0, 229, 255, 0.8); border-bottom: none; }
+      .feature-row:nth-child(even) .feature-text,
+      .feature-row:nth-child(odd) .feature-text { order: 1; }
+      .feature-row:nth-child(even) .feature-visual,
+      .feature-row:nth-child(odd) .feature-visual { order: 2; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(3), .stat-item:nth-child(4) { border-top: 1px solid rgba(0, 229, 255, 0.15); }
+      .stat-item:nth-child(3) { border-left: none; }
+    }
+
+    @media (max-width: 767px) {
+      .hero {
+        min-height: auto;
+        padding-top: 30px;
+      }
+      .hero-ecg { bottom: 8px; }
+      .float-card.green,
+      .float-card.yellow { display: none; }
+      .float-card.red { right: -35px; top: -24px; width: 170px; }
+      .phone-shell { width: 260px; height: 520px; }
+      .chat-controls {
+        grid-template-columns: 1fr;
+      }
+      .impact-grid { grid-template-columns: 1fr; }
+      .footer-bottom {
+        flex-direction: column;
+      }
+      .trust-badges { gap: 8px; }
+      .family-row { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <!-- ─── SECTION 1: NAVBAR ─── -->
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="logo-wrap" aria-label="MediCheck home">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2L4 5V11C4 16 7.4 20.7 12 22C16.6 20.7 20 16 20 11V5L12 2Z" stroke="#00E5FF" stroke-width="1.6"/>
+          <path d="M12 7V14M8.5 10.5H15.5" stroke="#00E5FF" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <span>Medi</span><span class="gradient-text">Check</span><span class="live-dot" aria-hidden="true"></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a class="nav-link" href="#features">Features</a>
+        <a class="nav-link" href="#how-it-works">How It Works</a>
+        <a class="nav-link" href="#impact">Impact</a>
+        <a class="nav-link" href="#asha-mode">ASHA Mode</a>
+        <a class="nav-link" href="#demo">Demo</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="#demo" class="btn btn-ghost-cyan">Try Demo</a>
+        <a href="#" class="btn btn-primary">Get the App</a>
+        <a href="/logout" class="btn btn-ghost-cyan">Logout</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile Menu">
+    <a href="#features">Features</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#impact">Impact</a>
+    <a href="#asha-mode">ASHA Mode</a>
+    <a href="#demo">Demo</a>
+    <a href="#" class="btn btn-primary">Get the App</a>
+    <a href="/logout" class="btn btn-ghost-cyan">Logout</a>
+  </nav>
+
+  <!-- ─── SECTION 2: HERO ─── -->
+  <section class="hero" id="home">
+    <canvas id="particleCanvas" aria-hidden="true"></canvas>
+    <div class="hero-blob" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-pill fade-in-up" data-delay="0">🟢 Live in Beta · India's First Geo-Aware Health AI</div>
+        <h1 class="hero-title gradient-text fade-in-up" data-delay="0.1">Your Village Doctor,<br />In Your Pocket</h1>
+        <p class="hero-sub fade-in-up" data-delay="0.2">AI-powered symptom triage in your language - voice, photo, or text. Built for 500 million Indians with no doctor nearby.</p>
+        <div class="hero-cta fade-in-up" data-delay="0.3">
+          <a href="#demo" class="btn btn-primary">Check Symptoms Now →</a>
+          <a href="#demo" class="btn btn-ghost">▶ Watch Demo</a>
+        </div>
+        <div class="trust-badges fade-in-up" data-delay="0.4">
+          <span>✅ Works Offline</span>
+          <span>🎙️ 22 Languages</span>
+          <span>🏥 1.5L+ Facilities</span>
+        </div>
+      </div>
+
+      <div class="phone-zone">
+        <div class="phone-group" id="phoneGroup">
+          <div class="phone-shell">
+            <div class="phone-screen">
+              <div class="chat-mini-title">Live Symptom Chat</div>
+              <div class="mini-bubble user">Sir mujhe 3 din se bukhar hai</div>
+              <div class="mini-bubble ai"><span class="ai-label">MediCheck AI</span>Kya aapke joints mein dard hai? Dengue ke 8 cases is hafte aapke block mein mile hain 🔴</div>
+              <div class="mini-bubble user">Haan, kaafi dard hai</div>
+              <div class="mini-result">🟡 <strong>CAUTION - Dengue Suspected</strong><br/>Nearest PHC: 2.8 km · Open now</div>
+            </div>
+          </div>
+          <div class="float-card glass red">🔴 <strong>Dengue Alert</strong>12 cases in your block this week</div>
+          <div class="float-card glass green">🟢 <strong>PHC Raikot</strong>2.8 km · Open · Free OPD</div>
+          <div class="float-card glass yellow">📅 <strong>Day 3 Check-in</strong>Condition worsening ↑</div>
+        </div>
+      </div>
+    </div>
+
+    <svg class="hero-ecg" width="100%" height="130" viewBox="0 0 1440 130" preserveAspectRatio="none" aria-hidden="true">
+      <path id="ecgPath" d="M0 85 L100 85 L140 85 L160 50 L175 105 L190 75 L230 85 L330 85 L350 52 L365 108 L385 75 L420 85 L520 85 L540 47 L558 112 L580 75 L620 85 L720 85 L740 53 L756 104 L774 75 L820 85 L920 85 L940 45 L958 113 L980 75 L1040 85 L1140 85 L1160 54 L1178 106 L1198 75 L1260 85 L1440 85"
+        fill="none" stroke="rgba(0,229,255,0.4)" stroke-width="1.5" />
+    </svg>
+  </section>
+
+  <!-- ─── SECTION 3: STATS BAR ─── -->
+  <section class="stats-bar">
+    <div class="container stats-grid">
+      <div class="stat-item"><div class="stat-number countup" data-value="2847" data-suffix="+">0</div><div class="stat-label">Symptoms Checked</div></div>
+      <div class="stat-item"><div class="stat-number countup" data-value="150000" data-format="indian" data-suffix="+">0</div><div class="stat-label">Facilities Mapped</div></div>
+      <div class="stat-item"><div class="stat-number countup" data-value="22">0</div><div class="stat-label">Indian Languages</div></div>
+      <div class="stat-item"><div class="stat-number countup" data-value="1.1" data-suffix="M">0</div><div class="stat-label">ASHA Workers</div></div>
+    </div>
+  </section>
+
+  <!-- ─── SECTION 4: PROBLEM SECTION ─── -->
+  <section class="problem" id="problem">
+    <div class="container">
+      <div class="center-copy fade-in-up">
+        <div class="section-label">THE PROBLEM</div>
+        <h2 class="section-title">Every 2 minutes, a rural Indian makes the<br />wrong health decision</h2>
+        <p class="muted">Because they had no guidance. MediCheck fixes the first broken link in India's healthcare chain.</p>
+      </div>
+      <div class="problem-grid">
+        <article class="problem-card glass fade-in-up" data-delay="0.05" style="border-left:3px solid var(--red)">
+          <div class="icon" style="background:rgba(255,76,76,0.14);color:var(--red)">🏥</div>
+          <h3 class="feature-title" style="font-size:20px">No Access</h3>
+          <p class="muted">65% of villages have no doctor within 10 km. 600M rural smartphone users - zero tools for them.</p>
+        </article>
+        <article class="problem-card glass fade-in-up" data-delay="0.15" style="border-left:3px solid var(--yellow)">
+          <div class="icon" style="background:rgba(255,214,0,0.14);color:var(--yellow)">⏰</div>
+          <h3 class="feature-title" style="font-size:20px">Deadly Delay</h3>
+          <p class="muted">Average 4-6 hour delay before rural patients reach care. By then, treatable becomes critical.</p>
+        </article>
+        <article class="problem-card glass fade-in-up" data-delay="0.25" style="border-left:3px solid var(--accent-purple)">
+          <div class="icon" style="background:rgba(123,97,255,0.14);color:var(--accent-purple)">📱</div>
+          <h3 class="feature-title" style="font-size:20px">Wrong Tools</h3>
+          <p class="muted">Ada, Buoy, Healthily - built for English-speaking urban users. Useless for a farmer in Punjab.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SECTION 5: FEATURES SECTION ─── -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="center-copy fade-in-up">
+        <div class="section-label">7 UNIQUE FEATURES</div>
+        <h2 class="section-title">Things <span class="gradient-text">No Other</span> Symptom Checker Does</h2>
+      </div>
+
+      <div class="feature-rows">
+        <div class="feature-row fade-in-up" data-delay="0.05">
+          <div class="feature-text">
+            <div class="feature-number">01</div>
+            <div class="feature-tag">🌦️ WORLD'S FIRST</div>
+            <h3 class="feature-title">Geo-Contextual Awareness</h3>
+            <p class="feature-desc">MediCheck reads outbreak and weather risk patterns for your exact district before giving advice.</p>
+            <ul class="bullet-list">
+              <li>District-level IDSP signal checks</li>
+              <li>Season and climate-aware triage</li>
+              <li>Hyperlocal alerts in real time</li>
+            </ul>
+          </div>
+          <div class="feature-visual glass india-map">
+            <svg viewBox="0 0 420 300" aria-hidden="true">
+              <path d="M130 35 L180 28 L220 38 L260 56 L294 92 L322 132 L314 172 L286 204 L252 236 L220 260 L180 252 L152 230 L122 212 L102 178 L84 144 L90 108 L108 82 L124 64 Z" fill="none" stroke="rgba(0,229,255,0.35)" stroke-width="2"/>
+              <circle class="alert-dot" cx="140" cy="92" r="4" />
+              <circle class="alert-dot" cx="182" cy="102" r="4" />
+              <circle class="alert-dot" cx="168" cy="166" r="4" />
+              <circle class="alert-dot" cx="208" cy="210" r="4" />
+              <circle class="alert-dot" cx="250" cy="175" r="4" />
+              <rect x="200" y="72" rx="8" ry="8" width="130" height="28" fill="rgba(6,11,24,0.95)" stroke="rgba(255,76,76,0.45)" />
+              <text x="210" y="90" fill="#ff9e9e" font-size="12" font-family="DM Sans">🔴 Dengue · 12 cases</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="feature-row fade-in-up" data-delay="0.1">
+          <div class="feature-visual glass">
+            <div>
+              <div class="mic-wrap">
+                <div class="wave-ring"></div>
+                <div class="wave-ring"></div>
+                <div class="wave-ring"></div>
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="9" y="3" width="6" height="11" rx="3" stroke="#00E5FF" stroke-width="1.8"/>
+                  <path d="M6 11.5C6 15 8.5 17 12 17C15.5 17 18 15 18 11.5" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round"/>
+                  <path d="M12 17V21" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round"/>
+                  <path d="M9 21H15" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="typewriter"><span id="typeText"></span><span class="cursor">|</span></div>
+              <div class="lang-pill">🎙️ Punjabi</div>
+            </div>
+          </div>
+          <div class="feature-text">
+            <div class="feature-number">02</div>
+            <div class="feature-tag">🎤 VOICE-FIRST</div>
+            <h3 class="feature-title">Speak Naturally, In Your Language</h3>
+            <p class="feature-desc">Patients can describe symptoms in Punjabi, Hindi, Marathi, Bhojpuri, and beyond with no typing barrier.</p>
+            <ul class="bullet-list">
+              <li>Low-literacy voice interaction flow</li>
+              <li>Regional speech understanding</li>
+              <li>Natural multilingual responses</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-row fade-in-up" data-delay="0.15">
+          <div class="feature-text">
+            <div class="feature-number">03</div>
+            <div class="feature-tag">📸 VISUAL TRIAGE</div>
+            <h3 class="feature-title">Photo Analysis for Hidden Risk</h3>
+            <p class="feature-desc">When words are not enough, camera-based checks catch visual warning signs like rashes and redness.</p>
+            <ul class="bullet-list">
+              <li>Guided camera framing</li>
+              <li>Fast on-device style scan flow</li>
+              <li>Visual + symptom fusion triage</li>
+            </ul>
+          </div>
+          <div class="feature-visual glass">
+            <div class="viewfinder">
+              <div class="scan-line"></div>
+              <div class="rash-dot"></div>
+            </div>
+            <p style="margin-top:10px;color:#ff9f9f;font-size:13px">🔴 Petechial rash detected - possible dengue</p>
+          </div>
+        </div>
+
+        <div class="feature-row fade-in-up" data-delay="0.2">
+          <div class="feature-visual glass timeline-card" id="timelineCard">
+            <svg viewBox="0 0 360 210" aria-hidden="true">
+              <line x1="40" y1="170" x2="330" y2="170" stroke="rgba(96,123,150,0.5)" />
+              <line x1="40" y1="30" x2="40" y2="170" stroke="rgba(96,123,150,0.5)" />
+              <polyline class="timeline-path" points="50,130 120,110 190,75 260,48" fill="none" stroke="#00E5FF" stroke-width="3"/>
+              <circle cx="50" cy="130" r="5" fill="#00E5FF"/>
+              <circle cx="120" cy="110" r="5" fill="#00E5FF"/>
+              <circle cx="190" cy="75" r="5" fill="#00E5FF"/>
+              <circle class="critical-dot" cx="260" cy="48" r="7" fill="#FF4C4C"/>
+              <text x="48" y="190" fill="#8aa6c4" font-size="11">Day 1</text>
+              <text x="118" y="190" fill="#8aa6c4" font-size="11">Day 2</text>
+              <text x="188" y="190" fill="#8aa6c4" font-size="11">Day 3</text>
+              <text x="258" y="190" fill="#8aa6c4" font-size="11">Day 4</text>
+              <text x="272" y="48" fill="#FF9E9E" font-size="11">⚠️ Critical</text>
+            </svg>
+          </div>
+          <div class="feature-text">
+            <div class="feature-number">04</div>
+            <div class="feature-tag">📈 LONGITUDINAL</div>
+            <h3 class="feature-title">Symptom Timeline, Not One-Off Guess</h3>
+            <p class="feature-desc">MediCheck tracks progression across days to catch worsening patterns before they become emergencies.</p>
+            <ul class="bullet-list">
+              <li>Day-by-day severity scoring</li>
+              <li>Escalation trend detection</li>
+              <li>Critical threshold alerts</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-row fade-in-up" data-delay="0.25">
+          <div class="feature-text">
+            <div class="feature-number">05</div>
+            <div class="feature-tag">🗺️ ROUTING</div>
+            <h3 class="feature-title">Nearest Government Facility Routing</h3>
+            <p class="feature-desc">Recommendations include where to go now, open hours, and estimated travel cost.</p>
+            <ul class="bullet-list">
+              <li>PHC availability and status</li>
+              <li>Distance and route context</li>
+              <li>One-tap facility call actions</li>
+            </ul>
+          </div>
+          <div class="feature-visual glass">
+            <div class="facility-map">
+              <div class="pin you" title="You"></div>
+              <div class="pin phc" title="PHC Raikot"></div>
+              <div class="dashed-route"></div>
+              <div class="facility-info">PHC Raikot · 2.8 km · Open · Free OPD till 2 PM · Est. auto fare ₹40</div>
+            </div>
+            <div class="call-chip">📞 Call Facility</div>
+          </div>
+        </div>
+
+        <div class="feature-row fade-in-up" data-delay="0.3">
+          <div class="feature-visual glass">
+            <div class="family-row" id="familyVault">
+              <button class="member-card" type="button">
+                <div class="avatar">D</div>
+                <div style="font-size:12px">Dadi 👵</div>
+                <div class="health-dot" style="background:var(--green)"></div>
+                <div class="member-extra">Last: 2 days ago<br/>Status: Stable</div>
+              </button>
+              <button class="member-card" type="button">
+                <div class="avatar">P</div>
+                <div style="font-size:12px">Papa 👨</div>
+                <div class="health-dot" style="background:var(--yellow)"></div>
+                <div class="member-extra">Last: Today<br/>Status: Fever Day 2</div>
+              </button>
+              <button class="member-card" type="button">
+                <div class="avatar">M</div>
+                <div style="font-size:12px">Mama 👩</div>
+                <div class="health-dot" style="background:var(--green)"></div>
+                <div class="member-extra">Last: Yesterday<br/>Status: Healthy</div>
+              </button>
+              <button class="member-card" type="button">
+                <div class="avatar">C</div>
+                <div style="font-size:12px">Chhotu 👦</div>
+                <div class="health-dot" style="background:var(--red)"></div>
+                <div class="member-extra">Last: Today<br/>Status: Urgent cough</div>
+              </button>
+            </div>
+          </div>
+          <div class="feature-text">
+            <div class="feature-number">06</div>
+            <div class="feature-tag">👨‍👩‍👧‍👦 FAMILY VAULT</div>
+            <h3 class="feature-title">One Phone, Full Family Health History</h3>
+            <p class="feature-desc">Manage up to eight profiles so every family member gets context-aware triage and follow-ups.</p>
+            <ul class="bullet-list">
+              <li>Role-based family profile management</li>
+              <li>Individual symptom history snapshots</li>
+              <li>Risk-color coded quick overview</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-row fade-in-up" data-delay="0.35">
+          <div class="feature-text">
+            <div class="feature-number">07</div>
+            <div class="feature-tag">🧑‍⚕️ FRONTLINE MODE</div>
+            <h3 class="feature-title">ASHA Worker Dashboard Mode</h3>
+            <p class="feature-desc">Frontline workers see household risk priorities and escalate cases to PHC quickly with evidence.</p>
+            <ul class="bullet-list">
+              <li>Household risk sorting</li>
+              <li>Urgent referral prioritization</li>
+              <li>Ready weekly report generation</li>
+            </ul>
+          </div>
+          <div class="feature-visual glass">
+            <div class="asha-mini">
+              <h4>ASHA Dashboard · Fatehgarh Sahib</h4>
+              <ul>
+                <li>Sharma family · 🟢 Healthy</li>
+                <li>Singh family · 🔴 Urgent - fever Day 4</li>
+                <li>Kaur family · 🟡 Monitor</li>
+                <li>Verma family · 🟢 Healthy</li>
+                <li>Devi family · 🟡 Follow-up needed</li>
+              </ul>
+              <div class="report-btn">Weekly Report Ready →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SECTION 6: HOW IT WORKS ─── -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container center-copy">
+      <div class="section-label">HOW IT WORKS</div>
+      <h2 class="section-title">From Symptom to Action in 90 Seconds</h2>
+      <div class="steps-wrap">
+        <article class="step-card glass fade-in-up">
+          <div class="step-watermark">01</div>
+          <svg class="step-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="9" y="3" width="6" height="11" rx="3" stroke="#00E5FF" stroke-width="1.8"/>
+            <path d="M6 11.5C6 15 8.5 17 12 17C15.5 17 18 15 18 11.5" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <h3 class="step-title">Describe Your Symptom</h3>
+          <p class="muted">Speak, type, or photograph in any Indian language. No literacy required.</p>
+        </article>
+
+        <div class="dash-arrow" aria-hidden="true"></div>
+
+        <article class="step-card glass fade-in-up" style="border-color:rgba(123,97,255,0.35)">
+          <div class="step-watermark">02</div>
+          <svg class="step-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3C8.1 3 5 6.1 5 10C5 12.8 6.7 15.2 9.2 16.2V19H14.8V16.2C17.3 15.2 19 12.8 19 10C19 6.1 15.9 3 12 3Z" stroke="#7B61FF" stroke-width="1.8"/>
+          </svg>
+          <h3 class="step-title">AI Analyses Everything</h3>
+          <p class="muted">Cross-checks your symptoms with local outbreaks, your history, weather data, and visual inputs simultaneously.</p>
+          <div class="orbit-wrap" aria-hidden="true">
+            <div class="orbit-center"></div>
+            <div class="orbiter"></div>
+            <div class="orbiter"></div>
+            <div class="orbiter"></div>
+          </div>
+        </article>
+
+        <div class="dash-arrow" aria-hidden="true"></div>
+
+        <article class="step-card glass fade-in-up" style="border-color:rgba(0,230,118,0.35)">
+          <div class="step-watermark">03</div>
+          <svg class="step-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 22C12 22 19 15.6 19 10.5C19 6.9 15.9 4 12 4C8.1 4 5 6.9 5 10.5C5 15.6 12 22 12 22Z" stroke="#00E676" stroke-width="1.8"/>
+            <circle cx="12" cy="10" r="2.5" stroke="#00E676" stroke-width="1.8"/>
+          </svg>
+          <h3 class="step-title">Know Exactly What To Do</h3>
+          <p class="muted">Clear triage verdict, nearest facility with directions, family alert, and doctor escalation - all in one screen.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SECTION 7: LIVE DEMO SECTION ─── -->
+  <section class="demo" id="demo">
+    <div class="container">
+      <div class="center-copy fade-in-up">
+        <div class="section-label">TRY IT NOW</div>
+        <h2 class="section-title">Ask MediCheck Anything</h2>
+        <p class="muted">Type a symptom below - our AI responds in real time</p>
+      </div>
+
+      <div class="demo-grid">
+        <div class="chat-card glass fade-in-up">
+          <div class="chat-window" id="chatWindow" aria-live="polite">
+            <div class="msg ai">Namaste! Main MediCheck hoon. Aapke kya symptoms hain? (Hello! I'm MediCheck. What are your symptoms?)</div>
+          </div>
+          <div class="chat-controls">
+            <input id="chatInput" class="chat-input" type="text" placeholder="Type your symptom..." aria-label="Type your symptom" />
+            <select id="langSelect" class="lang-select" aria-label="Choose language">
+              <option>English</option>
+              <option>Hindi</option>
+              <option>Punjabi</option>
+            </select>
+            <button id="nearbyHospitalsBtn" class="mini-btn" type="button" aria-label="Find nearby hospitals">Nearby hospitals</button>
+            <button id="sendBtn" class="send-btn" aria-label="Send">➜</button>
+          </div>
+        </div>
+
+        <aside class="analysis-card glass fade-in-up" id="analysisPanel">
+          <h3 class="analysis-title">Live Analysis</h3>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;color:#c9ddf4"><span>Confidence</span><span id="confidenceText">0%</span></div>
+          <div class="meter"><div id="confidenceBar" class="meter-fill" style="background:var(--yellow)"></div></div>
+          <div id="conditionsBox"></div>
+          <div class="alert-box">🔴 Local Alert: Dengue activity elevated in Punjab this week. 23 cases reported.</div>
+          <div class="facility-card">
+            <strong>📍 PHC Raikot</strong><br/>
+            Distance: 2.8 km<br/>
+            Status: 🟢 Open<br/>
+            OPD: Free till 2:00 PM
+            <div class="facility-actions">
+              <button class="mini-btn" type="button">📞 Call</button>
+              <button class="mini-btn" type="button">🗺️ Directions</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SECTION 8: ASHA WORKER SPOTLIGHT ─── -->
+  <section class="asha-spot" id="asha-mode">
+    <div class="container asha-grid">
+      <div class="quote-wrap fade-in-up">
+        <div class="quote-mark">"</div>
+        <p class="quote-text">Before MediCheck, I had to guess which family needed urgent referral today. Now I have data, and my PHC doctor trusts my assessments.</p>
+        <div class="avatar-id">SD</div>
+        <p><strong>- Sunita Devi, ASHA Worker</strong><br/><span class="muted">Fatehgarh Sahib District, Punjab</span></p>
+        <div class="asha-stats">
+          <p>1.1M ASHA workers in India</p>
+          <p>Each manages ~250 households</p>
+          <p>Zero digital decision support tools existed before</p>
+        </div>
+      </div>
+
+      <div class="dash-panel fade-in-up">
+        <div class="dash-head"><strong>Sunita's Dashboard · 12 Households Today</strong><span class="offline-dot">🔴 Offline · Will sync when connected</span></div>
+        <div class="dash-list">
+          <div class="dash-row"><span>Sharma (4 members)</span><span>2 days ago</span><span>🟢 Healthy</span></div>
+          <div class="dash-row"><span>Singh (6 members)</span><span>Today</span><span>🔴 Urgent</span></div>
+          <div class="dash-row"><span>Kaur (3 members)</span><span>Yesterday</span><span>🟡 Monitor</span></div>
+          <div class="dash-row"><span>Verma (5 members)</span><span>3 days ago</span><span>🟢 Healthy</span></div>
+          <div class="dash-row"><span>Mehta (2 members)</span><span>Today</span><span>🟡 Follow up</span></div>
+        </div>
+        <div class="dash-buttons">
+          <button class="btn btn-ghost-cyan" type="button">Generate Weekly Report</button>
+          <button class="btn" type="button" style="background:var(--red);color:white">Escalate to PHC Doctor</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SECTION 9: IMPACT NUMBERS ─── -->
+  <section class="impact" id="impact">
+    <div class="container">
+      <div class="center-copy fade-in-up">
+        <div class="section-label">OUR IMPACT POTENTIAL</div>
+        <h2 class="section-title">Built for the Largest Underserved<br/>Health Market on Earth</h2>
+      </div>
+      <div class="impact-grid">
+        <article class="impact-card glow-cyan fade-in-up">
+          <div class="impact-num countup gradient-text" data-value="500" data-suffix="M">0</div>
+          <p class="impact-desc">Rural Indians who can benefit</p>
+        </article>
+        <article class="impact-card glow-purple fade-in-up">
+          <div class="impact-num countup" style="color:#9f8dff" data-value="1.1" data-suffix="M">0</div>
+          <p class="impact-desc">ASHA workers empowered</p>
+        </article>
+        <article class="impact-card glow-green fade-in-up">
+          <div class="impact-num countup" style="color:#6dffbf" data-value="40" data-prefix="30-" data-suffix="%">0</div>
+          <p class="impact-desc">Fewer unnecessary ER visits</p>
+        </article>
+        <article class="impact-card glow-yellow fade-in-up">
+          <div class="impact-num countup" style="color:#ffe26f" data-value="0" data-prefix="₹" data-suffix="">0</div>
+          <p class="impact-desc">Cost to patients - always free</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SECTION 10: TECH STACK ─── -->
+  <section class="tech" id="tech-stack">
+    <div class="container">
+      <h2 class="section-title fade-in-up">Powered by World-Class AI,<br/>Grounded in India's Health Data</h2>
+
+      <div class="marquee-wrap fade-in-up">
+        <div class="marquee-track">
+          <span class="tech-pill">Claude AI</span><span class="tech-pill">Whisper</span><span class="tech-pill">AI4Bharat</span><span class="tech-pill">Firebase</span><span class="tech-pill">React Native</span><span class="tech-pill">IndicTrans2</span><span class="tech-pill">OpenWeatherMap</span>
+          <span class="tech-pill">Claude AI</span><span class="tech-pill">Whisper</span><span class="tech-pill">AI4Bharat</span><span class="tech-pill">Firebase</span><span class="tech-pill">React Native</span><span class="tech-pill">IndicTrans2</span><span class="tech-pill">OpenWeatherMap</span>
+        </div>
+        <div class="marquee-track" style="animation-duration:22s">
+          <span class="tech-pill">IDSP API</span><span class="tech-pill">NHA Registry</span><span class="tech-pill">CPCB AQI</span><span class="tech-pill">SQLite</span><span class="tech-pill">Node.js</span><span class="tech-pill">Expo</span><span class="tech-pill">Vision AI</span>
+          <span class="tech-pill">IDSP API</span><span class="tech-pill">NHA Registry</span><span class="tech-pill">CPCB AQI</span><span class="tech-pill">SQLite</span><span class="tech-pill">Node.js</span><span class="tech-pill">Expo</span><span class="tech-pill">Vision AI</span>
+        </div>
+      </div>
+
+      <div class="pillars">
+        <article class="pillar fade-in-up"><h4>🧠 Intelligence Layer</h4><p>Claude API · Vision AI · Whisper · IndicTrans2</p></article>
+        <article class="pillar fade-in-up"><h4>🗺️ India Data Layer</h4><p>IDSP outbreaks · NHA facilities · AQI · Weather</p></article>
+        <article class="pillar fade-in-up"><h4>📱 Delivery Layer</h4><p>Offline-first · React Native · Low-end device optimised</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SECTION 11: FOOTER ─── -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h5 style="font-family:'Cabinet Grotesk',Georgia,serif;font-size:28px"><span>Medi</span><span class="gradient-text">Check</span></h5>
+          <p class="muted">Your village doctor, always available.</p>
+          <div class="socials">
+            <a href="#" aria-label="Twitter/X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.3 2H21L14.7 9.2L22 22H16.3L11.8 14.2L5.4 22H2.7L9.4 13.8L2.4 2H8.2L12.3 9.2L18.3 2Z"/></svg></a>
+            <a href="#" aria-label="GitHub"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.8 5.4.8 11.7c0 5 3.2 9.3 7.7 10.8.6.1.8-.2.8-.6v-2.1c-3.1.7-3.7-1.5-3.7-1.5-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.5 2.4 1.1 2.9.9.1-.7.4-1.1.7-1.4-2.5-.3-5.1-1.2-5.1-5.6 0-1.2.4-2.2 1-3-.1-.3-.4-1.5.1-3.1 0 0 .8-.3 3.1 1.1.9-.2 1.9-.3 2.8-.3s1.9.1 2.8.3c2.3-1.5 3.1-1.1 3.1-1.1.5 1.6.2 2.8.1 3.1.6.8 1 1.8 1 3 0 4.4-2.6 5.3-5.1 5.6.4.3.7 1 .7 2v3c0 .4.2.7.8.6 4.5-1.5 7.7-5.8 7.7-10.8C23.2 5.4 18.3.5 12 .5Z"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5A2.5 2.5 0 0 0 4.98 3.5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.1c.5-.9 1.8-1.9 3.8-1.9 4.1 0 4.9 2.7 4.9 6.3V21h-4v-5.2c0-1.2 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V21h-4V9Z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Product</h5>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#demo">Live Demo</a></li>
+            <li><a href="#asha-mode">ASHA Mode</a></li>
+            <li><a href="#">Download App</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Built With</h5>
+          <ul>
+            <li>Claude API</li>
+            <li>AI4Bharat</li>
+            <li>NHA Data</li>
+            <li>Open Source</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Hackathon</h5>
+          <ul>
+            <li>[Event Name]</li>
+            <li>[Date]</li>
+            <li>[Team Name]</li>
+            <li>Built in 24 hours for rural India</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 MediCheck · Made with ❤️ in India</span>
+        <span>⚕️ Not a substitute for professional medical advice</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ─── FRONTEND ROUTE GUARD ─── */
+    async function ensureAuthenticated() {
+      try {
+        const res = await fetch('/auth/me', { credentials: 'same-origin' });
+        if (!res.ok) {
+          window.location.replace('/login');
+        }
+      } catch (_) {
+        window.location.replace('/login');
+      }
+    }
+
+    ensureAuthenticated();
+
+    /* ─── NAVBAR SCROLL + MOBILE MENU ─── */
+    const navbar = document.getElementById('navbar');
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('active', open);
+      hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* ─── HERO PARTICLE CANVAS ─── */
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    const particles = [];
+    const particleCount = 40;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = document.querySelector('.hero').offsetHeight;
+    }
+
+    function initParticles() {
+      particles.length = 0;
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          size: Math.random() * 2 + 1,
+          opacity: Math.random() * 0.6 + 0.2
+        });
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0,229,255,${0.25 * p.opacity})`;
+        ctx.fill();
+      }
+      requestAnimationFrame(animateParticles);
+    }
+
+    resizeCanvas();
+    initParticles();
+    animateParticles();
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      initParticles();
+    });
+
+    /* ─── ECG PATH ANIMATION ─── */
+    const ecgPath = document.getElementById('ecgPath');
+    const ecgLength = ecgPath.getTotalLength();
+    ecgPath.style.strokeDasharray = ecgLength;
+    ecgPath.style.strokeDashoffset = ecgLength;
+
+    function runEcg() {
+      ecgPath.style.transition = 'none';
+      ecgPath.style.strokeDashoffset = ecgLength;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          ecgPath.style.transition = 'stroke-dashoffset 3s linear';
+          ecgPath.style.strokeDashoffset = '0';
+        });
+      });
+    }
+
+    runEcg();
+    setInterval(runEcg, 3000);
+
+    /* ─── SCROLL REVEAL OBSERVER ─── */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const delay = Number(el.dataset.delay || 0);
+          el.style.transitionDelay = `${delay}s`;
+          el.classList.add('visible');
+          revealObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in-up').forEach((el) => revealObserver.observe(el));
+
+    /* ─── COUNTUP ANIMATION ─── */
+    function easeOutQuart(t) {
+      return 1 - Math.pow(1 - t, 4);
+    }
+
+    function formatIndian(num) {
+      const n = Math.floor(num).toString();
+      const lastThree = n.slice(-3);
+      const other = n.slice(0, -3);
+      return other ? other.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + lastThree : lastThree;
+    }
+
+    function animateCount(el) {
+      const target = parseFloat(el.dataset.value || '0');
+      const duration = 2000;
+      const suffix = el.dataset.suffix || '';
+      const prefix = el.dataset.prefix || '';
+      const useIndian = el.dataset.format === 'indian';
+      const start = performance.now();
+
+      function frame(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = easeOutQuart(progress);
+        const val = target * eased;
+
+        let shown;
+        if (Number.isInteger(target) && !suffix.includes('M')) {
+          shown = useIndian ? formatIndian(val) : Math.floor(val).toLocaleString('en-IN');
+        } else {
+          shown = (Math.round(val * 10) / 10).toString();
+        }
+
+        el.textContent = `${prefix}${shown}${suffix}`;
+        if (progress < 1) {
+          requestAnimationFrame(frame);
+        } else {
+          const final = Number.isInteger(target) ? target : target.toFixed(1).replace('.0', '');
+          el.textContent = `${prefix}${useIndian ? formatIndian(final) : final}${suffix}`;
+        }
+      }
+
+      requestAnimationFrame(frame);
+    }
+
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          countObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.countup').forEach((el) => countObserver.observe(el));
+
+    /* ─── PHONE 3D TILT ─── */
+    const phoneGroup = document.getElementById('phoneGroup');
+    phoneGroup.addEventListener('mousemove', (e) => {
+      const rect = phoneGroup.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const px = (x / rect.width - 0.5) * 2;
+      const py = (y / rect.height - 0.5) * 2;
+      const rotateY = px * 8;
+      const rotateX = -py * 8;
+      phoneGroup.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    phoneGroup.addEventListener('mouseleave', () => {
+      phoneGroup.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    });
+
+    /* ─── TYPEWRITER EFFECT ─── */
+    const typeTextEl = document.getElementById('typeText');
+    const phrases = [
+      'mera pet dard kar raha hai...',
+      'sir bahut dard hai...',
+      'bukhar hai 3 din se...'
+    ];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    function runTypewriter() {
+      const phrase = phrases[phraseIndex];
+      if (!deleting) {
+        charIndex++;
+        typeTextEl.textContent = phrase.slice(0, charIndex);
+        if (charIndex === phrase.length) {
+          deleting = true;
+          setTimeout(runTypewriter, 1200);
+          return;
+        }
+      } else {
+        charIndex--;
+        typeTextEl.textContent = phrase.slice(0, charIndex);
+        if (charIndex === 0) {
+          deleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+        }
+      }
+      setTimeout(runTypewriter, deleting ? 40 : 75);
+    }
+    runTypewriter();
+
+    /* ─── TIMELINE CHART OBSERVER ─── */
+    const timelineCard = document.getElementById('timelineCard');
+    const timelineObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          timelineCard.classList.add('play');
+          timelineObserver.unobserve(timelineCard);
+        }
+      });
+    }, { threshold: 0.35 });
+    timelineObserver.observe(timelineCard);
+
+    /* ─── FAMILY VAULT CARD EXPAND ─── */
+    document.querySelectorAll('#familyVault .member-card').forEach((card) => {
+      card.addEventListener('click', () => {
+        card.classList.toggle('active');
+      });
+    });
+
+    /* ─── LIVE CHAT DEMO ─── */
+    const chatWindow = document.getElementById('chatWindow');
+    const chatInput = document.getElementById('chatInput');
+    const nearbyHospitalsBtn = document.getElementById('nearbyHospitalsBtn');
+    const sendBtn = document.getElementById('sendBtn');
+    const confidenceBar = document.getElementById('confidenceBar');
+    const confidenceText = document.getElementById('confidenceText');
+    const conditionsBox = document.getElementById('conditionsBox');
+
+    const chatbotSystemInstructions =
+      'When a user asks for nearby hospitals, the bot must call the find_nearby_hospitals tool and then show a numbered list.';
+
+    const chatbotTools = {
+      find_nearby_hospitals: {
+        name: 'find_nearby_hospitals',
+        inputSchema: {
+          location: 'string (optional)',
+          lat: 'number (optional)',
+          lon: 'number (optional)',
+          radius_km: 'number (optional, default 5)',
+          limit: 'integer (optional, default 5)'
+        }
+      }
+    };
+
+    function addMessage(text, type = 'ai') {
+      const div = document.createElement('div');
+      div.className = `msg ${type}`;
+      div.textContent = text;
+      chatWindow.appendChild(div);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+      return div;
+    }
+
+    function addHtmlMessage(html, type = 'ai') {
+      const div = document.createElement('div');
+      div.className = `msg ${type}`;
+      div.innerHTML = html;
+      chatWindow.appendChild(div);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+      return div;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function isHospitalIntent(text) {
+      return /(nearby hospitals?|find hospital|hospital near me|emergency near|near hospital|nearest hospital)/i.test(text);
+    }
+
+    function extractCoordinates(text) {
+      const named = text.match(/lat\s*[:=]\s*(-?\d+(?:\.\d+)?)\s*[, ]\s*lon\s*[:=]\s*(-?\d+(?:\.\d+)?)/i);
+      if (named) {
+        return { lat: Number(named[1]), lon: Number(named[2]) };
+      }
+
+      const pair = text.match(/(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)/);
+      if (!pair) {
+        return null;
+      }
+
+      const lat = Number(pair[1]);
+      const lon = Number(pair[2]);
+      if (lat < -90 || lat > 90 || lon < -180 || lon > 180) {
+        return null;
+      }
+
+      return { lat, lon };
+    }
+
+    function parseHospitalSearchRequest(text) {
+      const parsed = {
+        radius_km: 5,
+        limit: 5
+      };
+
+      const radiusMatch = text.match(/(\d+(?:\.\d+)?)\s*km/i);
+      if (radiusMatch) {
+        parsed.radius_km = Number(radiusMatch[1]);
+      }
+
+      const limitMatch = text.match(/(?:top|limit)\s*(\d{1,2})/i);
+      if (limitMatch) {
+        parsed.limit = Number(limitMatch[1]);
+      }
+
+      const coords = extractCoordinates(text);
+      if (coords) {
+        parsed.lat = coords.lat;
+        parsed.lon = coords.lon;
+        return parsed;
+      }
+
+      const locationMatch = text.match(/(?:near|in|around|at)\s+(.+)/i);
+      if (locationMatch) {
+        const cleaned = locationMatch[1]
+          .replace(/within\s+\d+(?:\.\d+)?\s*km/gi, '')
+          .replace(/(?:top|limit)\s*\d{1,2}/gi, '')
+          .trim();
+
+        if (cleaned) {
+          parsed.location = cleaned;
+        }
+      }
+
+      return parsed;
+    }
+
+    async function callFindNearbyHospitalsTool(payload) {
+      const response = await fetch('/api/nearby/hospitals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        const error = new Error(data.error || 'Unable to fetch nearby hospitals.');
+        error.code = data.code || 'UNKNOWN';
+        error.suggestions = data.suggestions || [];
+        throw error;
+      }
+
+      return data;
+    }
+
+    function formatHospitalsAsHtml(hospitals) {
+      if (!Array.isArray(hospitals) || hospitals.length === 0) {
+        return 'No hospitals found in that area. Try increasing radius to 10-15 km.';
+      }
+
+      const lines = hospitals.map((hospital, index) => {
+        const safeName = escapeHtml(hospital.name || 'Hospital (unnamed)');
+        const safeAddress = escapeHtml(hospital.address || 'Address unavailable');
+        const safeDistance = escapeHtml(String(hospital.distance_km));
+        const safeLink = escapeHtml(hospital.maps_url);
+        return `${index + 1}. <strong>${safeName}</strong><br/>Address: ${safeAddress}<br/>Distance: ${safeDistance} km<br/><a href="${safeLink}" target="_blank" rel="noopener noreferrer">Open in maps</a>`;
+      });
+
+      return lines.join('<br/><br/>');
+    }
+
+    async function runNearbyHospitalsFlow(rawText, explicitInput) {
+      const toolInput = explicitInput || parseHospitalSearchRequest(rawText);
+
+      if (!toolInput.location && (toolInput.lat === undefined || toolInput.lon === undefined)) {
+        addMessage('Share your city/address or allow location access (lat/lon).', 'ai');
+        return true;
+      }
+
+      const typing = typingIndicator();
+
+      try {
+        const payload = {
+          location: toolInput.location,
+          lat: toolInput.lat,
+          lon: toolInput.lon,
+          radius_km: toolInput.radius_km,
+          limit: toolInput.limit
+        };
+
+        const toolResult = await callFindNearbyHospitalsTool(payload);
+        typing.remove();
+
+        const lead = toolResult.query.cached
+          ? 'Here are nearby hospitals (cached result):'
+          : 'Here are the nearest hospitals I found:';
+
+        addMessage(lead, 'ai');
+        addHtmlMessage(formatHospitalsAsHtml(toolResult.hospitals), 'ai');
+        addMessage('Do you want directions to one of these, or should I expand the radius?', 'ai');
+      } catch (error) {
+        typing.remove();
+
+        if (error.code === 'AMBIGUOUS_LOCATION' && error.suggestions.length) {
+          const suggestions = error.suggestions.map((value, idx) => `${idx + 1}. ${value}`).join(' | ');
+          addMessage(`That location is ambiguous. Please clarify: ${suggestions}`, 'ai');
+          return true;
+        }
+
+        if (error.code === 'MAP_SERVICE_UNAVAILABLE') {
+          addMessage('I couldn\'t reach the map service right now-try again in a minute.', 'ai');
+          return true;
+        }
+
+        addMessage(error.message || 'I could not fetch nearby hospitals right now.', 'ai');
+      }
+
+      return true;
+    }
+
+    function addResultCard(data) {
+      const card = document.createElement('div');
+      card.className = `result-card ${data.tone}`;
+      card.innerHTML = `<strong>${data.triage}</strong><br/>Confidence: ${data.confidence}%<br/>Action: ${data.action}<br/>Nearest: PHC Raikot · 2.8 km · Open`;
+      chatWindow.appendChild(card);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    function typingIndicator() {
+      const wrap = document.createElement('div');
+      wrap.className = 'typing';
+      wrap.innerHTML = '<span></span><span></span><span></span>';
+      chatWindow.appendChild(wrap);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+      return wrap;
+    }
+
+    function renderConditions(conditions, toneColor) {
+      conditionsBox.innerHTML = '';
+      conditions.forEach((item) => {
+        const row = document.createElement('div');
+        row.className = 'condition';
+        row.innerHTML = `
+          <div class="condition-head"><span>${item.name}</span><span>${item.value}%</span></div>
+          <div class="cond-bar"><div class="cond-fill" style="background:${toneColor}"></div></div>
+        `;
+        conditionsBox.appendChild(row);
+        requestAnimationFrame(() => {
+          row.querySelector('.cond-fill').style.width = `${item.value}%`;
+        });
+      });
+    }
+
+    function applyAnalysis(data) {
+      confidenceText.textContent = `${data.confidence}%`;
+      confidenceBar.style.background = data.color;
+      confidenceBar.style.width = '0';
+      requestAnimationFrame(() => {
+        confidenceBar.style.width = `${data.confidence}%`;
+      });
+      renderConditions(data.conditions, data.color);
+    }
+
+    function getResponse(input) {
+      const text = input.toLowerCase();
+      if (/(fever|bukhar)/i.test(text)) {
+        return {
+          reply: 'How many days? Any joint pain or rash?',
+          triage: '🟡 CAUTION',
+          action: 'Visit PHC today, hydrate, monitor platelets if fever persists.',
+          tone: 'yellow',
+          color: '#FFD600',
+          confidence: 78,
+          conditions: [
+            { name: 'Viral fever', value: 67 },
+            { name: 'Dengue', value: 23 },
+            { name: 'Malaria', value: 10 }
+          ]
+        };
+      }
+      if (/(chest pain|seene mein dard)/i.test(text)) {
+        return {
+          reply: '🔴 EMERGENCY - Call 108 now.',
+          triage: '🔴 EMERGENCY',
+          action: 'Call 108 immediately and avoid travel alone.',
+          tone: 'red',
+          color: '#FF4C4C',
+          confidence: 94,
+          conditions: [
+            { name: 'Cardiac event risk', value: 64 },
+            { name: 'Severe acidity', value: 21 },
+            { name: 'Musculoskeletal pain', value: 15 }
+          ]
+        };
+      }
+      if (/(headache|sar dard)/i.test(text)) {
+        return {
+          reply: 'Severity 1-10? Any vomiting?',
+          triage: '🟡 MONITOR',
+          action: 'Home rest, fluids, and PHC visit if severe or persistent.',
+          tone: 'yellow',
+          color: '#FFD600',
+          confidence: 72,
+          conditions: [
+            { name: 'Tension headache', value: 58 },
+            { name: 'Migraine', value: 29 },
+            { name: 'Viral symptom', value: 13 }
+          ]
+        };
+      }
+      if (/(cough|khansi)/i.test(text)) {
+        return {
+          reply: 'Duration? Any breathing difficulty?',
+          triage: '🟢 HOME REST',
+          action: 'Home rest advised. If persists 5+ days, visit PHC.',
+          tone: 'green',
+          color: '#00E676',
+          confidence: 75,
+          conditions: [
+            { name: 'Seasonal cough', value: 61 },
+            { name: 'Upper respiratory infection', value: 27 },
+            { name: 'Allergic reaction', value: 12 }
+          ]
+        };
+      }
+      return {
+        reply: 'Let me analyse that. Can you rate severity 1-10?',
+        triage: '🟡 CONSULT PHC',
+        action: 'Consult your nearest PHC within 24 hours.',
+        tone: 'yellow',
+        color: '#FFD600',
+        confidence: 66,
+        conditions: [
+          { name: 'General infection', value: 44 },
+          { name: 'Inflammatory condition', value: 31 },
+          { name: 'Nutritional factor', value: 25 }
+        ]
+      };
+    }
+
+    async function handleSend() {
+      const value = chatInput.value.trim();
+      if (!value) return;
+      addMessage(value, 'user');
+      chatInput.value = '';
+
+      if (isHospitalIntent(value)) {
+        await runNearbyHospitalsFlow(value);
+        return;
+      }
+
+      const typing = typingIndicator();
+      const response = getResponse(value);
+
+      setTimeout(() => {
+        typing.remove();
+        addMessage(response.reply, 'ai');
+        addResultCard(response);
+        applyAnalysis(response);
+      }, 1500);
+    }
+
+    nearbyHospitalsBtn.addEventListener('click', async () => {
+      addMessage('Find nearby hospitals', 'user');
+
+      if (!navigator.geolocation) {
+        addMessage('Share your city/address or allow location access (lat/lon).', 'ai');
+        return;
+      }
+
+      const typing = typingIndicator();
+
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          typing.remove();
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          await runNearbyHospitalsFlow('', {
+            lat,
+            lon,
+            radius_km: 5,
+            limit: 5
+          });
+        },
+        () => {
+          typing.remove();
+          addMessage('Location permission denied. Share your city/address or allow location access (lat/lon).', 'ai');
+        },
+        {
+          enableHighAccuracy: false,
+          timeout: 10000,
+          maximumAge: 300000
+        }
+      );
+    });
+
+    sendBtn.addEventListener('click', handleSend);
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleSend();
+    });
+
+    // Seed panel with initial state.
+    applyAnalysis({
+      confidence: 63,
+      color: '#FFD600',
+      conditions: [
+        { name: 'Viral fever', value: 52 },
+        { name: 'Dengue', value: 31 },
+        { name: 'Malaria', value: 17 }
+      ]
+    });
+  </script>
+</body>
+</html>

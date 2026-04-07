@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediCheck Sign Up</title>
+  <style>
+    :root {
+      --bg-deep: #060B18;
+      --bg-card: #0D1526;
+      --border: #1A2F4A;
+      --accent-cyan: #00E5FF;
+      --accent-purple: #7B61FF;
+      --text-primary: #EDF2FF;
+      --text-muted: #607B96;
+      --red: #FF4C4C;
+      --green: #00E676;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(0, 229, 255, 0.12), transparent 45%),
+        radial-gradient(circle at 75% 75%, rgba(123, 97, 255, 0.12), transparent 45%),
+        var(--bg-deep);
+      color: var(--text-primary);
+      padding: 20px;
+    }
+    .card {
+      width: min(500px, 100%);
+      padding: 28px;
+      border-radius: 20px;
+      background: rgba(13, 21, 38, 0.75);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 30px rgba(123, 97, 255, 0.14);
+    }
+    h1 {
+      font-size: 34px;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #00E5FF, #7B61FF);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p { color: var(--text-muted); margin-bottom: 18px; }
+    label {
+      display: block;
+      font-size: 12px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: #9fb8d3;
+      margin: 8px 0 6px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0b1830;
+      color: var(--text-primary);
+      outline: none;
+    }
+    input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.15);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    button {
+      margin-top: 14px;
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 12px;
+      font-weight: 700;
+      background: var(--accent-cyan);
+      color: #051021;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    button:hover { transform: translateY(-1px); box-shadow: 0 0 28px rgba(0, 229, 255, 0.4); }
+    .error {
+      margin-top: 12px;
+      color: var(--red);
+      font-size: 14px;
+      min-height: 20px;
+    }
+    .ok {
+      color: var(--green);
+      font-size: 14px;
+      min-height: 20px;
+    }
+    .row {
+      margin-top: 14px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .row a { color: var(--accent-cyan); }
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card" aria-labelledby="title">
+    <h1 id="title">Create Account</h1>
+    <p>Sign up to unlock MediCheck securely.</p>
+
+    <form id="signupForm" novalidate>
+      <label for="name">Name (optional)</label>
+      <input id="name" name="name" type="text" maxlength="80" autocomplete="name" />
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" required />
+
+      <div class="grid">
+        <div>
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="new-password" minlength="8" required />
+        </div>
+        <div>
+          <label for="confirmPassword">Confirm Password</label>
+          <input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" minlength="8" required />
+        </div>
+      </div>
+
+      <button type="submit">Create Account</button>
+      <div id="message" class="error" aria-live="polite"></div>
+    </form>
+
+    <div class="row">Already have an account? <a href="/login">Login</a></div>
+  </main>
+
+  <script>
+    const form = document.getElementById('signupForm');
+    const message = document.getElementById('message');
+
+    function validEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      message.className = 'error';
+      message.textContent = '';
+
+      const payload = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim().toLowerCase(),
+        password: form.password.value,
+        confirmPassword: form.confirmPassword.value
+      };
+
+      if (!validEmail(payload.email)) {
+        message.textContent = 'Please enter a valid email address.';
+        return;
+      }
+      if (payload.password.length < 8) {
+        message.textContent = 'Password must be at least 8 characters.';
+        return;
+      }
+      if (payload.password !== payload.confirmPassword) {
+        message.textContent = 'Passwords do not match.';
+        return;
+      }
+
+      try {
+        const res = await fetch('/auth/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          message.textContent = data.error || 'Signup failed.';
+          return;
+        }
+
+        message.className = 'ok';
+        message.textContent = 'Signup successful. Redirecting...';
+        window.location.href = '/';
+      } catch (_) {
+        message.textContent = 'Network error. Please try again.';
+      }
+    });
+  </script>
+</body>
+</html>
